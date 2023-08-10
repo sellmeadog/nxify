@@ -24,7 +24,9 @@
     "react": "*",
     "@expo/vector-icons": "*",
     "@react-navigation/native": "*",
-    "expo-font": "*"
+    "expo-font": "*",
+    "@nx/expo": "*",
+    "@expo/metro-config": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",

@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nxify/ghostbot-feature-journal": [
+      "@nxify/ghostbot-feature-today": [
         "libs/ghostbot/feature-today/src/index.ts"
       ]
     }
