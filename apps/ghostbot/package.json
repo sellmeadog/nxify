@@ -3,24 +3,33 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@babel/core": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
-    "metro-config": "*",
-    "react-native": "*",
-    "expo": "*",
-    "react-native-svg": "*",
-    "react-native-web": "*",
+    "expo-constants": "*",
+    "expo-head": "*",
+    "expo-linking": "*",
+    "expo-router": "*",
     "expo-splash-screen": "*",
     "expo-status-bar": "*",
-    "react": "*"
+    "expo": "*",
+    "metro-config": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-reanimated": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "react-native-svg": "*",
+    "react-native-web": "*",
+    "react-native": "*",
+    "react": "*",
+    "@expo/vector-icons": "*",
+    "@react-navigation/native": "*",
+    "expo-font": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",
     "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/ghostbot",
     "android": "expo run:android",
     "ios": "expo run:ios"
-  },
-  "devDependencies": {
-    "@babel/core": "*"
   }
 }
