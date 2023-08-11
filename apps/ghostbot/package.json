@@ -4,9 +4,16 @@
   "private": true,
   "dependencies": {
     "@babel/core": "*",
+    "@expo/metro-config": "*",
+    "@expo/vector-icons": "*",
+    "@nx/expo": "*",
+    "@react-navigation/native-stack": "*",
+    "@react-navigation/native": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "expo-constants": "*",
+    "expo-dev-client": "*",
+    "expo-font": "*",
     "expo-head": "*",
     "expo-linking": "*",
     "expo-router": "*",
@@ -21,12 +28,7 @@
     "react-native-svg": "*",
     "react-native-web": "*",
     "react-native": "*",
-    "react": "*",
-    "@expo/vector-icons": "*",
-    "@react-navigation/native": "*",
-    "expo-font": "*",
-    "@nx/expo": "*",
-    "@expo/metro-config": "*"
+    "react": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",
