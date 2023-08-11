@@ -28,7 +28,9 @@
     "react-native-svg": "*",
     "react-native-web": "*",
     "react-native": "*",
-    "react": "*"
+    "react": "*",
+    "@nx/react": "*",
+    "nativewind": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",
