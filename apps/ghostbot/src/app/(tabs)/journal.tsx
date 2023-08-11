@@ -11,7 +11,7 @@ export default function JournalScreen() {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcon
               color={color}
-              size={24}
+              size={25}
               name={
                 focused
                   ? 'book-open-page-variant'

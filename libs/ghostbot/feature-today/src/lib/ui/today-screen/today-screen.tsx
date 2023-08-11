@@ -13,7 +13,7 @@ export function TodayScreen(props: TodayScreenProps) {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcon
               color={color}
-              size={24}
+              size={25}
               name={focused ? 'comment-multiple' : 'comment-multiple-outline'}
             />
           ),
