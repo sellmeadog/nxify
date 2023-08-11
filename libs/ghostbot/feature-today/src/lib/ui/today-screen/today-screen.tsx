@@ -1,7 +1,8 @@
-import { View, Text, FlatList, TextInput, Pressable } from 'react-native';
+import { View, Text, TextInput, Pressable } from 'react-native';
 import { Tabs } from 'expo-router';
 import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useTodayScreen } from './today-screen.facade';
+import { JournalEntryTimeline } from '@nxify/ghostbot-shared-ui-journal';
 
 export interface TodayScreenProps {}
 
@@ -23,16 +24,7 @@ export function TodayScreen(props: TodayScreenProps) {
           ),
         }}
       />
-      <FlatList
-        className="flex-1"
-        data={entry?.items}
-        keyExtractor={({ _id }) => _id.toString()}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.text}</Text>
-          </View>
-        )}
-      />
+      <JournalEntryTimeline entry={entry} />
 
       <View className="bg-white rounded-lg shadow-md p-2 absolute w-full bottom-0">
         <View className="p-2">
