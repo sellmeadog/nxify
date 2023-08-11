@@ -1,15 +1,13 @@
 import { View, Text, FlatList, TextInput, Pressable } from 'react-native';
 import { Tabs } from 'expo-router';
 import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
-import { useState } from 'react';
+import { useTodayScreen } from './today-screen.facade';
 
 export interface TodayScreenProps {}
 
 export function TodayScreen(props: TodayScreenProps) {
-  const [text, handleChangeText] = useState('');
-  const [items, setItems] = useState<
-    Array<{ _id: number; timestamp: number; text: string }>
-  >([]);
+  const [{ canPost, entry, entryText }, handleChangeText, handlePress] =
+    useTodayScreen();
 
   return (
     <>
@@ -27,7 +25,7 @@ export function TodayScreen(props: TodayScreenProps) {
       />
       <FlatList
         className="flex-1"
-        data={items}
+        data={entry?.items}
         keyExtractor={({ _id }) => _id.toString()}
         renderItem={({ item }) => (
           <View>
@@ -43,22 +41,16 @@ export function TodayScreen(props: TodayScreenProps) {
             multiline
             placeholder="What's on your mind today?"
             onChangeText={handleChangeText}
-            value={text}
+            value={entryText}
           />
         </View>
         <View className="flex-row items-center justify-end px-2">
           <Pressable
-            onPress={() => {
-              if (text) {
-                setItems((data) => [
-                  ...data,
-                  { _id: Date.now(), timestamp: Date.now(), text },
-                ]);
-              }
-
-              handleChangeText('');
-            }}
-            className="bg-orange-500 py-1 px-3 rounded-full"
+            disabled={!canPost}
+            onPress={handlePress}
+            className={`${
+              canPost ? 'bg-orange-500' : 'bg-slate-400'
+            } py-1 px-3 rounded-full`}
           >
             <Text className="uppercase text-white text-xs font-bold">Post</Text>
           </Pressable>
