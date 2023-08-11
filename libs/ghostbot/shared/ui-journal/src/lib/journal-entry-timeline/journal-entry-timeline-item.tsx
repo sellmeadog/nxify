@@ -1,8 +1,9 @@
 import { JournalEntryItem } from '@nxify/ghostbot-data-model';
 import { format } from 'date-fns';
-import { Text, View } from 'react-native';
+import { ListRenderItemInfo, Text, View } from 'react-native';
 
-export type JournalEntryTimelineItemProps = { item: JournalEntryItem };
+export type JournalEntryTimelineItemProps =
+  ListRenderItemInfo<JournalEntryItem>;
 
 export function JournalEntryTimelineItem({
   item,

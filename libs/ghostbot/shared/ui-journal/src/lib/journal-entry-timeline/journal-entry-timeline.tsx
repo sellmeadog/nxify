@@ -1,6 +1,6 @@
 import { JournalEntry, JournalEntryItem } from '@nxify/ghostbot-data-model';
 import { useCallback } from 'react';
-import { FlatList, ListRenderItem } from 'react-native';
+import { FlatList } from 'react-native';
 import { JournalEntryTimelineItem } from './journal-entry-timeline-item';
 
 export interface JournalEntryTimelineProps {
@@ -13,17 +13,13 @@ export function JournalEntryTimeline({ entry }: JournalEntryTimelineProps) {
     []
   );
 
-  const renderItem: ListRenderItem<JournalEntryItem> = useCallback(
-    ({ item }) => <JournalEntryTimelineItem item={item} />,
-    []
-  );
-
   return (
     <FlatList
       data={entry?.items}
       keyExtractor={keyExtractor}
-      renderItem={renderItem}
+      renderItem={JournalEntryTimelineItem}
       className="m-4"
+      inverted
     />
   );
 }
