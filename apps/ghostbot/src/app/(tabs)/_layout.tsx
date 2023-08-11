@@ -1,5 +1,5 @@
-import { Tabs } from "expo-router";
+import { Tabs } from 'expo-router';
 
-export default function() {
-  return <Tabs />
+export default function () {
+  return <Tabs />;
 }

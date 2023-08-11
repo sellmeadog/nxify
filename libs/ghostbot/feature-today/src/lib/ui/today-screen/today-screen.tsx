@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
-import FontAwesomeIcon from '@expo/vector-icons/FontAwesome';
+import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
 
 export interface TodayScreenProps {}
 
@@ -11,10 +11,10 @@ export function TodayScreen(props: TodayScreenProps) {
         options={{
           title: 'Today',
           tabBarIcon: ({ color, focused }) => (
-            <FontAwesomeIcon
+            <MaterialCommunityIcon
               color={color}
               size={24}
-              name={focused ? 'comments' : 'comments-o'}
+              name={focused ? 'comment-multiple' : 'comment-multiple-outline'}
             />
           ),
         }}
