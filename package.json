@@ -6,6 +6,8 @@
   "private": true,
   "dependencies": {
     "@expo/metro-config": "~0.10.6",
+    "@realm/react": "^0.5.2",
+    "date-fns": "^2.30.0",
     "expo": "49.0.3",
     "expo-constants": "~14.4.2",
     "expo-dev-client": "~2.4.6",
@@ -24,6 +26,7 @@
     "react-native-svg": "13.9.0",
     "react-native-svg-transformer": "1.0.0",
     "react-native-web": "~0.19.6",
+    "realm": "^11.10.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

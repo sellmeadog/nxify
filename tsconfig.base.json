@@ -15,6 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nxify/ghostbot-data-model": ["libs/ghostbot/data-model/src/index.ts"],
+      "@nxify/ghostbot-data-provider": [
+        "libs/ghostbot/data-provider/src/index.ts"
+      ],
       "@nxify/ghostbot-feature-today": [
         "libs/ghostbot/feature-today/src/index.ts"
       ]
