@@ -1,6 +1,6 @@
 import { JournalEntry, JournalEntryItem } from '@nxify/ghostbot-data-model';
 import { useCallback } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { JournalEntryTimelineItem } from './journal-entry-timeline-item';
 
 export interface JournalEntryTimelineProps {
@@ -15,7 +15,8 @@ export function JournalEntryTimeline({ entry }: JournalEntryTimelineProps) {
 
   return (
     <FlatList
-      data={entry?.items}
+      ListHeaderComponent={View}
+      data={entry?.items.sorted([['timestamp', true]])}
       keyExtractor={keyExtractor}
       renderItem={JournalEntryTimelineItem}
       className="m-4"

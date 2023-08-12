@@ -29,38 +29,3 @@ export class JournalEntryItem extends Realm.Object<JournalEntryItem, 'text'> {
 
   static schema = JournalEntryItemSchema;
 }
-
-// import Realm from 'realm';
-// import { getUnixTime } from 'date-fns';
-// import { JournalEntry } from './journal-entry';
-
-// const JournalEntryItemSchema: Realm.ObjectSchema = {
-//   name: 'JournalEntry',
-//   primaryKey: '_id',
-//   properties: {
-//     _id: { type: 'int', default: () => getUnixTime(new Date()) },
-//     text: 'string',
-//     _parent: {
-//       type: 'linkingObjects',
-//       objectType: 'JournalEntry',
-//       property: 'items',
-//     },
-//   },
-// };
-
-// export class JournalEntryItem extends Realm.Object<JournalEntryItem> {
-//   private _parent!: Realm.Results<JournalEntry>;
-
-//   _id!: Realm.Types.Int;
-//   text!: string;
-
-//   get timestamp(): Realm.Types.Int {
-//     return this._id;
-//   }
-
-//   get entry(): JournalEntry {
-//     return this._parent[0];
-//   }
-
-//   static schema = JournalEntryItemSchema;
-// }
