@@ -1,8 +1,11 @@
 import { View, Text, TextInput, Pressable } from 'react-native';
-import { Link, Tabs } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useTodayScreen } from './today-screen.facade';
-import { JournalEntryTimeline } from '@nxify/ghostbot-shared-ui-journal';
+import {
+  JournalEntryBottomSheet,
+  JournalEntryTimeline,
+} from '@nxify/ghostbot-shared-ui-journal';
 
 export interface TodayScreenProps {}
 
@@ -12,31 +15,32 @@ export function TodayScreen(props: TodayScreenProps) {
 
   return (
     <>
-      <Tabs.Screen
+      <Stack.Screen
         options={{
           title: 'Today',
-          tabBarIcon: ({ color, focused }) => (
-            <MaterialCommunityIcon
-              color={color}
-              size={25}
-              name={focused ? 'comment-multiple' : 'comment-multiple-outline'}
-            />
-          ),
-          headerRight: ({ tintColor, pressColor, pressOpacity }) => (
+          // tabBarIcon: ({ color, focused }) => (
+          //   <MaterialCommunityIcon
+          //     color={color}
+          //     size={25}
+          //     name={focused ? 'comment-multiple' : 'comment-multiple-outline'}
+          //   />
+          // ),
+          headerRight: ({ tintColor }) => (
             <Link href={'/journal'} asChild>
               <MaterialCommunityIcon
-                color={pressColor ?? tintColor}
+                color={tintColor}
                 size={25}
                 name={'calendar-multiselect'}
                 style={{ marginHorizontal: 16 }}
               />
             </Link>
           ),
-          headerPressColor: 'blue',
-          headerTintColor: 'black',
+          // headerPressColor: 'blue',
+          headerTintColor: 'blue',
+          headerTitleStyle: { color: 'black' },
         }}
       />
-      <View className="bg-white p-2">
+      {/* <View className="bg-white p-2">
         <View className="p-2">
           <TextInput
             className="p-2 m-0 border-hairline border-slate-500 rounded-md"
@@ -57,10 +61,14 @@ export function TodayScreen(props: TodayScreenProps) {
             <Text className="uppercase text-white text-xs font-bold">Post</Text>
           </Pressable>
         </View>
-      </View>
-      <View className="flex-1">
-        <JournalEntryTimeline entry={entry} />
-      </View>
+      </View> */}
+      <JournalEntryTimeline entry={entry} />
+      <JournalEntryBottomSheet
+        canPost={canPost}
+        entryText={entryText}
+        onEntryTextChange={handleChangeText}
+        onPost={handlePress}
+      />
     </>
   );
 }

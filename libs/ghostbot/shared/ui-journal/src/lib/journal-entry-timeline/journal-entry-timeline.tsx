@@ -19,7 +19,7 @@ export function JournalEntryTimeline({ entry }: JournalEntryTimelineProps) {
       data={entry?.items.sorted([['timestamp', true]])}
       keyExtractor={keyExtractor}
       renderItem={JournalEntryTimelineItem}
-      className="m-4"
+      className={`m-4 flex-1`}
       inverted
     />
   );
