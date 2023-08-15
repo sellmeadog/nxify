@@ -35,7 +35,13 @@
     },
     "build": {
       "executor": "@nx/expo:build",
-      "options": {}
+      "options": {},
+      "configurations": {
+        "development": {
+          "profile": "development",
+          "platform": "ios"
+        }
+      }
     },
     "submit": {
       "executor": "@nx/expo:submit",
