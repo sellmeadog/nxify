@@ -8,6 +8,7 @@
     "@expo/vector-icons": "*",
     "@nx/expo": "*",
     "@nx/react": "*",
+    "@react-navigation/elements": "*",
     "@react-navigation/native-stack": "*",
     "@react-navigation/native": "*",
     "@realm/react": "*",
@@ -26,16 +27,16 @@
     "metro-config": "*",
     "nativewind": "*",
     "react-native-gesture-handler": "*",
+    "react-native-get-random-values": "*",
     "react-native-reanimated": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
+    "react-native-svg-transformer": "*",
     "react-native-svg": "*",
     "react-native-web": "*",
     "react-native": "*",
     "react": "*",
-    "realm": "*",
-    "react-native-svg-transformer": "*",
-    "@react-navigation/elements": "*"
+    "realm": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",
