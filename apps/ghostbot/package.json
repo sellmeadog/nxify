@@ -33,7 +33,9 @@
     "react-native-web": "*",
     "react-native": "*",
     "react": "*",
-    "realm": "*"
+    "realm": "*",
+    "react-native-svg-transformer": "*",
+    "@react-navigation/elements": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/ghostbot && cp yarn.lock apps/ghostbot",
