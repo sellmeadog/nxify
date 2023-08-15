@@ -28,7 +28,7 @@ export function JournalEntryBottomSheet({
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={useHeaderHeight() + 6 - bottom}
-      className="w-full p-3 shadow-sm bg-white"
+      className="w-full p-3 shadow-lg bg-white"
     >
       <SafeAreaView edges={['bottom']}>
         <View className="border-hairline border-slate-500 rounded-lg bg-neutral-100 flex-row ">

@@ -1,6 +1,6 @@
 import { JournalEntry, JournalEntryItem } from '@nxify/ghostbot-data-model';
-import { useCallback } from 'react';
-import { FlatList, View } from 'react-native';
+import { useCallback, useMemo } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, View } from 'react-native';
 import { JournalEntryTimelineItem } from './journal-entry-timeline-item';
 
 export interface JournalEntryTimelineProps {
@@ -9,20 +9,38 @@ export interface JournalEntryTimelineProps {
 
 export function JournalEntryTimeline({ entry }: JournalEntryTimelineProps) {
   const keyExtractor = useCallback(
-    ({ _id }: JournalEntryItem): string => _id.toHexString(),
+    ({ _id }: JournalEntryItem) => _id.toHexString(),
     []
+  );
+
+  const renderItem: ListRenderItem<JournalEntryItem> = useCallback(
+    (info) => <JournalEntryTimelineItem {...info} />,
+    []
+  );
+
+  const data = useMemo(
+    () => entry?.items.sorted([['timestamp', true]]),
+    [entry]
   );
 
   return (
     <FlatList
       ListHeaderComponent={View}
-      data={entry?.items.sorted([['timestamp', true]])}
+      data={data}
       keyExtractor={keyExtractor}
-      renderItem={JournalEntryTimelineItem}
-      className={`m-4 flex-1`}
+      renderItem={renderItem}
+      contentContainerStyle={JournalEntryTimelineTheme.invertedContentContainer}
       inverted
     />
   );
 }
+
+const JournalEntryTimelineTheme = StyleSheet.create({
+  invertedContentContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    padding: 12,
+  },
+});
 
 export default JournalEntryTimeline;
