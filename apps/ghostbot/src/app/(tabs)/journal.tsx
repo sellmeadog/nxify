@@ -8,6 +8,7 @@ export default function JournalScreen() {
       <Tabs.Screen
         options={{
           title: 'Journal',
+          headerTitleStyle: { color: 'black' },
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcon
               color={color}

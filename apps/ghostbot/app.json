@@ -14,18 +14,19 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.nxify.ghostbot"
+      "bundleIdentifier": "com.nxify.ghostbot",
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "userInterfaceStyle": "automatic"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -37,12 +38,17 @@
         "@config-plugins/detox",
         {
           "skipProguard": false,
-          "subdomains": [
-            "10.0.2.2",
-            "localhost"
-          ]
+          "subdomains": ["10.0.2.2", "localhost"]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "63c6559d-68be-4d97-a1d1-c10b5d1c5871"
+      }
+    }
   }
 }

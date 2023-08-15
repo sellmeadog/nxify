@@ -1,4 +1,3 @@
-import { View, Text, TextInput, Pressable } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useTodayScreen } from './today-screen.facade';
@@ -18,13 +17,6 @@ export function TodayScreen(props: TodayScreenProps) {
       <Stack.Screen
         options={{
           title: 'Today',
-          // tabBarIcon: ({ color, focused }) => (
-          //   <MaterialCommunityIcon
-          //     color={color}
-          //     size={25}
-          //     name={focused ? 'comment-multiple' : 'comment-multiple-outline'}
-          //   />
-          // ),
           headerRight: ({ tintColor }) => (
             <Link href={'/journal'} asChild>
               <MaterialCommunityIcon
@@ -35,33 +27,11 @@ export function TodayScreen(props: TodayScreenProps) {
               />
             </Link>
           ),
-          // headerPressColor: 'blue',
-          headerTintColor: 'blue',
+          headerTintColor: '#f97316',
           headerTitleStyle: { color: 'black' },
+          headerShadowVisible: false,
         }}
       />
-      {/* <View className="bg-white p-2">
-        <View className="p-2">
-          <TextInput
-            className="p-2 m-0 border-hairline border-slate-500 rounded-md"
-            multiline
-            placeholder="What's on your mind today?"
-            onChangeText={handleChangeText}
-            value={entryText}
-          />
-        </View>
-        <View className="flex-row items-center justify-end px-2">
-          <Pressable
-            disabled={!canPost}
-            onPress={handlePress}
-            className={`${
-              canPost ? 'bg-orange-500' : 'bg-slate-400'
-            } py-1 px-3 rounded-full`}
-          >
-            <Text className="uppercase text-white text-xs font-bold">Post</Text>
-          </Pressable>
-        </View>
-      </View> */}
       <JournalEntryTimeline entry={entry} />
       <JournalEntryBottomSheet
         canPost={canPost}

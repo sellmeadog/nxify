@@ -52,7 +52,7 @@ function RootLayoutNav() {
   return (
     <GhostbotDataProvider deleteRealmIfMigrationNeeded={true}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack screenOptions={{ headerTintColor: '#f97316' }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="entries/[id]" />
         </Stack>
