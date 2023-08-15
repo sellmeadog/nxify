@@ -1,9 +1,13 @@
 import React from 'react';
 
 import { View, KeyboardAvoidingView, TextInput, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import MaterialCommunityIcon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useHeaderHeight } from '@react-navigation/elements';
+import { StyledComponent } from 'nativewind';
 
 export interface JournalEntryBottomSheetProps {
   canPost?: boolean;
@@ -18,38 +22,37 @@ export function JournalEntryBottomSheet({
   onPost,
   onEntryTextChange,
 }: JournalEntryBottomSheetProps) {
+  const { bottom } = useSafeAreaInsets();
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
-      keyboardVerticalOffset={useHeaderHeight()}
-      className="absolute bottom-0 w-full p-4 rounded-lg shadow-lg bg-white"
+      keyboardVerticalOffset={useHeaderHeight() + 6 - bottom}
+      className="w-full p-3 shadow-sm bg-white"
     >
       <SafeAreaView edges={['bottom']}>
-        <View className="border-hairline border-slate-500 rounded-lg bg-neutral-100 flex-row items-end">
+        <View className="border-hairline border-slate-500 rounded-lg bg-neutral-100 flex-row ">
           <TextInput
-            className="flex-1 p-2"
+            className="flex-1 p-2 self-center"
             placeholder="What's on your mind?"
-            style={{
-              fontSize: 16,
-              lineHeight: 24,
-              paddingTop: 0,
-            }}
             multiline
             value={entryText}
             onChangeText={onEntryTextChange}
+            style={{ fontSize: 16 }}
           />
-          {canPost ? (
-            <Pressable
-              className="bg-orange-400 rounded-md items-center justify-center w-7 h-7 m-1"
-              onPress={onPost}
-            >
-              <MaterialCommunityIcon
-                name="arrow-up"
-                color={'white'}
-                size={19}
-              />
-            </Pressable>
-          ) : null}
+          <Pressable
+            className="items-center justify-center self-end"
+            onPress={onPost}
+          >
+            <StyledComponent
+              component={MaterialCommunityIcon}
+              name="send"
+              className={`${
+                canPost ? 'text-orange-400' : 'text-neutral-400'
+              } py-2 pr-2`}
+              size={24}
+            ></StyledComponent>
+          </Pressable>
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
