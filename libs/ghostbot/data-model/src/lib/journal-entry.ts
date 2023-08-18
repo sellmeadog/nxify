@@ -6,6 +6,7 @@ export const JournalEntrySchema: Realm.ObjectSchema = {
   name: 'JournalEntry',
   properties: {
     _id: { type: 'int', default: () => JournalEntry.currentEntryId() },
+    authorId: { type: 'string', mapTo: 'owner_id' },
     date: {
       type: 'date',
       default: () => JournalEntry.currentEntryDate(),
@@ -16,8 +17,10 @@ export const JournalEntrySchema: Realm.ObjectSchema = {
   primaryKey: '_id',
 };
 
-export class JournalEntry extends Realm.Object<JournalEntry> {
+export class JournalEntry extends Realm.Object<JournalEntry, 'authorId'> {
   _id!: Realm.Types.Int;
+
+  authorId!: string;
   date!: Realm.Types.Date;
   items!: Realm.List<JournalEntryItem>;
 
@@ -26,9 +29,10 @@ export class JournalEntry extends Realm.Object<JournalEntry> {
   static currentEntryDate = () => startOfDay(new Date());
   static currentEntryId = () => getUnixTime(JournalEntry.currentEntryDate());
 
-  constructor(realm: Realm) {
+  constructor(realm: Realm, authorId: string) {
     super(realm, {
       _id: JournalEntry.currentEntryId(),
+      authorId,
       date: JournalEntry.currentEntryDate(),
     });
   }

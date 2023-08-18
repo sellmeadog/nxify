@@ -5,6 +5,7 @@ export const JournalEntryItemSchema: Realm.ObjectSchema = {
   name: 'JournalEntryItem',
   properties: {
     _id: { type: 'objectId', default: () => new BSON.ObjectID() },
+    authorId: { type: 'string', mapTo: 'owner_id' },
     _entry: {
       type: 'linkingObjects',
       objectType: 'JournalEntry',
@@ -16,10 +17,14 @@ export const JournalEntryItemSchema: Realm.ObjectSchema = {
   primaryKey: '_id',
 };
 
-export class JournalEntryItem extends Realm.Object<JournalEntryItem, 'text'> {
+export class JournalEntryItem extends Realm.Object<
+  JournalEntryItem,
+  'authorId' | 'text'
+> {
   private _entry!: Realm.Results<JournalEntry>;
 
   _id = new BSON.ObjectId();
+  authorId!: string;
   text!: string;
   timestamp!: Date;
 

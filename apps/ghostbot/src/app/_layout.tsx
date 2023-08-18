@@ -46,11 +46,13 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+const { EXPO_PUBLIC_REALM_APP_ID } = process.env;
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <GhostbotDataProvider deleteRealmIfMigrationNeeded={true}>
+    <GhostbotDataProvider appId={EXPO_PUBLIC_REALM_APP_ID}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{ headerTintColor: '#f97316' }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
