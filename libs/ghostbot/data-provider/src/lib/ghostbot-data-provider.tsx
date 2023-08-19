@@ -1,9 +1,9 @@
 import { AppProvider, RealmProvider, UserProvider, useApp } from '@realm/react';
-import { JournalEntry, JournalEntryItem } from '@nxify/ghostbot-data-model';
 import { PropsWithChildren, useState } from 'react';
 import { OpenRealmBehaviorType, OpenRealmTimeOutBehavior } from 'realm';
 import { Button, Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import { JournalEntry, JournalEntryEvent } from '@nxify/ghostbot-data-model';
 
 export type GhostbotDataProviderProps = PropsWithChildren<
   Omit<Realm.Configuration, 'schema' | 'sync'> & { appId: string }
@@ -18,7 +18,7 @@ export function GhostbotDataProvider({
     <AppProvider id={appId}>
       <UserProvider fallback={LoginScreen}>
         <RealmProvider
-          schema={[JournalEntry, JournalEntryItem]}
+          schema={[JournalEntry, JournalEntryEvent]}
           sync={{
             flexible: true,
             existingRealmFileBehavior: {

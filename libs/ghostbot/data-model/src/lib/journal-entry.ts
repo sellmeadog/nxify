@@ -1,63 +1,31 @@
-import Realm from 'realm';
-import { getUnixTime, startOfDay } from 'date-fns';
-import { JournalEntryItem } from './journal-entry-item';
+import { startOfDay } from 'date-fns';
+import { BSON } from 'realm';
 
-export const JournalEntrySchema: Realm.ObjectSchema = {
+const JournalEntrySchema: Realm.ObjectSchema = {
   name: 'JournalEntry',
   properties: {
-    _id: { type: 'int', default: () => JournalEntry.currentEntryId() },
-    authorId: { type: 'string', mapTo: 'owner_id' },
-    date: {
-      type: 'date',
-      default: () => JournalEntry.currentEntryDate(),
-      indexed: true,
-    },
-    items: 'JournalEntryItem[]',
+    _id: 'objectId',
+    authorId: { type: 'string', mapTo: 'owner_id', indexed: true },
+    date: { type: 'date', indexed: true },
   },
   primaryKey: '_id',
 };
 
 export class JournalEntry extends Realm.Object<JournalEntry, 'authorId'> {
-  _id!: Realm.Types.Int;
-
-  authorId!: string;
-  date!: Realm.Types.Date;
-  items!: Realm.List<JournalEntryItem>;
-
   static schema = JournalEntrySchema;
 
-  static currentEntryDate = () => startOfDay(new Date());
-  static currentEntryId = () => getUnixTime(JournalEntry.currentEntryDate());
+  _id = new BSON.ObjectID();
+  authorId!: string;
+  date!: Date;
 
-  constructor(realm: Realm, authorId: string) {
-    super(realm, {
-      _id: JournalEntry.currentEntryId(),
-      authorId,
-      date: JournalEntry.currentEntryDate(),
-    });
+  constructor(realm: Realm, authorId: string);
+  constructor(realm: Realm, authorId: string, date: Date);
+  constructor(realm: Realm, authorId: string, date: number);
+  constructor(
+    realm: Realm,
+    authorId: string,
+    date: Date | number = new Date()
+  ) {
+    super(realm, { authorId, date: startOfDay(date) });
   }
 }
-
-// import Realm from 'realm';
-// import { startOfDay } from 'date-fns';
-// import { JournalEntryItem } from './journal-entry-item';
-
-// const JournalEntrySchema: Realm.ObjectSchema = {
-//   name: 'JournalEntry',
-//   primaryKey: '_id',
-//   properties: {
-//     _id: { type: 'int', default: () => startOfDay(new Date()) },
-//     items: { type: 'list', objectType: 'JournalEntryItem' },
-//   },
-// };
-
-// export class JournalEntry extends Realm.Object<JournalEntry> {
-//   _id!: Realm.Types.Int;
-//   items!: Realm.List<JournalEntryItem>;
-
-//   get date(): Date {
-//     return new Date(this._id);
-//   }
-
-//   static schema = JournalEntrySchema;
-// }

@@ -9,7 +9,7 @@ import {
 export interface TodayScreenProps {}
 
 export function TodayScreen(props: TodayScreenProps) {
-  const [{ canPost, entry, entryText }, handleChangeText, handlePress] =
+  const [{ canPost, entries, entryText }, handleChangeText, handlePress] =
     useTodayScreen();
 
   return (
@@ -32,7 +32,7 @@ export function TodayScreen(props: TodayScreenProps) {
           headerShadowVisible: false,
         }}
       />
-      <JournalEntryTimeline entry={entry} />
+      <JournalEntryTimeline entries={entries} />
       <JournalEntryBottomSheet
         canPost={canPost}
         entryText={entryText}

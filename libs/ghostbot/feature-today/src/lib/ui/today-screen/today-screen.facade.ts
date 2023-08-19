@@ -1,76 +1,40 @@
-import { JournalEntry, JournalEntryItem } from '@nxify/ghostbot-data-model';
-import { useObject, useRealm, useUser } from '@realm/react';
+import { JournalEntryEvent } from '@nxify/ghostbot-data-model';
+import { useQuery, useRealm, useUser } from '@realm/react';
+import { startOfDay } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
-import { UpdateMode } from 'realm';
 
 export function useTodayScreen(): [
-  state: { canPost: boolean; entry: JournalEntry | null; entryText?: string },
+  state: {
+    canPost: boolean;
+    entries: ReadonlyArray<JournalEntryEvent>;
+    entryText?: string;
+  },
   setEntryText: (text: string) => void,
   postEntryItem: () => void
 ] {
   const realm = useRealm();
   const user = useUser();
-  const entry = useObject(JournalEntry, JournalEntry.currentEntryId());
+  const entries = useQuery(JournalEntryEvent, (collection) =>
+    collection.filtered(
+      'date == $0 SORT (timestamp DESC)',
+      startOfDay(new Date())
+    )
+  );
 
   const [entryText, setEntryText] = useState<string>();
-
-  useEffect(() => {
-    realm.subscriptions.update((subscriptions) => {
-      subscriptions.add(
-        realm.objects(JournalEntry).filtered('owner_id == "$0"', user.id),
-        { name: 'ownJournalEntry' }
-      );
-      subscriptions.add(
-        realm.objects(JournalEntryItem).filtered('owner_id == "$0"', user.id),
-        { name: 'ownJournalEntryItem' }
-      );
-    });
-
-    return () => {
-      realm.subscriptions.update((subscriptions) => {
-        subscriptions.removeByName('ownJournalEntry');
-        subscriptions.removeByName('ownJournalEntryItem');
-      });
-    };
-  }, [realm, user]);
 
   const postEntryItem = useCallback(() => {
     if (entryText) {
       realm.write(() => {
-        if (entry) {
-          // const event = new JournalEntryItem(realm, {
-          //   authorId: user.id,
-          //   text: entryText,
-          // });
-          const event = realm.create(
-            JournalEntryItem,
-            { authorId: user.id, text: entryText },
-            UpdateMode.Modified
-          );
-          entry.items.push(event);
-        } else {
-          realm.create(
-            JournalEntry,
-            {
-              authorId: user.id,
-              items: [
-                {
-                  authorId: user.id,
-                  text: entryText,
-                },
-              ],
-            },
-            UpdateMode.Modified
-          );
-        }
+        new JournalEntryEvent(realm, user.id, entryText);
       });
     }
 
     setEntryText(undefined);
-  }, [entry, entryText, realm, user]);
+  }, [entryText, realm, user]);
 
   return [
-    { canPost: Boolean(entryText), entry, entryText },
+    { canPost: Boolean(entryText), entries, entryText },
     setEntryText,
     postEntryItem,
   ];

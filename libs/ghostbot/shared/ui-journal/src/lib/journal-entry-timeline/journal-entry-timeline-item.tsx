@@ -1,10 +1,10 @@
-import { JournalEntryItem } from '@nxify/ghostbot-data-model';
+import { JournalEntryEvent } from '@nxify/ghostbot-data-model';
 import { format } from 'date-fns';
 import { useCallback } from 'react';
 import { ListRenderItemInfo, Pressable, Text, View } from 'react-native';
 
 export type JournalEntryTimelineItemProps =
-  ListRenderItemInfo<JournalEntryItem>;
+  ListRenderItemInfo<JournalEntryEvent>;
 
 export function JournalEntryTimelineItem({
   item,
