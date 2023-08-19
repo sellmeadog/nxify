@@ -1,5 +1,6 @@
 import { getTime, startOfDay } from 'date-fns';
 import { BSON } from 'realm';
+import { journalDateInfo } from '../util/journal-date-info';
 
 const JournalEntryEventSchema: Realm.ObjectSchema = {
   name: 'JournalEntryEvent',
@@ -43,9 +44,16 @@ export class JournalEntryEvent extends Realm.Object<
     authorId: string,
     text: string,
     type: JournalEntryEventType = 'event',
-    date = startOfDay(new Date()),
-    timestamp = getTime(new Date())
+    date = new Date()
   ) {
-    super(realm, { authorId, date, timestamp, text, type });
+    const { entryDate, eventTimestamp } = journalDateInfo(date, authorId);
+
+    super(realm, {
+      authorId,
+      date: entryDate,
+      timestamp: eventTimestamp,
+      text,
+      type,
+    });
   }
 }
