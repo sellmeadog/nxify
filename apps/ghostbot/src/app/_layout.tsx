@@ -15,11 +15,6 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -54,9 +49,11 @@ function RootLayoutNav() {
   return (
     <GhostbotDataProvider appId={EXPO_PUBLIC_REALM_APP_ID}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerTintColor: '#f97316' }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="entries/[id]" />
+        <Stack
+          initialRouteName="(app)"
+          screenOptions={{ headerTintColor: '#f97316' }}
+        >
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
         </Stack>
       </ThemeProvider>
     </GhostbotDataProvider>
