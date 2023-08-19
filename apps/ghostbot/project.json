@@ -39,7 +39,8 @@
       "configurations": {
         "development": {
           "profile": "development",
-          "platform": "ios"
+          "platform": "ios",
+          "interactive": false
         }
       }
     },
