@@ -9,6 +9,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { GhostbotDataProvider } from '@nxify/ghostbot-data-provider';
+import { LoginScreen } from '@nxify/ghostbot-feature-admin';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,7 +48,10 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <GhostbotDataProvider appId={EXPO_PUBLIC_REALM_APP_ID}>
+    <GhostbotDataProvider
+      appId={EXPO_PUBLIC_REALM_APP_ID}
+      fallback={LoginScreen}
+    >
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack
           initialRouteName="(app)"

@@ -19,6 +19,9 @@
       "@nxify/ghostbot-data-provider": [
         "libs/ghostbot/data-provider/src/index.ts"
       ],
+      "@nxify/ghostbot-feature-admin": [
+        "libs/ghostbot/feature-admin/src/index.ts"
+      ],
       "@nxify/ghostbot-feature-today": [
         "libs/ghostbot/feature-today/src/index.ts"
       ],
