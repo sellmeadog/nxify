@@ -34,13 +34,13 @@
   "devDependencies": {
     "@config-plugins/detox": "6.0.0",
     "@expo/cli": "0.10.10",
-    "@nx/detox": "16.7.0",
-    "@nx/eslint-plugin": "16.7.0",
-    "@nx/expo": "16.7.0",
-    "@nx/jest": "16.7.0",
-    "@nx/js": "16.7.0",
-    "@nx/linter": "16.7.0",
-    "@nx/workspace": "16.7.0",
+    "@nx/detox": "16.7.2",
+    "@nx/eslint-plugin": "16.7.2",
+    "@nx/expo": "16.7.2",
+    "@nx/jest": "16.7.2",
+    "@nx/js": "16.7.2",
+    "@nx/linter": "16.7.2",
+    "@nx/workspace": "16.7.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/jest-native": "5.4.2",
     "@testing-library/react-native": "12.1.2",
@@ -67,7 +67,7 @@
     "jest-expo": "49.0.0",
     "metro": "0.76.7",
     "metro-resolver": "0.76.7",
-    "nx": "16.7.0",
+    "nx": "16.7.2",
     "postcss": "8.4.21",
     "prettier": "2.6.2",
     "react-test-renderer": "18.2.0",
@@ -77,3 +77,4 @@
     "typescript": "5.1.3"
   }
 }
+
