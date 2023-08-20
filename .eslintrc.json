@@ -18,6 +18,12 @@
               }
             ]
           }
+        ],
+        "react/style-prop-object": [
+          "warn",
+          {
+            "allow": ["StatusBar"]
+          }
         ]
       }
     },
