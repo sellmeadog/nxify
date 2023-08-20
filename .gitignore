@@ -56,3 +56,6 @@ cache/
 
 
 apps/ghostbot-e2e/artifacts
+
+# Next.js
+.next
