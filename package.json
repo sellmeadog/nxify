@@ -40,6 +40,7 @@
     "@nx/jest": "16.7.2",
     "@nx/js": "16.7.2",
     "@nx/linter": "16.7.2",
+    "@nx/next": "16.7.2",
     "@nx/workspace": "16.7.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/jest-native": "5.4.2",
@@ -77,4 +78,3 @@
     "typescript": "5.1.3"
   }
 }
-
