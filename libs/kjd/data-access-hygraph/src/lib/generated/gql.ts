@@ -12,7 +12,7 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  query pageBySlug($slug: String = "home") {\n    page(where: { slug: $slug }) {\n      id\n      sections {\n        __typename\n        ... on HomePageHero {\n          id\n          image {\n            url\n          }\n          title\n        }\n      }\n      title\n    }\n  }\n':
+  '\n  query pageBySlug($slug: String = "home") {\n    page(where: { slug: $slug }) {\n      id\n      sections {\n        __typename\n        ... on HomePageHero {\n          content {\n            raw\n          }\n          id\n          image {\n            url\n          }\n          subtitle\n          title\n        }\n      }\n    }\n  }\n':
     types.PageBySlugDocument,
 };
 
@@ -20,7 +20,7 @@ const documents = {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query pageBySlug($slug: String = "home") {\n    page(where: { slug: $slug }) {\n      id\n      sections {\n        __typename\n        ... on HomePageHero {\n          id\n          image {\n            url\n          }\n          title\n        }\n      }\n      title\n    }\n  }\n'
+  source: '\n  query pageBySlug($slug: String = "home") {\n    page(where: { slug: $slug }) {\n      id\n      sections {\n        __typename\n        ... on HomePageHero {\n          content {\n            raw\n          }\n          id\n          image {\n            url\n          }\n          subtitle\n          title\n        }\n      }\n    }\n  }\n'
 ): typeof import('./graphql').PageBySlugDocument;
 
 export function graphql(source: string) {

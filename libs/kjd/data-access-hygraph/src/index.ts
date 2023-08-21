@@ -1,2 +1,2 @@
-export { PageBySlugQuery } from './lib/generated/graphql';
-export * from './lib/cms-page-by-slug';
+export { HomePageHero, PageBySlugQuery } from './lib/generated/graphql';
+export * from './lib/page-by-slug';

@@ -1969,11 +1969,13 @@ export type DocumentVersion = {
 
 export type HomePageHero = {
   __typename?: 'HomePageHero';
+  content: Array<RichText>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
   image?: Maybe<Asset>;
   /** System stage field */
   stage: Stage;
+  subtitle?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
 };
 
@@ -2000,7 +2002,9 @@ export type HomePageHeroConnection = {
 };
 
 export type HomePageHeroCreateInput = {
+  content?: InputMaybe<Array<Scalars['RichTextAST']['input']>>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
 };
 
@@ -2060,6 +2064,25 @@ export type HomePageHeroManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<AssetWhereInput>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  subtitle_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  subtitle_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  subtitle_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  subtitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  subtitle_starts_with?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2084,6 +2107,8 @@ export type HomePageHeroManyWhereInput = {
 export enum HomePageHeroOrderByInput {
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
 }
@@ -2173,7 +2198,9 @@ export type HomePageHeroParentWhereUniqueInput = {
 };
 
 export type HomePageHeroUpdateInput = {
+  content?: InputMaybe<Array<Scalars['RichTextAST']['input']>>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2193,6 +2220,8 @@ export type HomePageHeroUpdateManyInlineInput = {
 };
 
 export type HomePageHeroUpdateManyInput = {
+  content?: InputMaybe<Array<Scalars['RichTextAST']['input']>>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2283,6 +2312,25 @@ export type HomePageHeroWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<AssetWhereInput>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  subtitle_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  subtitle_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  subtitle_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  subtitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  subtitle_starts_with?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -5607,11 +5655,12 @@ export type PageBySlugQuery = {
   page?: {
     __typename?: 'Page';
     id: string;
-    title?: string | null;
     sections: Array<{
       __typename: 'HomePageHero';
       id: string;
+      subtitle?: string | null;
       title: string;
+      content: Array<{ __typename?: 'RichText'; raw: any }>;
       image?: { __typename?: 'Asset'; url: string } | null;
     }>;
   } | null;
@@ -5639,14 +5688,17 @@ export const PageBySlugDocument = new TypedDocumentString(`
     sections {
       __typename
       ... on HomePageHero {
+        content {
+          raw
+        }
         id
         image {
           url
         }
+        subtitle
         title
       }
     }
-    title
   }
 }
     `) as unknown as TypedDocumentString<
