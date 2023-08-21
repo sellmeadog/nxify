@@ -36,7 +36,9 @@
       "@nxify/kjd-shared-ui-components/server": [
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
-      "@nxify/kjd-ui-article": ["libs/kjd/ui-article/src/index.ts"]
+      "@nxify/kjd-ui-article": ["libs/kjd/ui-article/src/index.ts"],
+      "@nxify/kjd-ui-layout": ["libs/kjd/ui-layout/src/index.ts"],
+      "@nxify/kjd-ui-layout/server": ["libs/kjd/ui-layout/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

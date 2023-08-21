@@ -7,8 +7,8 @@ export function ArticlePreviewSection({
   articles,
 }: ArticlePreviewSectionProps) {
   return (
-    <div className="max-w-5xl mx-auto">
+    <section className="max-w-5xl mx-auto">
       <ArticlePreviewList articles={articles} />
-    </div>
+    </section>
   );
 }
