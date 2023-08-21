@@ -1,16 +1,21 @@
-import { fetchArticlePreviewList } from '@nxify/kjd-data-access-article';
-import { ArticlePreviewSection } from '../../client/article-preview-section/article-preview-section';
 import { HeroSection } from '../../client/hero-section/hero-section';
+import { cmsPageBySlug } from '@nxify/kjd-data-access-hygraph';
+import { ContentPage } from '@nxify/kjd-ui-hygraph';
+import { notFound } from 'next/navigation';
 
 export interface HomePageProps {}
 
 export async function HomePage(props: HomePageProps) {
-  const { articles } = await fetchArticlePreviewList();
+  const page = await cmsPageBySlug('home');
+
+  if (!page) {
+    return notFound();
+  }
 
   return (
-    <>
-      <HeroSection />
-      <ArticlePreviewSection articles={articles} />
-    </>
+    <ContentPage
+      components={{ HomePageHero: HeroSection }}
+      sections={page?.sections}
+    />
   );
 }
