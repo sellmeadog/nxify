@@ -31,12 +31,17 @@
       "@nxify/kjd-data-access-article": [
         "libs/kjd/data-access-article/src/index.ts"
       ],
+      "@nxify/kjd-data-access-hygraph": [
+        "libs/kjd/data-access-hygraph/src/index.ts"
+      ],
       "@nxify/kjd-feature-home": ["libs/kjd/feature-home/src/index.ts"],
       "@nxify/kjd-feature-home/server": ["libs/kjd/feature-home/src/server.ts"],
       "@nxify/kjd-shared-ui-components/server": [
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
       "@nxify/kjd-ui-article": ["libs/kjd/ui-article/src/index.ts"],
+      "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"],
+      "@nxify/kjd-ui-hygraph": ["libs/kjd/ui-hygraph/src/index.ts"],
       "@nxify/kjd-ui-layout": ["libs/kjd/ui-layout/src/index.ts"],
       "@nxify/kjd-ui-layout/server": ["libs/kjd/ui-layout/src/server.ts"]
     }

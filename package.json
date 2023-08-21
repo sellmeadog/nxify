@@ -37,6 +37,8 @@
   "devDependencies": {
     "@config-plugins/detox": "6.0.0",
     "@expo/cli": "0.10.10",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
     "@nx/cypress": "16.7.2",
     "@nx/detox": "16.7.2",
     "@nx/eslint-plugin": "16.7.2",
