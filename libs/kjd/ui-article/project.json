@@ -1,0 +1,36 @@
+{
+  "name": "kjd-ui-article",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/kjd/ui-article/src",
+  "projectType": "library",
+  "tags": ["scope:kjd"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/kjd/ui-article/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/kjd/ui-article",
+        "tsConfig": "libs/kjd/ui-article/tsconfig.lib.json",
+        "project": "libs/kjd/ui-article/package.json",
+        "entryFile": "libs/kjd/ui-article/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/kjd/ui-article/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

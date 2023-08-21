@@ -1968,6 +1968,13 @@
     slash "^3.0.0"
     strip-ansi "^6.0.0"
 
+"@jest/create-cache-key-function@^27.4.2":
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/@jest/create-cache-key-function/-/create-cache-key-function-27.5.1.tgz#7448fae15602ea95c828f5eceed35c202a820b31"
+  integrity sha512-dmH1yW+makpTSURTy8VzdUwFnfQh1G8R+DxO2Ho2FFmBbKFEVm+3jWdvFhE2VqB/LATCTokkP0dotjyQyw5/AQ==
+  dependencies:
+    "@jest/types" "^27.5.1"
+
 "@jest/create-cache-key-function@^29.2.1":
   version "29.6.2"
   resolved "https://registry.yarnpkg.com/@jest/create-cache-key-function/-/create-cache-key-function-29.6.2.tgz#b6b74fb741a7b7d9aa399c179694db8272283527"
@@ -3630,6 +3637,13 @@
   integrity sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==
   dependencies:
     tslib "^2.4.0"
+
+"@swc/jest@0.2.20":
+  version "0.2.20"
+  resolved "https://registry.yarnpkg.com/@swc/jest/-/jest-0.2.20.tgz#2bddb4348fb730296b86cdcd96748be131b11395"
+  integrity sha512-5qSUBYY1wyIMn7p0Vl9qqV4hMI69oJwZCIPUpBsTFWN2wlwn6RDugzdgCn+bLXVYh+Cxi8bJcZ1uumDgsoL+FA==
+  dependencies:
+    "@jest/create-cache-key-function" "^27.4.2"
 
 "@szmarczak/http-timer@^4.0.5":
   version "4.0.6"
@@ -10124,7 +10138,7 @@ jest-environment-jsdom@^29.2.1:
     jest-util "^29.6.2"
     jsdom "^20.0.0"
 
-jest-environment-node@^29.2.1, jest-environment-node@^29.6.2:
+jest-environment-node@^29.2.1, jest-environment-node@^29.4.1, jest-environment-node@^29.6.2:
   version "29.6.2"
   resolved "https://registry.yarnpkg.com/jest-environment-node/-/jest-environment-node-29.6.2.tgz#a9ea2cabff39b08eca14ccb32c8ceb924c8bb1ad"
   integrity sha512-YGdFeZ3T9a+/612c5mTQIllvWkddPbYcN2v95ZH24oWMbGA4GGS2XdIF92QMhUhvrjjuQWYgUGW2zawOyH63MQ==

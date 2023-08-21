@@ -1,3 +1,3 @@
-import { HomePage } from '@nxify/kjd-feature-home';
+import { HomePage } from '@nxify/kjd-feature-home/server';
 
 export default HomePage;

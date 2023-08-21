@@ -1,10 +1,11 @@
-import { HomePage } from './home-page';
 import { render } from '@testing-library/react';
+
+import { ArticlePreviewList } from './article-preview-list';
 import React from 'react';
 
-describe('HomePage', () => {
+describe('ArticlePreviewList', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<HomePage />);
+    const { baseElement } = render(<ArticlePreviewList />);
     expect(baseElement).toBeTruthy();
   });
 });

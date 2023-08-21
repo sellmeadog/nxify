@@ -18,12 +18,6 @@
               }
             ]
           }
-        ],
-        "react/style-prop-object": [
-          "warn",
-          {
-            "allow": ["StatusBar"]
-          }
         ]
       }
     },
@@ -32,6 +26,12 @@
       "extends": ["plugin:@nx/typescript"],
       "rules": {
         "@typescript-eslint/no-empty-interface": "off"
+        // "react/style-prop-object": [
+        //   "warn",
+        //   {
+        //     "allow": ["StatusBar"]
+        //   }
+        // ]
       }
     },
     {
