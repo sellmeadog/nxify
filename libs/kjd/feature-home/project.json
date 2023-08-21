@@ -1,0 +1,36 @@
+{
+  "name": "kjd-feature-home",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/kjd/feature-home/src",
+  "projectType": "library",
+  "tags": ["scope:kjd"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/kjd/feature-home/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/kjd/feature-home",
+        "tsConfig": "libs/kjd/feature-home/tsconfig.lib.json",
+        "project": "libs/kjd/feature-home/package.json",
+        "entryFile": "libs/kjd/feature-home/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/kjd/feature-home/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}
