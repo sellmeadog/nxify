@@ -33,6 +33,8 @@
       "@nxify/kjd-shared-ui-components/server": [
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
+      "@nxify/kjd-ui-articles": ["libs/kjd/ui-articles/src/index.ts"],
+      "@nxify/kjd-ui-articles/server": ["libs/kjd/ui-articles/src/server.ts"],
       "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"]
     }
   },
