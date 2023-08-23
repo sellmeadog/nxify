@@ -45,6 +45,14 @@
           "codeCoverage": true
         }
       }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "graphql-codegen -c codegen.ts",
+        "cwd": "{projectRoot}/src"
+      },
+      "dependsOn": ["^codegen"]
     }
   }
 }

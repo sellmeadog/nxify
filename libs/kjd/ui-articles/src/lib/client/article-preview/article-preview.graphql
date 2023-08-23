@@ -1,0 +1,11 @@
+fragment ArticlePreview on Article {
+  author {
+    id
+    name
+  }
+  createdAt
+  excerpt
+  id
+  slug
+  title
+}
