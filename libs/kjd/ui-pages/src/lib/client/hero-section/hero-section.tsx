@@ -25,8 +25,8 @@ export function HeroSection({ fragment }: HeroSectionProps) {
           <img alt={title ?? ''} src={image?.url} />
         </section>
         <section className=" flex flex-col gap-y-1 col-span-3 text-sm md:col-span-2 lg:text-base">
-          {content.map(({ raw }) => (
-            <RichText content={raw} />
+          {content.map(({ __typename, raw }, index) => (
+            <RichText key={`${__typename}:${index}`} content={raw} />
           ))}
         </section>
       </section>
