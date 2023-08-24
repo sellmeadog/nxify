@@ -1,0 +1,11 @@
+fragment HeroSection on HomePageHero {
+  content {
+    raw
+  }
+  id
+  image {
+    url
+  }
+  subtitle
+  title
+}

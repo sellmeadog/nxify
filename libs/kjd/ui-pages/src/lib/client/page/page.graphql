@@ -1,0 +1,13 @@
+#import HeroSection from "../hero-section/hero-section.graphql"
+
+fragment PageContent on Query {
+  page(where: { slug: $slug }) {
+    id
+    sections {
+      __typename
+      ... on HomePageHero {
+        ...HeroSection
+      }
+    }
+  }
+}

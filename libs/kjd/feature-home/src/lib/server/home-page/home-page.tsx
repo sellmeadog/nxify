@@ -1,11 +1,13 @@
 import { ArticlePreviewList } from '@nxify/kjd-ui-articles';
 import { graphql } from '../../generated';
 import { GraphQLClient } from 'graphql-request';
+import { Page } from '@nxify/kjd-ui-pages';
 
 const { KJD_HYGRAPH_ENDPOINT } = process.env;
 
 const HomePageRoute = graphql(`
-  query HomePage {
+  query HomePage($slug: String!) {
+    ...PageContent
     ...ArticlePreviewList
   }
 `);
@@ -15,7 +17,12 @@ const client = new GraphQLClient(KJD_HYGRAPH_ENDPOINT);
 export interface HomePageProps {}
 
 export async function HomePage(props: HomePageProps) {
-  const query = await client.request(HomePageRoute);
+  const query = await client.request(HomePageRoute, { slug: 'home' });
 
-  return <ArticlePreviewList fragment={query} />;
+  return (
+    <>
+      <Page fragment={query} />
+      <ArticlePreviewList fragment={query} />;
+    </>
+  );
 }

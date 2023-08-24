@@ -13,9 +13,6 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n": types.HomePageDocument,
-    "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}": types.ArticlePreviewListFragmentDoc,
-    "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}": types.ArticlePreviewFragmentDoc,
     "fragment HeroSection on HomePageHero {\n  content {\n    raw\n  }\n  id\n  image {\n    url\n  }\n  subtitle\n  title\n}": types.HeroSectionFragmentDoc,
     "fragment PageContent on Query {\n  page(where: {slug: $slug}) {\n    id\n    sections {\n      __typename\n      ... on HomePageHero {\n        ...HeroSection\n      }\n    }\n  }\n}": types.PageContentFragmentDoc,
 };
@@ -34,18 +31,6 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n"): (typeof documents)["\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"): (typeof documents)["fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"): (typeof documents)["fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

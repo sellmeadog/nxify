@@ -35,7 +35,9 @@
       ],
       "@nxify/kjd-ui-articles": ["libs/kjd/ui-articles/src/index.ts"],
       "@nxify/kjd-ui-articles/server": ["libs/kjd/ui-articles/src/server.ts"],
-      "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"]
+      "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"],
+      "@nxify/kjd-ui-pages": ["libs/kjd/ui-pages/src/index.ts"],
+      "@nxify/kjd-ui-pages/server": ["libs/kjd/ui-pages/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
