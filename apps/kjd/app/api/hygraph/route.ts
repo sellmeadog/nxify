@@ -27,8 +27,6 @@ export async function GET() {
       QUERY
     );
 
-    console.log(result);
-
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error(error);
