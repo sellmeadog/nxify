@@ -1,0 +1,8 @@
+fragment ArticleHero on Article {
+  author {
+    name
+    picture
+  }
+  createdAt
+  title
+}

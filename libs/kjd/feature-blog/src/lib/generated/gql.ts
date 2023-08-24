@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  query ArticleBySlug($slug: String!) {\n    article(where: { slug: $slug }) {\n      ...ArticleHero\n      ...ArticleBody\n    }\n  }\n": types.ArticleBySlugDocument,
     "fragment ArticleBody on Article {\n  body {\n    raw\n  }\n}": types.ArticleBodyFragmentDoc,
     "fragment ArticleHero on Article {\n  author {\n    name\n    picture\n  }\n  createdAt\n  title\n}": types.ArticleHeroFragmentDoc,
     "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}": types.ArticlePreviewListFragmentDoc,
@@ -33,6 +34,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query ArticleBySlug($slug: String!) {\n    article(where: { slug: $slug }) {\n      ...ArticleHero\n      ...ArticleBody\n    }\n  }\n"): (typeof documents)["\n  query ArticleBySlug($slug: String!) {\n    article(where: { slug: $slug }) {\n      ...ArticleHero\n      ...ArticleBody\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

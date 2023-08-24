@@ -1,10 +1,30 @@
-/* eslint-disable-next-line */
-export interface ArticlePageProps {}
+import { ArticleBody, ArticleHero } from '@nxify/kjd-ui-articles';
+import { graphql } from '../../generated';
+import { GraphQLClient } from 'graphql-request';
 
-export async function ArticlePage(props: ArticlePageProps) {
+const ArticlePageRoute = graphql(`
+  query ArticleBySlug($slug: String!) {
+    article(where: { slug: $slug }) {
+      ...ArticleHero
+      ...ArticleBody
+    }
+  }
+`);
+
+const client = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT);
+
+export interface ArticlePageProps {
+  params: { slug: string };
+}
+
+export async function ArticlePage({ params }: ArticlePageProps) {
+  console.log(params.slug);
+  const query = await client.request(ArticlePageRoute, { slug: params.slug });
+
   return (
-    <div>
-      <h1>Welcome to ArticlePage!</h1>
-    </div>
+    <>
+      <ArticleHero fragment={query.article} />
+      <ArticleBody fragment={query.article} />
+    </>
   );
 }
