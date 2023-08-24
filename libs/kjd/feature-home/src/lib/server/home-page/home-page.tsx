@@ -1,4 +1,4 @@
-import { ArticlePreviewList } from '@nxify/kjd-ui-articles/server';
+import { ArticlePreviewList } from '@nxify/kjd-ui-articles';
 import { graphql } from '../../generated';
 import { GraphQLClient } from 'graphql-request';
 

@@ -1,4 +1,4 @@
-import { ArticlePreview } from '../../client/article-preview/article-preview';
+import { ArticlePreview } from '../article-preview/article-preview';
 import { FragmentType, useFragment } from '../../generated';
 import { ArticlePreviewListFragmentDoc } from '../../generated/graphql';
 

@@ -13,8 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}": types.ArticlePreviewFragmentDoc,
     "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}": types.ArticlePreviewListFragmentDoc,
+    "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}": types.ArticlePreviewFragmentDoc,
 };
 
 /**
@@ -34,11 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"): (typeof documents)["fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"];
+export function graphql(source: "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"): (typeof documents)["fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"): (typeof documents)["fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"];
+export function graphql(source: "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"): (typeof documents)["fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
