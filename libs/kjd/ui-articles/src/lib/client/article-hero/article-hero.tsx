@@ -13,18 +13,16 @@ export function ArticleHero({ fragment }: ArticleHeroProps) {
     return null;
   }
 
-  const { author, createdAt, title } = article;
+  const { createdAt, title } = article;
 
   return (
     <div className="bg-neutral-800">
-      <header className="max-w-5xl mx-auto p-4 text-neutral-200 gap-y-4 md:gap-y-6 md:p-8 lg:p-16">
-        <section className="flex flex-col justify-center gap-y-2 md:col-span-2">
-          <h1 className="text-5xl">{title}</h1>
-          <p className="text-base text-neutral-400 uppercase">
-            {author?.name}
-            &nbsp;&mdash;&nbsp;
+      <header className="max-w-prose mx-auto p-4 md:px-0 md:py-8 lg:py-16">
+        <section className="flex flex-col gap-1">
+          <p className="font-bold !m-0 !p-0 text-neutral-400 text-xs md:text-sm uppercase">
             {format(parseISO(createdAt), 'PPP')}
           </p>
+          <h1 className="font-light !m-0 !p-0">{title}</h1>
         </section>
       </header>
     </div>

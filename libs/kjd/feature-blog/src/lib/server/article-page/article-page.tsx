@@ -22,9 +22,9 @@ export async function ArticlePage({ params }: ArticlePageProps) {
   const query = await client.request(ArticlePageRoute, { slug: params.slug });
 
   return (
-    <>
+    <article className="prose prose-invert prose-sm prose-a:text-cyan-300 prose-blockquote:font-serif prose-blockquote:border-amber-500 max-w-none md:prose-base lg:prose-lg">
       <ArticleHero fragment={query.article} />
       <ArticleBody fragment={query.article} />
-    </>
+    </article>
   );
 }

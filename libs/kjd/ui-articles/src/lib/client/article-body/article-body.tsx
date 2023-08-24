@@ -13,7 +13,11 @@ export function ArticleBody({ fragment }: ArticleBodyProps) {
     return null;
   }
 
-  return <RichText content={article.body.raw} />;
+  return (
+    <main className="prose-p:first-of-type:mt-0 prose-p:last-of-type:mb-0 max-w-prose mx-auto p-4 md:px-0 md:py-8 lg:py-16">
+      <RichText content={article.body.raw} />
+    </main>
+  );
 }
 
 export default ArticleBody;

@@ -17,7 +17,7 @@ export function ArticlePreview({ fragment }: ArticlePreviewProps) {
   return (
     <article className="flex flex-col border-b border-neutral-800 last-of-type:border-transparent gap-y-4 max-w-5xl mx-auto p-4 text-neutral-200 md:p-8 lg:p-16">
       <header className="flex flex-col gap-y-px">
-        <Link href={slug}>
+        <Link href={`/blog/${slug}`}>
           <h2 className="text-cyan-400 text-lg md:text-2xl lg:text-3xl hover:text-cyan-300">
             {title}
           </h2>
