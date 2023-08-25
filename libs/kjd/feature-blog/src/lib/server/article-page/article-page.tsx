@@ -1,6 +1,7 @@
 import { ArticleBody, ArticleHero } from '@nxify/kjd-ui-articles';
 import { graphql } from '../../generated';
 import { GraphQLClient } from 'graphql-request';
+import { ArticlePageRouteParamsDocument } from '../../generated/graphql';
 
 const ArticlePageRoute = graphql(`
   query ArticleBySlug($slug: String!) {
@@ -11,7 +12,9 @@ const ArticlePageRoute = graphql(`
   }
 `);
 
-const client = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT);
+const client = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT, {
+  fetch: fetch,
+});
 
 export interface ArticlePageProps {
   params: { slug: string };
@@ -27,4 +30,12 @@ export async function ArticlePage({ params }: ArticlePageProps) {
       <ArticleBody fragment={query.article} />
     </article>
   );
+}
+
+export async function generateStaticParams() {
+  const { params } = await client.request(ArticlePageRouteParamsDocument);
+
+  console.log(params);
+
+  return params;
 }
