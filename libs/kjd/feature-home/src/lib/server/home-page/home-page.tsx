@@ -2,6 +2,7 @@ import { ArticlePreviewList } from '@nxify/kjd-ui-articles';
 import { graphql } from '../../generated';
 import { GraphQLClient } from 'graphql-request';
 import { Page } from '@nxify/kjd-ui-pages';
+import { Menu } from '@nxify/kjd-ui-layout';
 
 const { KJD_HYGRAPH_ENDPOINT } = process.env;
 
@@ -21,6 +22,7 @@ export async function HomePage(props: HomePageProps) {
 
   return (
     <>
+      <Menu />
       <Page fragment={query} />
       <ArticlePreviewList fragment={query} />;
     </>
