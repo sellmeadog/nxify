@@ -1,0 +1,17 @@
+fragment ArticleMetadata on Article {
+  author {
+    name
+  }
+  createdAt
+  excerpt
+  tags {
+    tag
+  }
+  title
+}
+
+query ArticleMetadataBySlug($slug: String) {
+  article(where: { slug: $slug }) {
+    ...ArticleMetadata
+  }
+}

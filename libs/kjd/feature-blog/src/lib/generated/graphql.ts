@@ -49,6 +49,7 @@ export type Article = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  markdown?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -175,6 +176,7 @@ export type ArticleCreateInput = {
   body: Scalars['RichTextAST']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   excerpt: Scalars['String']['input'];
+  markdown?: InputMaybe<Scalars['String']['input']>;
   slug: Scalars['String']['input'];
   tags?: InputMaybe<TagCreateManyInlineInput>;
   title: Scalars['String']['input'];
@@ -272,6 +274,25 @@ export type ArticleManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  markdown_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  markdown_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  markdown_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  markdown_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  markdown_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  markdown_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  markdown_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  markdown_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  markdown_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -357,6 +378,8 @@ export enum ArticleOrderByInput {
   ExcerptDesc = 'excerpt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  MarkdownAsc = 'markdown_ASC',
+  MarkdownDesc = 'markdown_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -750,6 +773,7 @@ export type ArticleUpdateInput = {
   author?: InputMaybe<AuthorUpdateOneInlineInput>;
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagUpdateManyInlineInput>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -775,6 +799,7 @@ export type ArticleUpdateManyInlineInput = {
 export type ArticleUpdateManyInput = {
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ArticleUpdateManyWithNestedWhereInput = {
@@ -894,6 +919,25 @@ export type ArticleWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  markdown_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  markdown_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  markdown_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  markdown_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  markdown_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  markdown_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  markdown_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  markdown_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  markdown_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7063,6 +7107,18 @@ export type ArticleBySlugQuery = { __typename?: 'Query', article?: (
     & { ' $fragmentRefs'?: { 'ArticleHeroFragment': ArticleHeroFragment;'ArticleBodyFragment': ArticleBodyFragment } }
   ) | null };
 
+export type ArticleMetadataFragment = { __typename?: 'Article', createdAt: any, excerpt: string, title: string, author?: { __typename?: 'Author', name: string } | null, tags: Array<{ __typename?: 'Tag', tag: string }> } & { ' $fragmentName'?: 'ArticleMetadataFragment' };
+
+export type ArticleMetadataBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ArticleMetadataBySlugQuery = { __typename?: 'Query', article?: (
+    { __typename?: 'Article' }
+    & { ' $fragmentRefs'?: { 'ArticleMetadataFragment': ArticleMetadataFragment } }
+  ) | null };
+
 export type ArticleBodyFragment = { __typename?: 'Article', body: { __typename?: 'ArticleBodyRichText', raw: any } } & { ' $fragmentName'?: 'ArticleBodyFragment' };
 
 export type ArticleHeroFragment = { __typename?: 'Article', createdAt: any, title: string, author?: { __typename?: 'Author', name: string, picture: string } | null } & { ' $fragmentName'?: 'ArticleHeroFragment' };
@@ -7074,9 +7130,11 @@ export type ArticlePreviewListFragment = { __typename?: 'Query', articles: Array
 
 export type ArticlePreviewFragment = { __typename?: 'Article', createdAt: any, excerpt: string, id: string, slug: string, title: string, author?: { __typename?: 'Author', id: string, name: string } | null } & { ' $fragmentName'?: 'ArticlePreviewFragment' };
 
+export const ArticleMetadataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMetadata"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleMetadataFragment, unknown>;
 export const ArticleBodyFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleBody"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]} as unknown as DocumentNode<ArticleBodyFragment, unknown>;
 export const ArticleHeroFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHero"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleHeroFragment, unknown>;
 export const ArticlePreviewFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreview"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticlePreviewFragment, unknown>;
 export const ArticlePreviewListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreviewList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"createdAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticlePreview"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreview"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticlePreviewListFragment, unknown>;
 export const ArticlePageRouteParamsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticlePageRouteParams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"params"},"name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<ArticlePageRouteParamsQuery, ArticlePageRouteParamsQueryVariables>;
 export const ArticleBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHero"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleBody"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHero"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleBody"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]} as unknown as DocumentNode<ArticleBySlugQuery, ArticleBySlugQueryVariables>;
+export const ArticleMetadataBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleMetadataBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMetadata"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMetadata"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleMetadataBySlugQuery, ArticleMetadataBySlugQueryVariables>;

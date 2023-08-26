@@ -21,7 +21,6 @@ export interface ArticlePageProps {
 }
 
 export async function ArticlePage({ params }: ArticlePageProps) {
-  console.log(params.slug);
   const query = await client.request(ArticlePageRoute, { slug: params.slug });
 
   return (
@@ -34,8 +33,5 @@ export async function ArticlePage({ params }: ArticlePageProps) {
 
 export async function generateStaticParams() {
   const { params } = await client.request(ArticlePageRouteParamsDocument);
-
-  console.log(params);
-
   return params;
 }

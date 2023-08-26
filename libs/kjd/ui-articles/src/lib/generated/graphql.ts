@@ -49,6 +49,7 @@ export type Article = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  markdown?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -175,6 +176,7 @@ export type ArticleCreateInput = {
   body: Scalars['RichTextAST']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   excerpt: Scalars['String']['input'];
+  markdown?: InputMaybe<Scalars['String']['input']>;
   slug: Scalars['String']['input'];
   tags?: InputMaybe<TagCreateManyInlineInput>;
   title: Scalars['String']['input'];
@@ -272,6 +274,25 @@ export type ArticleManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  markdown_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  markdown_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  markdown_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  markdown_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  markdown_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  markdown_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  markdown_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  markdown_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  markdown_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -357,6 +378,8 @@ export enum ArticleOrderByInput {
   ExcerptDesc = 'excerpt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  MarkdownAsc = 'markdown_ASC',
+  MarkdownDesc = 'markdown_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -750,6 +773,7 @@ export type ArticleUpdateInput = {
   author?: InputMaybe<AuthorUpdateOneInlineInput>;
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagUpdateManyInlineInput>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -775,6 +799,7 @@ export type ArticleUpdateManyInlineInput = {
 export type ArticleUpdateManyInput = {
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ArticleUpdateManyWithNestedWhereInput = {
@@ -894,6 +919,25 @@ export type ArticleWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  markdown?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  markdown_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  markdown_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  markdown_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  markdown_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  markdown_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  markdown_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  markdown_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  markdown_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  markdown_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
