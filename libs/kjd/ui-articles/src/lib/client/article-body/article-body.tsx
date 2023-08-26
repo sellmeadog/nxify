@@ -1,3 +1,4 @@
+import { CenterColumn } from '@nxify/kjd-ui-layout';
 import { FragmentType, useFragment } from '../../generated';
 import { ArticleBodyFragmentDoc } from '../../generated/graphql';
 import { RichText } from '@graphcms/rich-text-react-renderer';
@@ -14,9 +15,9 @@ export function ArticleBody({ fragment }: ArticleBodyProps) {
   }
 
   return (
-    <main className="prose-p:first-of-type:mt-0 prose-p:last-of-type:mb-0 max-w-prose mx-auto p-4 md:px-0 md:py-8 lg:py-16">
+    <CenterColumn className="prose-p:first-of-type:mt-0 prose-p:last-of-type:mb-0">
       <RichText content={article.body.raw} />
-    </main>
+    </CenterColumn>
   );
 }
 
