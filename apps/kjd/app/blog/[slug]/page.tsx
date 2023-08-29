@@ -1,10 +1,7 @@
-import {
-  ArticlePage,
-  generateMetadata,
-  generateStaticParams,
-} from '@nxify/kjd-feature-blog/server';
+export const revalidate = 60;
 
-const revalidate = 60;
+async function ArticlePage() {
+  return <h1>Welcome to ArticlePage</h1>;
+}
 
-export { generateMetadata, generateStaticParams, revalidate };
 export default ArticlePage;

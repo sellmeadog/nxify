@@ -1,3 +1,5 @@
-import { BlogPage } from '@nxify/kjd-feature-blog/server';
+async function BlogPage() {
+  return <h1>Welcome to BlogPage</h1>;
+}
 
 export default BlogPage;

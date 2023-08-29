@@ -1,8 +1,0 @@
-#import ArticlePreview from "../../client/article-preview/article-preview.graphql"
-
-fragment ArticlePreviewList on Query {
-  articles(first: 10, orderBy: createdAt_DESC) {
-    __typename
-    ...ArticlePreview
-  }
-}
