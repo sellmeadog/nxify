@@ -1,5 +1,5 @@
 import { graphql } from '../../generated';
-import { GraphQLClient } from 'graphql-request';
+import { hygraph } from '@nxify/kjd-data-access-hygraph';
 
 const RouteBaseQuery = graphql(`
   query PageBySlug($slug: String = "") {
@@ -31,8 +31,6 @@ const RouteBaseQuery = graphql(`
     }
   }
 `);
-
-const hygraph = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT);
 
 export interface RouteBaseProps {
   slug: string;

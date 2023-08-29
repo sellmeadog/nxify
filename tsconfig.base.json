@@ -28,6 +28,9 @@
       "@nxify/ghostbot-shared-ui-journal": [
         "libs/ghostbot/shared/ui-journal/src/index.ts"
       ],
+      "@nxify/kjd-data-access-hygraph": [
+        "libs/kjd/data-access-hygraph/src/index.ts"
+      ],
       "@nxify/kjd-feature-home": ["libs/kjd/feature-home/src/index.ts"],
       "@nxify/kjd-feature-home/server": ["libs/kjd/feature-home/src/server.ts"],
       "@nxify/kjd-shared-ui-components/server": [
