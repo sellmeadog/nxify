@@ -36,7 +36,11 @@
       "@nxify/kjd-shared-ui-components/server": [
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
-      "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"]
+      "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"],
+      "@nxify/kjd-ui-page-route": ["libs/kjd/ui-page-route/src/index.ts"],
+      "@nxify/kjd-ui-page-route/server": [
+        "libs/kjd/ui-page-route/src/server.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

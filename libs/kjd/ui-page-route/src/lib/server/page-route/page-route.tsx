@@ -32,11 +32,11 @@ const RouteBaseQuery = graphql(`
   }
 `);
 
-export interface RouteBaseProps {
+export interface PageRouteProps {
   slug: string;
 }
 
-export async function RouteBase({ slug = 'home' }: RouteBaseProps) {
+export async function PageRoute({ slug = 'home' }: PageRouteProps) {
   const { page } = await hygraph.request(RouteBaseQuery, { slug });
 
   return (

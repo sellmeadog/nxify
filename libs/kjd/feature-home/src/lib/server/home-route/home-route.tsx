@@ -1,7 +1,7 @@
-import { RouteBase } from '../route-base/route-base';
+import { PageRoute } from '@nxify/kjd-ui-page-route/server';
 
 export interface HomeRouteProps {}
 
 export async function HomeRoute(props: HomeRouteProps) {
-  return <RouteBase slug="home" />;
+  return <PageRoute slug="home" />;
 }
