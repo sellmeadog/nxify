@@ -5,6 +5,7 @@
     "types": ["node", "next", "@nx/next/typings/image.d.ts"]
   },
   "files": [
+    "environment.d.ts",
     "../../../node_modules/@nx/react/typings/cssmodule.d.ts",
     "../../../node_modules/@nx/react/typings/image.d.ts"
   ],
