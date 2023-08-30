@@ -27,9 +27,9 @@ export function HeroSection(props: HeroSectionProps) {
 
   return (
     <section className="bg-neutral-800 max-w-none">
-      <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-16 flex items-center">
+      <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-16 flex flex-col-reverse gap-y-4 md:flex-row items-center">
         <div className="flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-6 md:basis-3/4 lg:basis-2/3">
-          <div className="flex flex-col gap-y-px md:gap-y-2">
+          <div className="flex flex-col items-center md:items-start gap-y-px md:gap-y-2">
             <h1 className="font-serif font-medium !m-0 !p-0 !text-white">
               {title}
             </h1>
@@ -37,10 +37,10 @@ export function HeroSection(props: HeroSectionProps) {
           </div>
           <p className="!m-0 !p-0">{caption}</p>
         </div>
-        <div className="hidden md:basis-1/4 lg:basis-1/3 md:flex">
+        <div className="flex justify-center items-center md:basis-1/4 lg:basis-1/3">
           <img
             alt={title}
-            className="!m-0 !p-0 object-cover"
+            className="!m-0 !p-0 object-cover rounded-full bg-neutral-900 w-1/3 md:w-full md:rounded-none md:bg-transparent"
             src={image?.url}
           />
         </div>

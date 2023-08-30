@@ -60,14 +60,14 @@ export async function ArticleExplorerSection(
 
   return (
     <section className="max-w-none">
-      <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-16">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-16">
         {articles.edges.map(({ node }) => {
           const published = parseISO(node.createdAt);
 
           return (
             <article className="flex flex-col lg:flex-row border-b border-neutral-600 last-of-type:border-transparent py-4 md:py-8 lg:py-16 prose-h2:mt-0">
               <section className="flex grow">
-                <span className="leading-8 lg:leading-10 text-neutral-400 uppercase">
+                <span className="lg:leading-10 text-neutral-400 uppercase">
                   {format(published, 'PP')}
                 </span>
               </section>

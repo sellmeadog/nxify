@@ -49,7 +49,6 @@ export async function PageRoute({ slug = 'home' }: PageRouteProps) {
 
         return null;
       })}
-      <pre>{JSON.stringify(page, undefined, 2)}</pre>
     </>
   );
 }
