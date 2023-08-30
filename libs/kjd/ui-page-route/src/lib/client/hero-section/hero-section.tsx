@@ -1,0 +1,48 @@
+import { FragmentType, graphql, useFragment } from '../../generated';
+
+const HeroSectionFragment = graphql(`
+  fragment HeroSectionContent on HeroSection {
+    caption
+    id
+    image {
+      url
+    }
+    subtitle
+    title
+  }
+`);
+
+export interface HeroSectionProps {
+  fragment?: FragmentType<typeof HeroSectionFragment> | null;
+}
+
+export function HeroSection(props: HeroSectionProps) {
+  const fragment = useFragment(HeroSectionFragment, props.fragment);
+
+  if (!fragment) {
+    return null;
+  }
+
+  const { caption, image, subtitle, title } = fragment;
+
+  return (
+    <section className="bg-neutral-800 max-w-none">
+      <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-16 flex items-center">
+        <div className="flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-6 md:basis-3/4 lg:basis-2/3">
+          <div className="flex flex-col gap-y-px md:gap-y-2">
+            <h1 className="font-serif font-medium !m-0 !p-0">{title}</h1>
+            <p className="text-neutral-500 !m-0 !p-0">{subtitle}</p>
+          </div>
+          <p className="!m-0 !p-0">{caption}</p>
+        </div>
+        <div className="hidden md:basis-1/4 lg:basis-1/3 md:flex">
+          <img
+            alt={title}
+            className="!m-0 !p-0 object-cover"
+            src={image?.url}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

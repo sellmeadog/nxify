@@ -1,3 +1,4 @@
+import { HeroSection } from '../../client/hero-section/hero-section';
 import { graphql } from '../../generated';
 import { hygraph } from '@nxify/kjd-data-access-hygraph';
 
@@ -5,13 +6,7 @@ const RouteBaseQuery = graphql(`
   query PageBySlug($slug: String = "") {
     page(where: { slug: $slug }) {
       hero {
-        caption
-        id
-        image {
-          url
-        }
-        subtitle
-        title
+        ...HeroSectionContent
       }
       sections {
         __typename
@@ -40,8 +35,9 @@ export async function PageRoute({ slug = 'home' }: PageRouteProps) {
   const { page } = await hygraph.request(RouteBaseQuery, { slug });
 
   return (
-    <div>
+    <>
+      <HeroSection fragment={page?.hero} />
       <pre>{JSON.stringify(page, undefined, 2)}</pre>
-    </div>
+    </>
   );
 }

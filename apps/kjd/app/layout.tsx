@@ -12,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-neutral-900">{children}</body>
+      <body className="bg-neutral-900 max-w-none prose prose-sm prose-invert prose-neutral:invert md:prose-base lg:prose-lg">
+        {children}
+      </body>
     </html>
   );
 }
