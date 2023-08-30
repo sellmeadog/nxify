@@ -76,7 +76,10 @@ export async function ArticleExplorerSection(
               </section>
               <section className="max-w-prose">
                 <h2>
-                  <Link className="font-medium lg:font-light" href={node.slug}>
+                  <Link
+                    className="font-medium lg:font-light"
+                    href={`/blog/${node.slug}`}
+                  >
                     {node.hero?.title}
                   </Link>
                 </h2>
