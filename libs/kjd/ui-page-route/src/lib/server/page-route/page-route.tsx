@@ -1,6 +1,8 @@
+import { ElementType } from 'react';
 import { HeroSection } from '../../client/hero-section/hero-section';
 import { graphql } from '../../generated';
 import { hygraph } from '@nxify/kjd-data-access-hygraph';
+import ArticleExplorerSection from '../../client/article-explorer-section/article-explorer-section';
 
 const RouteBaseQuery = graphql(`
   query PageBySlug($slug: String = "") {
@@ -11,10 +13,7 @@ const RouteBaseQuery = graphql(`
       sections {
         __typename
         ... on ArticleExplorer {
-          first
-          id
-          subtitle
-          title
+          ...ArticleExplorerContent
         }
         ... on TagExplorer {
           id
@@ -27,6 +26,10 @@ const RouteBaseQuery = graphql(`
   }
 `);
 
+const SECTIONS: { [key: string]: ElementType } = {
+  ArticleExplorer: ArticleExplorerSection,
+};
+
 export interface PageRouteProps {
   slug: string;
 }
@@ -37,6 +40,15 @@ export async function PageRoute({ slug = 'home' }: PageRouteProps) {
   return (
     <>
       <HeroSection fragment={page?.hero} />
+      {page?.sections.map((fragment) => {
+        const Component = SECTIONS[fragment.__typename];
+
+        if (Component) {
+          return <Component fragment={fragment} />;
+        }
+
+        return null;
+      })}
       <pre>{JSON.stringify(page, undefined, 2)}</pre>
     </>
   );

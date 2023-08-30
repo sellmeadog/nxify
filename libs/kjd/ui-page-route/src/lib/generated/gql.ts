@@ -13,8 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  fragment ArticleExplorerContent on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n": types.ArticleExplorerContentFragmentDoc,
+    "\n  query RecentArticles($first: Int = 10) {\n    articles: articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        node {\n          createdAt\n          hero {\n            caption\n            title\n          }\n          id\n          slug\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n": types.RecentArticlesDocument,
     "\n  fragment HeroSectionContent on HeroSection {\n    caption\n    id\n    image {\n      url\n    }\n    subtitle\n    title\n  }\n": types.HeroSectionContentFragmentDoc,
-    "\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          first\n          id\n          subtitle\n          title\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n": types.PageBySlugDocument,
+    "\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          ...ArticleExplorerContent\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n": types.PageBySlugDocument,
 };
 
 /**
@@ -34,11 +36,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment ArticleExplorerContent on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n"): (typeof documents)["\n  fragment ArticleExplorerContent on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query RecentArticles($first: Int = 10) {\n    articles: articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        node {\n          createdAt\n          hero {\n            caption\n            title\n          }\n          id\n          slug\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n"): (typeof documents)["\n  query RecentArticles($first: Int = 10) {\n    articles: articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        node {\n          createdAt\n          hero {\n            caption\n            title\n          }\n          id\n          slug\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment HeroSectionContent on HeroSection {\n    caption\n    id\n    image {\n      url\n    }\n    subtitle\n    title\n  }\n"): (typeof documents)["\n  fragment HeroSectionContent on HeroSection {\n    caption\n    id\n    image {\n      url\n    }\n    subtitle\n    title\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          first\n          id\n          subtitle\n          title\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          first\n          id\n          subtitle\n          title\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          ...ArticleExplorerContent\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageBySlug($slug: String = \"\") {\n    page(where: { slug: $slug }) {\n      hero {\n        ...HeroSectionContent\n      }\n      sections {\n        __typename\n        ... on ArticleExplorer {\n          ...ArticleExplorerContent\n        }\n        ... on TagExplorer {\n          id\n          first\n          subtitle\n          title\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

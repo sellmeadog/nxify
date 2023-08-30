@@ -30,7 +30,9 @@ export function HeroSection(props: HeroSectionProps) {
       <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-16 flex items-center">
         <div className="flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-6 md:basis-3/4 lg:basis-2/3">
           <div className="flex flex-col gap-y-px md:gap-y-2">
-            <h1 className="font-serif font-medium !m-0 !p-0">{title}</h1>
+            <h1 className="font-serif font-medium !m-0 !p-0 !text-white">
+              {title}
+            </h1>
             <p className="text-neutral-500 !m-0 !p-0">{subtitle}</p>
           </div>
           <p className="!m-0 !p-0">{caption}</p>
