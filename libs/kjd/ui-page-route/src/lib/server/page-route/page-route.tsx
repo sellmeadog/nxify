@@ -40,11 +40,16 @@ export async function PageRoute({ slug = 'home' }: PageRouteProps) {
   return (
     <>
       <HeroSection fragment={page?.hero} />
-      {page?.sections.map((fragment) => {
+      {page?.sections.map((fragment, index) => {
         const Component = SECTIONS[fragment.__typename];
 
         if (Component) {
-          return <Component fragment={fragment} />;
+          return (
+            <Component
+              key={`${fragment.__typename}:${index}`}
+              fragment={fragment}
+            />
+          );
         }
 
         return null;

@@ -65,7 +65,10 @@ export async function ArticleExplorerSection(
           const published = parseISO(node.createdAt);
 
           return (
-            <article className="flex flex-col lg:flex-row border-b border-neutral-600 last-of-type:border-transparent py-4 md:py-8 lg:py-16 prose-h2:mt-0">
+            <article
+              key={node.id}
+              className="flex flex-col lg:flex-row border-b border-neutral-600 last-of-type:border-transparent py-4 md:py-8 lg:py-16 prose-h2:mt-0"
+            >
               <section className="flex grow">
                 <span className="lg:leading-10 text-neutral-400 uppercase">
                   {format(published, 'PP')}
@@ -79,8 +82,11 @@ export async function ArticleExplorerSection(
                 </h2>
                 <p>{node.hero?.caption}</p>
                 <section className="not-prose">
-                  {node.tags.map(({ tag }) => (
-                    <span className="text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full bg-gray-700 text-indigo-400 border border-indigo-400">
+                  {node.tags.map(({ tag }, index) => (
+                    <span
+                      key={`${tag}:${index}`}
+                      className="text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full bg-gray-700 text-indigo-400 border border-indigo-400"
+                    >
                       {tag}
                     </span>
                   ))}
