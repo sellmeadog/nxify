@@ -1,7 +1,3 @@
-export const revalidate = 60;
+import { ArticleRoute } from '@nxify/kjd-feature-blog/server';
 
-async function ArticlePage() {
-  return <h1>Welcome to ArticlePage</h1>;
-}
-
-export default ArticlePage;
+export default ArticleRoute;

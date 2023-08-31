@@ -1,31 +1,31 @@
 {
-  "name": "kjd-ui-page-route",
+  "name": "kjd-feature-blog",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/kjd/ui-page-route/src",
+  "sourceRoot": "libs/kjd/feature-blog/src",
   "projectType": "library",
-  "tags": ["scope:kjd type:ui"],
+  "tags": ["scope:kjd type:feature"],
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/kjd/ui-page-route/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/kjd/feature-blog/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/kjd/ui-page-route",
-        "tsConfig": "libs/kjd/ui-page-route/tsconfig.lib.json",
-        "project": "libs/kjd/ui-page-route/package.json",
-        "entryFile": "libs/kjd/ui-page-route/src/index.ts",
+        "outputPath": "dist/libs/kjd/feature-blog",
+        "tsConfig": "libs/kjd/feature-blog/tsconfig.lib.json",
+        "project": "libs/kjd/feature-blog/package.json",
+        "entryFile": "libs/kjd/feature-blog/src/index.ts",
         "external": ["react", "react-dom", "react/jsx-runtime"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "swc",
         "assets": [
           {
-            "glob": "libs/kjd/ui-page-route/README.md",
+            "glob": "libs/kjd/feature-blog/README.md",
             "input": ".",
             "output": "."
           }
@@ -36,7 +36,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/kjd/ui-page-route/jest.config.ts",
+        "jestConfig": "libs/kjd/feature-blog/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -45,13 +45,6 @@
           "codeCoverage": true
         }
       }
-    },
-    "codegen": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "graphql-codegen -c {projectRoot}/codegen.ts -w"
-      },
-      "dependsOn": ["^codegen"]
     }
   }
 }
