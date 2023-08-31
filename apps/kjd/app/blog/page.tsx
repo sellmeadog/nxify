@@ -1,5 +1,3 @@
-async function BlogPage() {
-  return <h1>Welcome to BlogPage</h1>;
-}
+import { BlogRoute } from '@nxify/kjd-feature-home/server';
 
-export default BlogPage;
+export default BlogRoute;
