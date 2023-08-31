@@ -1,11 +1,10 @@
-import { hygraph } from '@nxify/kjd-data-access-hygraph';
-import { graphql } from '../../generated';
+import { FragmentType, graphql, useFragment } from '../../generated';
 import { HeroSection } from '../../client/hero-section/hero-section';
 import ReactMarkdown from 'react-markdown';
 import { format, parseISO } from 'date-fns';
 
 const ArticleContentQuery = graphql(`
-  query ArticleBySlug($slug: String = "") {
+  fragment ArticleContentQuery on Query {
     article(where: { slug: $slug }) {
       author {
         avatar {
@@ -22,32 +21,22 @@ const ArticleContentQuery = graphql(`
         ...HeroSectionContent
       }
       markdown
-      # sections {
-      #   __typename
-      #   ... on ArticleExplorer {
-      #     ...ArticleExplorerContent
-      #   }
-      #   ... on TagExplorer {
-      #     id
-      #     first
-      #     subtitle
-      #     title
-      #   }
-      # }
     }
   }
 `);
 
 export interface ArticleContentProps {
-  slug: string;
+  query?: FragmentType<typeof ArticleContentQuery>;
 }
 
-export async function ArticleContent({ slug }: ArticleContentProps) {
-  const { article } = await hygraph.request(ArticleContentQuery, { slug });
+export async function ArticleContent({ query }: ArticleContentProps) {
+  const data = useFragment(ArticleContentQuery, query);
 
-  if (!article) {
+  if (!data?.article) {
     return null;
   }
+
+  const { article } = data;
 
   return (
     <>
@@ -78,5 +67,3 @@ export async function ArticleContent({ slug }: ArticleContentProps) {
     </>
   );
 }
-
-export default ArticleContent;

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import ArticleContent from './article-content';
+import { ArticleContent } from './article-content';
 
 describe('ArticleContent', () => {
   it('should render successfully', () => {
