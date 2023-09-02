@@ -1,8 +1,8 @@
 import { ArticleBody, ArticleHero } from '@nxify/kjd-ui-articles';
 import { graphql } from '../../generated';
-import { GraphQLClient } from 'graphql-request';
 import { ArticlePageRouteParamsDocument } from '../../generated/graphql';
 import { Menu } from '@nxify/kjd-ui-layout';
+import { hygraph } from '@nxify/kjd-data-access-hygraph';
 
 const ArticlePageRoute = graphql(`
   query ArticleBySlug($slug: String!) {
@@ -13,16 +13,12 @@ const ArticlePageRoute = graphql(`
   }
 `);
 
-const client = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT, {
-  fetch: fetch,
-});
-
 export interface ArticlePageProps {
   params: { slug: string };
 }
 
 export async function ArticlePage({ params }: ArticlePageProps) {
-  const query = await client.request(ArticlePageRoute, { slug: params.slug });
+  const query = await hygraph.request(ArticlePageRoute, { slug: params.slug });
 
   return (
     <>
@@ -36,6 +32,6 @@ export async function ArticlePage({ params }: ArticlePageProps) {
 }
 
 export async function generateStaticParams() {
-  const { params } = await client.request(ArticlePageRouteParamsDocument);
+  const { params } = await hygraph.request(ArticlePageRouteParamsDocument);
   return params;
 }
