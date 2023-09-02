@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import { FragmentType, graphql, useFragment } from '../../generated';
 
 const HeroSectionFragment = graphql(`
@@ -35,7 +36,9 @@ export function HeroSection(props: HeroSectionProps) {
             </h1>
             <p className="text-neutral-500 !m-0 !p-0">{subtitle}</p>
           </div>
-          <p className="!m-0 !p-0">{caption}</p>
+          <section className="prose-blockquote:border-amber-500 prose-blockquote:font-serif prose-blockquote:text-neutral-400 prose-code:before:hidden prose-code:after:hidden first-of-type:prose-p:mt-0 last-of-type:prose-p:mb-0">
+            <ReactMarkdown>{caption as string}</ReactMarkdown>
+          </section>
         </div>
         <HeroImage title={title} url={image?.url} />
       </div>

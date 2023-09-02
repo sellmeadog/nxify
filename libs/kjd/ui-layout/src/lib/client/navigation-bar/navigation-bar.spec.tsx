@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import RootLayout from './root-layout';
+import { NavigationBar } from './navigation-bar';
 
-describe('RootLayout', () => {
+describe('NavigationBar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<RootLayout />);
+    const { baseElement } = render(<NavigationBar />);
     expect(baseElement).toBeTruthy();
   });
 });
