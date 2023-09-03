@@ -1,21 +1,30 @@
+import { notFound } from 'next/navigation';
 import { FragmentType, fragmentData, graphql } from '../../generated';
+import { PageHero } from '../page-hero/page-hero';
 
-const PageContentFragment = graphql(`
-  fragment PageContent on Page {
-    ...PageHero
+const PageContentQueryFragment = graphql(`
+  fragment PageContentQueryFragment on Query {
+    page(where: { slug: $slug }) {
+      ...PageHeroFragment
+    }
   }
 `);
 
 export interface PageContentProps {
-  data?: FragmentType<typeof PageContentFragment>;
+  data: FragmentType<typeof PageContentQueryFragment>;
 }
 
 export function PageContent({ data }: PageContentProps) {
-  const fragment = fragmentData(PageContentFragment, data);
+  const { page } = fragmentData(PageContentQueryFragment, data);
+
+  if (!page) {
+    return notFound();
+  }
 
   return (
-    <div>
-      <pre>{JSON.stringify(fragment)}</pre>
-    </div>
+    <>
+      <PageHero data={page} />
+      <div></div>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { FragmentType, fragmentData, graphql } from '../../generated';
 
 const PageHeroFragment = graphql(`
-  fragment PageHero on Page {
+  fragment PageHeroFragment on Page {
     hero {
       caption
       image {
@@ -22,7 +22,7 @@ export function PageHero({ data }: PageHeroProps) {
 
   return (
     <div>
-      <pre>{JSON.stringify(fragment)}</pre>
+      <pre>{JSON.stringify(fragment, null, 2)}</pre>
     </div>
   );
 }
