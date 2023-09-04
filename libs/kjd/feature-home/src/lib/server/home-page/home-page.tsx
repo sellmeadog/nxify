@@ -1,5 +1,5 @@
 import { hygraph } from '@nxify/kjd-data-access-hygraph';
-import { PageContent } from '@nxify/kjd-ui-page-fragments/server';
+import { PageContent } from '@nxify/kjd-ui-page-fragments';
 import { graphql } from '../../generated';
 
 const HomePageQuery = graphql(`

@@ -14,15 +14,25 @@ const PageHeroFragment = graphql(`
 `);
 
 export interface PageHeroProps {
-  data?: FragmentType<typeof PageHeroFragment>;
+  data: FragmentType<typeof PageHeroFragment>;
 }
 
 export function PageHero({ data }: PageHeroProps) {
-  const fragment = fragmentData(PageHeroFragment, data);
+  const { hero } = fragmentData(PageHeroFragment, data);
 
   return (
-    <div>
-      <pre>{JSON.stringify(fragment, null, 2)}</pre>
-    </div>
+    <header className="bg-neutral-800 max-w-none">
+      <div className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0">
+        <section className="flex flex-col grow items-center md:items-start">
+          <h1 className="font-light font-serif">{hero?.title}</h1>
+          <span className="text-neutral-400">{hero?.subtitle}</span>
+        </section>
+        <img
+          alt={hero?.title}
+          className="aspect-square bg-neutral-950 md:bg-transparent rounded-full md:rounded-none w-1/3"
+          src={hero?.image?.url}
+        />
+      </div>
+    </header>
   );
 }

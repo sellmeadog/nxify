@@ -1,4 +1,4 @@
-import { HomePage } from '@nxify/kjd-feature-home/server';
+import { HomePage } from '@nxify/kjd-feature-home';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
