@@ -1,12 +1,19 @@
+import { ElementType } from 'react';
 import { FragmentType, fragmentData, graphql } from '../../generated';
+import { ArticleExplorerSection } from '../article-explorer-section/article-explorer-section';
 
 const PageSectionExplorerFragment = graphql(`
   fragment PageSectionExplorerFragment on Page {
     sections {
       __typename
+      ...ArticleExplorerSectionFragment
     }
   }
 `);
+
+const SECTIONS: { [key: string]: ElementType } = {
+  ArticleExplorer: ArticleExplorerSection,
+};
 
 export interface PageSectionExplorerProps {
   data: FragmentType<typeof PageSectionExplorerFragment>;
@@ -15,9 +22,15 @@ export interface PageSectionExplorerProps {
 export function PageSectionExplorer({ data }: PageSectionExplorerProps) {
   const { sections } = fragmentData(PageSectionExplorerFragment, data);
 
-  return (
-    <div>
-      <pre>{JSON.stringify(sections, undefined, 2)}</pre>
-    </div>
-  );
+  return sections.map((fragment, index) => {
+    const Component = SECTIONS[fragment.__typename];
+
+    if (Component) {
+      return (
+        <Component key={`${fragment.__typename}:${index}`} data={fragment} />
+      );
+    }
+
+    return null;
+  });
 }
