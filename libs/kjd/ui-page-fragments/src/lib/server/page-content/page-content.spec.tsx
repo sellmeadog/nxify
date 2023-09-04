@@ -4,7 +4,7 @@ import { PageContent } from './page-content';
 
 describe('PageContent', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<PageContent />);
+    const { baseElement } = render(<PageContent data={{}} />);
     expect(baseElement).toBeTruthy();
   });
 });
