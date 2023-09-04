@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 
 const PageHeroFragment = graphql(`
@@ -22,10 +23,13 @@ export function PageHero({ data }: PageHeroProps) {
 
   return (
     <header className="bg-neutral-800 max-w-none">
-      <div className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0">
+      <div className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0 last-of-type:prose-p:mb-0">
         <section className="flex flex-col grow items-center md:items-start">
           <h1 className="font-light font-serif">{hero?.title}</h1>
           <span className="text-neutral-400">{hero?.subtitle}</span>
+          <ReactMarkdown className="text-center md:text-left">
+            {hero?.caption ?? ''}
+          </ReactMarkdown>
         </section>
         <img
           alt={hero?.title}
