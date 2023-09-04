@@ -24,11 +24,13 @@ export function ArticleExplorerSection({ data }: ArticleExplorerSectionProps) {
 
   return (
     <SectionLayout>
-      <header className="prose-headings:m-0 prose-p:m-0">
-        <h3 className="empty:hidden font-medium uppercase text-orange-300">
-          {fragment.title}
-        </h3>
-        <p className="empty:hidden">{fragment.subtitle}</p>
+      <header className="empty:hidden pb-8 lg:pb-16 prose-headings:m-0 prose-p:m-0">
+        {fragment.title && (
+          <h3 className="empty:hidden font-medium uppercase text-orange-300">
+            {fragment.title}
+          </h3>
+        )}
+        {fragment.title && <p className="empty:hidden">{fragment.subtitle}</p>}
       </header>
       <main>
         <ArticleExplorer />
