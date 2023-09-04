@@ -93,6 +93,7 @@
     "metro": "0.76.7",
     "metro-resolver": "0.76.7",
     "nx": "16.7.2",
+    "nx-cloud": "^16.3.0",
     "postcss": "8.4.21",
     "prettier": "2.6.2",
     "react-test-renderer": "18.2.0",
