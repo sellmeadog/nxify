@@ -1,3 +1,4 @@
+import { Menu } from '@nxify/kjd-ui-layout';
 import '../index.css';
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-neutral-900">
+        <Menu />
         <article className="max-w-none prose prose-neutral !prose-invert prose-a:text-cyan-400 hover:prose-a:text-cyan-200 prose-a:no-underline">
           {children}
         </article>
