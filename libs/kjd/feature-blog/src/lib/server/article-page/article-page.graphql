@@ -1,5 +1,0 @@
-query ArticlePageRouteParams {
-  params: articles(stage: PUBLISHED) {
-    slug
-  }
-}
