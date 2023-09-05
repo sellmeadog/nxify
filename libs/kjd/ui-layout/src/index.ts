@@ -1,3 +1,4 @@
+export * from './lib/markdown/markdown';
 export * from './lib/section-layout/section-layout';
 export * from './lib/client/menu/menu';
 // Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities

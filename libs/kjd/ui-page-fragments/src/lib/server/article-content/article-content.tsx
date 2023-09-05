@@ -1,11 +1,13 @@
 import { notFound } from 'next/navigation';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 import { ArticleHero } from '../article-hero/article-hero';
+import ArticleMarkdown from '../article-markdown/article-markdown';
 
 const ArticleContentQueryFragment = graphql(`
   fragment ArticleContentQueryFragment on Query {
     article(where: { slug: $slug }) {
       ...ArticleHeroFragment
+      ...ArticleMarkdownFragment
     }
   }
 `);
@@ -24,7 +26,7 @@ export function ArticleContent({ data }: ArticleContentProps) {
   return (
     <>
       <ArticleHero data={article} />
-      <div></div>
+      <ArticleMarkdown data={article} />
     </>
   );
 }
