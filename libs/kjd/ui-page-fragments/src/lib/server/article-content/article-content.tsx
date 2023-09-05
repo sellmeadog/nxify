@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 import { ArticleHero } from '../article-hero/article-hero';
-import ArticleMarkdown from '../article-markdown/article-markdown';
+import { ArticleMarkdown } from '../article-markdown/article-markdown';
 
 const ArticleContentQueryFragment = graphql(`
   fragment ArticleContentQueryFragment on Query {
