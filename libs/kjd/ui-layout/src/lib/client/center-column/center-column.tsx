@@ -35,7 +35,7 @@ function innerVariantClass(variant?: CenterColumnVariant) {
   if (variant !== 'nav') {
     classes.push('max-w-prose p-4 md:px-0 md:py-8 lg:py-16');
   } else {
-    classes.push('max-w-5xl');
+    classes.push('max-w-prose');
   }
 
   return classes.join(' ');

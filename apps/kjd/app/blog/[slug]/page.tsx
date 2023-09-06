@@ -1,10 +1,4 @@
-import {
-  ArticlePage,
-  generateMetadata,
-  generateStaticParams,
-} from '@nxify/kjd-feature-blog/server';
+import { ArticlePage } from '@nxify/kjd-feature-blog/server';
 
-const revalidate = 60;
-
-export { generateMetadata, generateStaticParams, revalidate };
+export const revalidate = 10;
 export default ArticlePage;

@@ -1,30 +1,17 @@
-import { ArticlePreviewList } from '@nxify/kjd-ui-articles';
+import { hygraph } from '@nxify/kjd-data-access-hygraph';
+import { PageContent } from '@nxify/kjd-ui-page-fragments';
 import { graphql } from '../../generated';
-import { GraphQLClient } from 'graphql-request';
-import { Page } from '@nxify/kjd-ui-pages';
-import { Menu } from '@nxify/kjd-ui-layout';
 
-const { KJD_HYGRAPH_ENDPOINT } = process.env;
-
-const HomePageRoute = graphql(`
-  query HomePage($slug: String!) {
-    ...PageContent
-    ...ArticlePreviewList
+const HomePageQuery = graphql(`
+  query PageQuery($slug: String) {
+    ...PageContentQueryFragment
   }
 `);
 
-const client = new GraphQLClient(KJD_HYGRAPH_ENDPOINT);
-
 export interface HomePageProps {}
 
-export async function HomePage(props: HomePageProps) {
-  const query = await client.request(HomePageRoute, { slug: 'home' });
+export async function HomePage() {
+  const query = await hygraph.request(HomePageQuery, { slug: 'home' });
 
-  return (
-    <>
-      <Menu />
-      <Page fragment={query} />
-      <ArticlePreviewList fragment={query} />;
-    </>
-  );
+  return <PageContent data={query} variant="home" />;
 }

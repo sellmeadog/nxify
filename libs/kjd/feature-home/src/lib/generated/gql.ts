@@ -13,11 +13,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n": types.HomePageDocument,
-    "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}": types.ArticlePreviewListFragmentDoc,
-    "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}": types.ArticlePreviewFragmentDoc,
-    "fragment HeroSection on HomePageHero {\n  content {\n    raw\n  }\n  id\n  image {\n    url\n  }\n  subtitle\n  title\n}": types.HeroSectionFragmentDoc,
-    "fragment PageContent on Query {\n  page(where: {slug: $slug}) {\n    id\n    sections {\n      __typename\n      ... on HomePageHero {\n        ...HeroSection\n      }\n    }\n  }\n}": types.PageContentFragmentDoc,
+    "\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n": types.PageQueryDocument,
+    "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n": types.ArticleAuthorFragmentFragmentDoc,
+    "\n  fragment ArticleContentQueryFragment on Query {\n    article(where: { slug: $slug }) {\n      ...ArticleHeroFragment\n      ...ArticleMarkdownFragment\n      ...ArticleAuthorFragment\n    }\n  }\n": types.ArticleContentQueryFragmentFragmentDoc,
+    "\n  fragment ArticleExplorerSectionFragment on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n": types.ArticleExplorerSectionFragmentFragmentDoc,
+    "\n  query ArticleExplorerQuery($first: Int) {\n    articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        cursor\n        node {\n          ...ArticlePreviewFragment\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n": types.ArticleExplorerQueryDocument,
+    "\n  fragment ArticleHeroFragment on Article {\n    createdAt\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n": types.ArticleHeroFragmentFragmentDoc,
+    "\n  fragment ArticleMarkdownFragment on Article {\n    markdown\n  }\n": types.ArticleMarkdownFragmentFragmentDoc,
+    "\n  fragment ArticlePreviewFragment on Article {\n    author {\n      name\n    }\n    createdAt\n    hero {\n      caption\n      title\n      subtitle\n    }\n    id\n    slug\n  }\n": types.ArticlePreviewFragmentFragmentDoc,
+    "\n  fragment PageContentQueryFragment on Query {\n    page(where: { slug: $slug }) {\n      ...PageHeroFragment\n      ...PageSectionExplorerFragment\n    }\n  }\n": types.PageContentQueryFragmentFragmentDoc,
+    "\n  fragment PageHeroFragment on Page {\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n": types.PageHeroFragmentFragmentDoc,
+    "\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n": types.PageSectionExplorerFragmentFragmentDoc,
 };
 
 /**
@@ -37,23 +43,47 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n"): (typeof documents)["\n  query HomePage($slug: String!) {\n    ...PageContent\n    ...ArticlePreviewList\n  }\n"];
+export function graphql(source: "\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n"): (typeof documents)["\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"): (typeof documents)["fragment ArticlePreviewList on Query {\n  articles(first: 10, orderBy: createdAt_DESC) {\n    __typename\n    ...ArticlePreview\n  }\n}"];
+export function graphql(source: "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"): (typeof documents)["fragment ArticlePreview on Article {\n  author {\n    id\n    name\n  }\n  createdAt\n  excerpt\n  id\n  slug\n  title\n}"];
+export function graphql(source: "\n  fragment ArticleContentQueryFragment on Query {\n    article(where: { slug: $slug }) {\n      ...ArticleHeroFragment\n      ...ArticleMarkdownFragment\n      ...ArticleAuthorFragment\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleContentQueryFragment on Query {\n    article(where: { slug: $slug }) {\n      ...ArticleHeroFragment\n      ...ArticleMarkdownFragment\n      ...ArticleAuthorFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment HeroSection on HomePageHero {\n  content {\n    raw\n  }\n  id\n  image {\n    url\n  }\n  subtitle\n  title\n}"): (typeof documents)["fragment HeroSection on HomePageHero {\n  content {\n    raw\n  }\n  id\n  image {\n    url\n  }\n  subtitle\n  title\n}"];
+export function graphql(source: "\n  fragment ArticleExplorerSectionFragment on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n"): (typeof documents)["\n  fragment ArticleExplorerSectionFragment on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment PageContent on Query {\n  page(where: {slug: $slug}) {\n    id\n    sections {\n      __typename\n      ... on HomePageHero {\n        ...HeroSection\n      }\n    }\n  }\n}"): (typeof documents)["fragment PageContent on Query {\n  page(where: {slug: $slug}) {\n    id\n    sections {\n      __typename\n      ... on HomePageHero {\n        ...HeroSection\n      }\n    }\n  }\n}"];
+export function graphql(source: "\n  query ArticleExplorerQuery($first: Int) {\n    articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        cursor\n        node {\n          ...ArticlePreviewFragment\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n"): (typeof documents)["\n  query ArticleExplorerQuery($first: Int) {\n    articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        cursor\n        node {\n          ...ArticlePreviewFragment\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ArticleHeroFragment on Article {\n    createdAt\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleHeroFragment on Article {\n    createdAt\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ArticleMarkdownFragment on Article {\n    markdown\n  }\n"): (typeof documents)["\n  fragment ArticleMarkdownFragment on Article {\n    markdown\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ArticlePreviewFragment on Article {\n    author {\n      name\n    }\n    createdAt\n    hero {\n      caption\n      title\n      subtitle\n    }\n    id\n    slug\n  }\n"): (typeof documents)["\n  fragment ArticlePreviewFragment on Article {\n    author {\n      name\n    }\n    createdAt\n    hero {\n      caption\n      title\n      subtitle\n    }\n    id\n    slug\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment PageContentQueryFragment on Query {\n    page(where: { slug: $slug }) {\n      ...PageHeroFragment\n      ...PageSectionExplorerFragment\n    }\n  }\n"): (typeof documents)["\n  fragment PageContentQueryFragment on Query {\n    page(where: { slug: $slug }) {\n      ...PageHeroFragment\n      ...PageSectionExplorerFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment PageHeroFragment on Page {\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n"): (typeof documents)["\n  fragment PageHeroFragment on Page {\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n"): (typeof documents)["\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

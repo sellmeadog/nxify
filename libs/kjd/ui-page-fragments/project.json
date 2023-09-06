@@ -1,0 +1,57 @@
+{
+  "name": "kjd-ui-page-fragments",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/kjd/ui-page-fragments/src",
+  "projectType": "library",
+  "tags": ["scope:kjd type:ui"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/kjd/ui-page-fragments/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/kjd/ui-page-fragments",
+        "tsConfig": "libs/kjd/ui-page-fragments/tsconfig.lib.json",
+        "project": "libs/kjd/ui-page-fragments/package.json",
+        "entryFile": "libs/kjd/ui-page-fragments/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/kjd/ui-page-fragments/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/kjd/ui-page-fragments/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "graphql-codegen -c {projectRoot}/codegen.ts"
+      },
+      "dependsOn": ["^codegen"]
+    }
+  }
+}

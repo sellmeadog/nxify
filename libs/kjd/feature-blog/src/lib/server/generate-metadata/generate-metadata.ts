@@ -1,14 +1,10 @@
-import { GraphQLClient } from 'graphql-request';
 import {
   ArticleMetadataBySlugDocument,
   ArticleMetadataFragmentDoc,
 } from '../../generated/graphql';
 import { Metadata } from 'next';
 import { useFragment as fragmentData } from '../../generated';
-
-const client = new GraphQLClient(process.env.KJD_HYGRAPH_ENDPOINT, {
-  fetch: fetch,
-});
+import { hygraph } from '@nxify/kjd-data-access-hygraph';
 
 type SlugParam = {
   slug: string;
@@ -21,7 +17,7 @@ export interface GenerateMetadataParams {
 export async function generateMetadata({
   params,
 }: GenerateMetadataParams): Promise<Metadata> {
-  const query = await client.request(ArticleMetadataBySlugDocument, params);
+  const query = await hygraph.request(ArticleMetadataBySlugDocument, params);
   const fragment = fragmentData(ArticleMetadataFragmentDoc, query.article);
 
   return {

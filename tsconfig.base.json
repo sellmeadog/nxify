@@ -28,6 +28,9 @@
       "@nxify/ghostbot-shared-ui-journal": [
         "libs/ghostbot/shared/ui-journal/src/index.ts"
       ],
+      "@nxify/kjd-data-access-hygraph": [
+        "libs/kjd/data-access-hygraph/src/index.ts"
+      ],
       "@nxify/kjd-feature-blog": ["libs/kjd/feature-blog/src/index.ts"],
       "@nxify/kjd-feature-blog/server": ["libs/kjd/feature-blog/src/server.ts"],
       "@nxify/kjd-feature-home": ["libs/kjd/feature-home/src/index.ts"],
@@ -35,13 +38,15 @@
       "@nxify/kjd-shared-ui-components/server": [
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
-      "@nxify/kjd-ui-articles": ["libs/kjd/ui-articles/src/index.ts"],
-      "@nxify/kjd-ui-articles/server": ["libs/kjd/ui-articles/src/server.ts"],
       "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"],
       "@nxify/kjd-ui-layout": ["libs/kjd/ui-layout/src/index.ts"],
       "@nxify/kjd-ui-layout/server": ["libs/kjd/ui-layout/src/server.ts"],
-      "@nxify/kjd-ui-pages": ["libs/kjd/ui-pages/src/index.ts"],
-      "@nxify/kjd-ui-pages/server": ["libs/kjd/ui-pages/src/server.ts"]
+      "@nxify/kjd-ui-page-fragments": [
+        "libs/kjd/ui-page-fragments/src/index.ts"
+      ],
+      "@nxify/kjd-ui-page-fragments/server": [
+        "libs/kjd/ui-page-fragments/src/server.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
