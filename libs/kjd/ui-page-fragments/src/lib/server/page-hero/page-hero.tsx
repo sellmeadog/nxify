@@ -38,7 +38,7 @@ export function PageHero({ data, variant = 'page' }: PageHeroProps) {
   const { hero } = fragmentData(PageHeroFragment, data);
 
   return (
-    <header className="bg-neutral-800 max-w-none">
+    <header className="bg-neutral-700 max-w-none">
       <section className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0 last-of-type:prose-p:mb-0">
         <div className={`flex flex-col ${CONTAINER_CLASS[variant]}`}>
           <h1 className={`empty:hidden font-light ${TITLE_CLASS[variant]}`}>
