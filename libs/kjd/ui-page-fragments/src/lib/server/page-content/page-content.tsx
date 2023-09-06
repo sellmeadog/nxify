@@ -14,9 +14,10 @@ const PageContentQueryFragment = graphql(`
 
 export interface PageContentProps {
   data: FragmentType<typeof PageContentQueryFragment>;
+  variant?: 'home' | 'page';
 }
 
-export function PageContent({ data }: PageContentProps) {
+export function PageContent({ data, variant }: PageContentProps) {
   const { page } = fragmentData(PageContentQueryFragment, data);
 
   if (!page) {
@@ -25,7 +26,7 @@ export function PageContent({ data }: PageContentProps) {
 
   return (
     <>
-      <PageHero data={page} />
+      <PageHero data={page} variant={variant} />
       <PageSectionExplorer data={page} />
     </>
   );

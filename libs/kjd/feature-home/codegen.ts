@@ -8,8 +8,6 @@ const documents = createGlobPatternsForDependencies(
   'lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}'
 );
 
-console.log(documents);
-
 const config: CodegenConfig = {
   schema: KJD_HYGRAPH_ENDPOINT,
   documents: [

@@ -1,5 +1,5 @@
-import ReactMarkdown from 'react-markdown';
 import { FragmentType, fragmentData, graphql } from '../../generated';
+import { Markdown } from '@nxify/kjd-ui-layout';
 
 const PageHeroFragment = graphql(`
   fragment PageHeroFragment on Page {
@@ -14,25 +14,43 @@ const PageHeroFragment = graphql(`
   }
 `);
 
+const CONTAINER_CLASS = {
+  home: 'items-center md:items-start',
+  page: '',
+};
+
+const TITLE_CLASS = {
+  home: 'font-serif',
+  page: '',
+};
+
+const MARKDOWN_CLASS = {
+  home: 'text-center md:text-left',
+  page: '',
+};
+
 export interface PageHeroProps {
   data: FragmentType<typeof PageHeroFragment>;
+  variant?: 'home' | 'page';
 }
 
-export function PageHero({ data }: PageHeroProps) {
+export function PageHero({ data, variant = 'page' }: PageHeroProps) {
   const { hero } = fragmentData(PageHeroFragment, data);
 
   return (
     <header className="bg-neutral-800 max-w-none">
-      <div className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0 last-of-type:prose-p:mb-0">
-        <section className="flex flex-col grow items-center md:items-start">
-          <h1 className="empty:hidden font-light font-serif">{hero?.title}</h1>
+      <section className="flex flex-col-reverse md:flex-row items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0 last-of-type:prose-p:mb-0">
+        <div className={`flex flex-col ${CONTAINER_CLASS[variant]}`}>
+          <h1 className={`empty:hidden font-light ${TITLE_CLASS[variant]}`}>
+            {hero?.title}
+          </h1>
           <span className="empty:hidden text-neutral-400">
             {hero?.subtitle}
           </span>
-          <ReactMarkdown className="empty:hidden text-center md:text-left">
+          <Markdown className={`empty:hidden mt-8 ${MARKDOWN_CLASS[variant]}`}>
             {hero?.caption ?? ''}
-          </ReactMarkdown>
-        </section>
+          </Markdown>
+        </div>
         {hero?.image?.url && (
           <img
             alt={hero?.title}
@@ -40,7 +58,7 @@ export function PageHero({ data }: PageHeroProps) {
             src={hero?.image?.url}
           />
         )}
-      </div>
+      </section>
     </header>
   );
 }

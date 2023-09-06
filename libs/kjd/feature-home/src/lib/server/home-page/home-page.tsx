@@ -13,5 +13,5 @@ export interface HomePageProps {}
 export async function HomePage() {
   const query = await hygraph.request(HomePageQuery, { slug: 'home' });
 
-  return <PageContent data={query} />;
+  return <PageContent data={query} variant="home" />;
 }

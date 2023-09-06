@@ -21,7 +21,7 @@ export function ArticleAuthor({ data }: ArticleAuthorProps) {
   const { author } = fragmentData(ArticleAuthorFragment, data);
 
   return (
-    <SectionLayout className="flex flex-col md:flex-row md:gap-x-8 items-center md:items-start prose-headings:mt-0 prose-img:m-0">
+    <SectionLayout className="flex flex-col md:flex-row gap-8 items-center md:items-start prose-headings:mt-0 prose-img:m-0">
       <img
         alt={author?.name}
         className="bg-neutral-950 rounded-full w-1/3 md:w-1/4 aspect-square"
