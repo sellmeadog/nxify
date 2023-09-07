@@ -24,6 +24,29 @@ const ArticleMetadataQuery = graphql(`
         tag
       }
     }
+    metadata(where: { id: "clm9qf5ek1hnk0amzfuxh62yf" }) {
+      id
+      open {
+        description
+        image {
+          url
+        }
+        title
+        url
+      }
+      site {
+        description
+        title
+      }
+      twitter {
+        card
+        description
+        image {
+          url
+        }
+        title
+      }
+    }
   }
 `);
 
@@ -37,17 +60,33 @@ export async function ArticlePage({ params }: ArticlePageProps) {
   return <ArticleContent data={query} />;
 }
 
-export async function articleMetadataGenerator({
-  params,
-}: ArticlePageProps): Promise<Metadata> {
-  const { article } = await hygraph.request(ArticleMetadataQuery, {
-    slug: params.slug,
-  });
+export function articleMetadataGenerator(): (
+  props: ArticlePageProps
+) => Promise<Metadata> {
+  return async ({ params }) => {
+    const { article, metadata } = await hygraph.request(ArticleMetadataQuery, {
+      slug: params.slug,
+    });
 
-  return {
-    authors: [{ name: article?.author?.name }],
-    description: article?.hero?.caption,
-    keywords: article?.tags.map(({ tag }) => tag),
-    title: `${article?.hero?.title} - kennie j. davis`,
+    return {
+      authors: [{ name: article?.author?.name }],
+      description: article?.hero?.caption,
+      keywords: article?.tags.map(({ tag }) => tag),
+      title: `${article?.hero?.title} - kennie j. davis`,
+      openGraph: {
+        description:
+          article?.hero?.caption ?? metadata?.site?.description ?? '',
+        images: metadata?.open?.image?.url ?? '',
+        title: article?.hero?.title ?? metadata?.site?.title ?? '',
+        url: metadata?.open?.url ?? '',
+      },
+      twitter: {
+        card: metadata?.twitter?.card ?? 'summary',
+        description:
+          article?.hero?.caption ?? metadata?.twitter?.description ?? '',
+        images: metadata?.twitter?.image?.url ?? '',
+        title: article?.hero?.title ?? metadata?.twitter?.title ?? '',
+      },
+    };
   };
 }
