@@ -4,7 +4,7 @@ import { ArticleHero } from '../article-hero/article-hero';
 import { ArticleMarkdown } from '../article-markdown/article-markdown';
 import { ArticleAuthor } from '../article-author/article-author';
 
-const ArticleContentQueryFragment = graphql(`
+export const ArticleContentQueryFragment = graphql(`
   fragment ArticleContentQueryFragment on Query {
     article(where: { slug: $slug }) {
       ...ArticleHeroFragment

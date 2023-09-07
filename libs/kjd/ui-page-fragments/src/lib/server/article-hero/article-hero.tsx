@@ -2,7 +2,7 @@ import { FragmentType, fragmentData, graphql } from '../../generated';
 import { format, parseISO } from 'date-fns';
 import { Markdown } from '@nxify/kjd-ui-layout';
 
-const ArticleHeroFragment = graphql(`
+export const ArticleHeroFragment = graphql(`
   fragment ArticleHeroFragment on Article {
     createdAt
     hero {

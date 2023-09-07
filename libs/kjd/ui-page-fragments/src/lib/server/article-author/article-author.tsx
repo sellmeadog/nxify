@@ -1,7 +1,7 @@
 import { SectionLayout } from '@nxify/kjd-ui-layout';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 
-const ArticleAuthorFragment = graphql(`
+export const ArticleAuthorFragment = graphql(`
   fragment ArticleAuthorFragment on Article {
     author {
       name

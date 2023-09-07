@@ -1,7 +1,7 @@
 import { Markdown, SectionLayout } from '@nxify/kjd-ui-layout';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 
-const ArticleMarkdownFragment = graphql(`
+export const ArticleMarkdownFragment = graphql(`
   fragment ArticleMarkdownFragment on Article {
     markdown
   }

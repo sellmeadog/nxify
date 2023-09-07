@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 import { format, parseISO } from 'date-fns';
 
-const ArticlePreviewFragment = graphql(`
+export const ArticlePreviewFragment = graphql(`
   fragment ArticlePreviewFragment on Article {
     author {
       name
