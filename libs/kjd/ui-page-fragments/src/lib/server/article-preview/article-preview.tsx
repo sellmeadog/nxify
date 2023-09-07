@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 import { format, parseISO } from 'date-fns';
+import { Markdown } from '@nxify/kjd-ui-layout';
 
 export const ArticlePreviewFragment = graphql(`
   fragment ArticlePreviewFragment on Article {
@@ -36,7 +37,7 @@ export function ArticlePreview({ data }: ArticlePreviewProps) {
         </h2>
       </header>
       <main>
-        <p>{hero?.caption}</p>
+        <Markdown>{hero?.caption}</Markdown>
       </main>
     </article>
   );
