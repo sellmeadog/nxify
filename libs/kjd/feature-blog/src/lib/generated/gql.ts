@@ -17,7 +17,6 @@ const documents = {
     "\n  query ArticleMetadataQuery($slug: String!) {\n    article(where: { slug: $slug }) {\n      author {\n        name\n      }\n      createdAt\n      hero {\n        caption\n        title\n      }\n      tags {\n        tag\n      }\n    }\n  }\n": types.ArticleMetadataQueryDocument,
     "\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n": types.PageQueryDocument,
     "\n  query PageMetadataQuery($slug: String) {\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n": types.PageMetadataQueryDocument,
-    "fragment ArticleMetadata on Article {\n  author {\n    name\n  }\n  createdAt\n  excerpt\n  tags {\n    tag\n  }\n  title\n}\n\nquery ArticleMetadataBySlug($slug: String) {\n  article(where: {slug: $slug}) {\n    ...ArticleMetadata\n  }\n}": types.ArticleMetadataFragmentDoc,
     "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n": types.ArticleAuthorFragmentFragmentDoc,
     "\n  fragment ArticleContentQueryFragment on Query {\n    article(where: { slug: $slug }) {\n      ...ArticleHeroFragment\n      ...ArticleMarkdownFragment\n      ...ArticleAuthorFragment\n    }\n  }\n": types.ArticleContentQueryFragmentFragmentDoc,
     "\n  fragment ArticleExplorerSectionFragment on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n": types.ArticleExplorerSectionFragmentFragmentDoc,
@@ -60,10 +59,6 @@ export function graphql(source: "\n  query PageQuery($slug: String) {\n    ...Pa
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query PageMetadataQuery($slug: String) {\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageMetadataQuery($slug: String) {\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "fragment ArticleMetadata on Article {\n  author {\n    name\n  }\n  createdAt\n  excerpt\n  tags {\n    tag\n  }\n  title\n}\n\nquery ArticleMetadataBySlug($slug: String) {\n  article(where: {slug: $slug}) {\n    ...ArticleMetadata\n  }\n}"): (typeof documents)["fragment ArticleMetadata on Article {\n  author {\n    name\n  }\n  createdAt\n  excerpt\n  tags {\n    tag\n  }\n  title\n}\n\nquery ArticleMetadataBySlug($slug: String) {\n  article(where: {slug: $slug}) {\n    ...ArticleMetadata\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
