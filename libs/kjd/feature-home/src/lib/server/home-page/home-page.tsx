@@ -1,17 +1,10 @@
-import { hygraph } from '@nxify/kjd-data-access-hygraph';
-import { PageContent } from '@nxify/kjd-ui-page-fragments';
-import { graphql } from '../../generated';
+import {
+  Page,
+  pageMetadataGeneratorFactory,
+} from '@nxify/kjd-ui-page-fragments';
 
-const HomePageQuery = graphql(`
-  query PageQuery($slug: String) {
-    ...PageContentQueryFragment
-  }
-`);
-
-export interface HomePageProps {}
+export const homePageMetadataGenerator = pageMetadataGeneratorFactory('home');
 
 export async function HomePage() {
-  const query = await hygraph.request(HomePageQuery, { slug: 'home' });
-
-  return <PageContent data={query} variant="home" />;
+  return <Page slug="home" />;
 }

@@ -2238,6 +2238,8 @@ export type AssetCreateInput = {
   height?: InputMaybe<Scalars['Float']['input']>;
   imageHeroSection?: InputMaybe<HeroSectionCreateManyInlineInput>;
   imageHomePageHero?: InputMaybe<HomePageHeroCreateManyInlineInput>;
+  imageOpenGraphMeta?: InputMaybe<OpenGraphMetaCreateManyInlineInput>;
+  imageTwitterMeta?: InputMaybe<TwitterMetaCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
@@ -2417,6 +2419,8 @@ export type AssetUpdateInput = {
   height?: InputMaybe<Scalars['Float']['input']>;
   imageHeroSection?: InputMaybe<HeroSectionUpdateManyInlineInput>;
   imageHomePageHero?: InputMaybe<HomePageHeroUpdateManyInlineInput>;
+  imageOpenGraphMeta?: InputMaybe<OpenGraphMetaUpdateManyInlineInput>;
+  imageTwitterMeta?: InputMaybe<TwitterMetaUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
@@ -4913,6 +4917,427 @@ export type LocationInput = {
   longitude: Scalars['Float']['input'];
 };
 
+export type Metadata = Node & {
+  __typename?: 'Metadata';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Metadata>;
+  /** List of Metadata versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  open?: Maybe<OpenGraphMeta>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  site?: Maybe<SiteMeta>;
+  /** System stage field */
+  stage: Stage;
+  twitter?: Maybe<TwitterMeta>;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type MetadataCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type MetadataDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type MetadataHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type MetadataOpenArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type MetadataPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type MetadataScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type MetadataSiteArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type MetadataTwitterArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type MetadataUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type MetadataConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: MetadataWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type MetadataConnection = {
+  __typename?: 'MetadataConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<MetadataEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type MetadataCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  open?: InputMaybe<OpenGraphMetaCreateOneInlineInput>;
+  site?: InputMaybe<SiteMetaCreateOneInlineInput>;
+  twitter?: InputMaybe<TwitterMetaCreateOneInlineInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type MetadataCreateManyInlineInput = {
+  /** Connect multiple existing Metadata documents */
+  connect?: InputMaybe<Array<MetadataWhereUniqueInput>>;
+  /** Create and connect multiple existing Metadata documents */
+  create?: InputMaybe<Array<MetadataCreateInput>>;
+};
+
+export type MetadataCreateOneInlineInput = {
+  /** Connect one existing Metadata document */
+  connect?: InputMaybe<MetadataWhereUniqueInput>;
+  /** Create and connect one Metadata document */
+  create?: InputMaybe<MetadataCreateInput>;
+};
+
+/** An edge in a connection. */
+export type MetadataEdge = {
+  __typename?: 'MetadataEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: Metadata;
+};
+
+/** Identifies documents */
+export type MetadataManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<MetadataWhereStageInput>;
+  documentInStages_none?: InputMaybe<MetadataWhereStageInput>;
+  documentInStages_some?: InputMaybe<MetadataWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  open?: InputMaybe<OpenGraphMetaWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  site?: InputMaybe<SiteMetaWhereInput>;
+  twitter?: InputMaybe<TwitterMetaWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum MetadataOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type MetadataUpdateInput = {
+  open?: InputMaybe<OpenGraphMetaUpdateOneInlineInput>;
+  site?: InputMaybe<SiteMetaUpdateOneInlineInput>;
+  twitter?: InputMaybe<TwitterMetaUpdateOneInlineInput>;
+};
+
+export type MetadataUpdateManyInlineInput = {
+  /** Connect multiple existing Metadata documents */
+  connect?: InputMaybe<Array<MetadataConnectInput>>;
+  /** Create and connect multiple Metadata documents */
+  create?: InputMaybe<Array<MetadataCreateInput>>;
+  /** Delete multiple Metadata documents */
+  delete?: InputMaybe<Array<MetadataWhereUniqueInput>>;
+  /** Disconnect multiple Metadata documents */
+  disconnect?: InputMaybe<Array<MetadataWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Metadata documents */
+  set?: InputMaybe<Array<MetadataWhereUniqueInput>>;
+  /** Update multiple Metadata documents */
+  update?: InputMaybe<Array<MetadataUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Metadata documents */
+  upsert?: InputMaybe<Array<MetadataUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type MetadataUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MetadataUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: MetadataUpdateManyInput;
+  /** Document search */
+  where: MetadataWhereInput;
+};
+
+export type MetadataUpdateOneInlineInput = {
+  /** Connect existing Metadata document */
+  connect?: InputMaybe<MetadataWhereUniqueInput>;
+  /** Create and connect one Metadata document */
+  create?: InputMaybe<MetadataCreateInput>;
+  /** Delete currently connected Metadata document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected Metadata document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single Metadata document */
+  update?: InputMaybe<MetadataUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Metadata document */
+  upsert?: InputMaybe<MetadataUpsertWithNestedWhereUniqueInput>;
+};
+
+export type MetadataUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: MetadataUpdateInput;
+  /** Unique document search */
+  where: MetadataWhereUniqueInput;
+};
+
+export type MetadataUpsertInput = {
+  /** Create document if it didn't exist */
+  create: MetadataCreateInput;
+  /** Update document if it exists */
+  update: MetadataUpdateInput;
+};
+
+export type MetadataUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: MetadataUpsertInput;
+  /** Unique document search */
+  where: MetadataWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type MetadataWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type MetadataWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<MetadataWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<MetadataWhereStageInput>;
+  documentInStages_none?: InputMaybe<MetadataWhereStageInput>;
+  documentInStages_some?: InputMaybe<MetadataWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  open?: InputMaybe<OpenGraphMetaWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  site?: InputMaybe<SiteMetaWhereInput>;
+  twitter?: InputMaybe<TwitterMetaWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type MetadataWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<MetadataWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<MetadataWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<MetadataWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<MetadataWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Metadata record uniquely */
+export type MetadataWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Create one article */
@@ -4928,6 +5353,8 @@ export type Mutation = {
   createAuthor?: Maybe<Author>;
   /** Create one layout */
   createLayout?: Maybe<Layout>;
+  /** Create one metadata */
+  createMetadata?: Maybe<Metadata>;
   /** Create one page */
   createPage?: Maybe<Page>;
   /** Create one page2 */
@@ -4982,6 +5409,13 @@ export type Mutation = {
   /** Delete many Layout documents, return deleted documents */
   deleteManyLayoutsConnection: LayoutConnection;
   /**
+   * Delete many Metadata documents
+   * @deprecated Please use the new paginated many mutation (deleteManyMetadatasConnection)
+   */
+  deleteManyMetadatas: BatchPayload;
+  /** Delete many Metadata documents, return deleted documents */
+  deleteManyMetadatasConnection: MetadataConnection;
+  /**
    * Delete many Page2 documents
    * @deprecated Please use the new paginated many mutation (deleteManyPage2SConnection)
    */
@@ -5002,6 +5436,8 @@ export type Mutation = {
   deleteManyTags: BatchPayload;
   /** Delete many Tag documents, return deleted documents */
   deleteManyTagsConnection: TagConnection;
+  /** Delete one metadata from _all_ existing stages. Returns deleted document. */
+  deleteMetadata?: Maybe<Metadata>;
   /** Delete one page from _all_ existing stages. Returns deleted document. */
   deletePage?: Maybe<Page>;
   /** Delete one page2 from _all_ existing stages. Returns deleted document. */
@@ -5058,6 +5494,13 @@ export type Mutation = {
   /** Publish many Layout documents */
   publishManyLayoutsConnection: LayoutConnection;
   /**
+   * Publish many Metadata documents
+   * @deprecated Please use the new paginated many mutation (publishManyMetadatasConnection)
+   */
+  publishManyMetadatas: BatchPayload;
+  /** Publish many Metadata documents */
+  publishManyMetadatasConnection: MetadataConnection;
+  /**
    * Publish many Page2 documents
    * @deprecated Please use the new paginated many mutation (publishManyPage2SConnection)
    */
@@ -5078,6 +5521,8 @@ export type Mutation = {
   publishManyTags: BatchPayload;
   /** Publish many Tag documents */
   publishManyTagsConnection: TagConnection;
+  /** Publish one metadata */
+  publishMetadata?: Maybe<Metadata>;
   /** Publish one page */
   publishPage?: Maybe<Page>;
   /** Publish one page2 */
@@ -5094,6 +5539,8 @@ export type Mutation = {
   schedulePublishAuthor?: Maybe<Author>;
   /** Schedule to publish one layout */
   schedulePublishLayout?: Maybe<Layout>;
+  /** Schedule to publish one metadata */
+  schedulePublishMetadata?: Maybe<Metadata>;
   /** Schedule to publish one page */
   schedulePublishPage?: Maybe<Page>;
   /** Schedule to publish one page2 */
@@ -5110,6 +5557,8 @@ export type Mutation = {
   scheduleUnpublishAuthor?: Maybe<Author>;
   /** Unpublish one layout from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishLayout?: Maybe<Layout>;
+  /** Unpublish one metadata from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishMetadata?: Maybe<Metadata>;
   /** Unpublish one page from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishPage?: Maybe<Page>;
   /** Unpublish one page2 from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -5162,6 +5611,13 @@ export type Mutation = {
   /** Find many Layout documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyLayoutsConnection: LayoutConnection;
   /**
+   * Unpublish many Metadata documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyMetadatasConnection)
+   */
+  unpublishManyMetadatas: BatchPayload;
+  /** Find many Metadata documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyMetadatasConnection: MetadataConnection;
+  /**
    * Unpublish many Page2 documents
    * @deprecated Please use the new paginated many mutation (unpublishManyPage2SConnection)
    */
@@ -5182,6 +5638,8 @@ export type Mutation = {
   unpublishManyTags: BatchPayload;
   /** Find many Tag documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyTagsConnection: TagConnection;
+  /** Unpublish one metadata from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishMetadata?: Maybe<Metadata>;
   /** Unpublish one page from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishPage?: Maybe<Page>;
   /** Unpublish one page2 from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -5234,6 +5692,13 @@ export type Mutation = {
   /** Update many Layout documents */
   updateManyLayoutsConnection: LayoutConnection;
   /**
+   * Update many metadatas
+   * @deprecated Please use the new paginated many mutation (updateManyMetadatasConnection)
+   */
+  updateManyMetadatas: BatchPayload;
+  /** Update many Metadata documents */
+  updateManyMetadatasConnection: MetadataConnection;
+  /**
    * Update many page2S
    * @deprecated Please use the new paginated many mutation (updateManyPage2SConnection)
    */
@@ -5254,6 +5719,8 @@ export type Mutation = {
   updateManyTags: BatchPayload;
   /** Update many Tag documents */
   updateManyTagsConnection: TagConnection;
+  /** Update one metadata */
+  updateMetadata?: Maybe<Metadata>;
   /** Update one page */
   updatePage?: Maybe<Page>;
   /** Update one page2 */
@@ -5272,6 +5739,8 @@ export type Mutation = {
   upsertAuthor?: Maybe<Author>;
   /** Upsert one layout */
   upsertLayout?: Maybe<Layout>;
+  /** Upsert one metadata */
+  upsertMetadata?: Maybe<Metadata>;
   /** Upsert one page */
   upsertPage?: Maybe<Page>;
   /** Upsert one page2 */
@@ -5303,6 +5772,11 @@ export type MutationCreateAuthorArgs = {
 
 export type MutationCreateLayoutArgs = {
   data: LayoutCreateInput;
+};
+
+
+export type MutationCreateMetadataArgs = {
+  data: MetadataCreateInput;
 };
 
 
@@ -5426,6 +5900,21 @@ export type MutationDeleteManyLayoutsConnectionArgs = {
 };
 
 
+export type MutationDeleteManyMetadatasArgs = {
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
+export type MutationDeleteManyMetadatasConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
 export type MutationDeleteManyPage2SArgs = {
   where?: InputMaybe<Page2ManyWhereInput>;
 };
@@ -5468,6 +5957,11 @@ export type MutationDeleteManyTagsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<TagManyWhereInput>;
+};
+
+
+export type MutationDeleteMetadataArgs = {
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -5625,6 +6119,24 @@ export type MutationPublishManyLayoutsConnectionArgs = {
 };
 
 
+export type MutationPublishManyMetadatasArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
+export type MutationPublishManyMetadatasConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
 export type MutationPublishManyPage2SArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<Page2ManyWhereInput>;
@@ -5676,6 +6188,12 @@ export type MutationPublishManyTagsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   to?: Array<Stage>;
   where?: InputMaybe<TagManyWhereInput>;
+};
+
+
+export type MutationPublishMetadataArgs = {
+  to?: Array<Stage>;
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -5737,6 +6255,14 @@ export type MutationSchedulePublishLayoutArgs = {
   releaseId?: InputMaybe<Scalars['String']['input']>;
   to?: Array<Stage>;
   where: LayoutWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishMetadataArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -5803,6 +6329,14 @@ export type MutationScheduleUnpublishLayoutArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
   where: LayoutWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishMetadataArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -5956,6 +6490,24 @@ export type MutationUnpublishManyLayoutsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyMetadatasArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyMetadatasConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyPage2SArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<Page2ManyWhereInput>;
@@ -6007,6 +6559,12 @@ export type MutationUnpublishManyTagsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<TagManyWhereInput>;
+};
+
+
+export type MutationUnpublishMetadataArgs = {
+  from?: Array<Stage>;
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -6143,6 +6701,23 @@ export type MutationUpdateManyLayoutsConnectionArgs = {
 };
 
 
+export type MutationUpdateManyMetadatasArgs = {
+  data: MetadataUpdateManyInput;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
+export type MutationUpdateManyMetadatasConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: MetadataUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<MetadataManyWhereInput>;
+};
+
+
 export type MutationUpdateManyPage2SArgs = {
   data: Page2UpdateManyInput;
   where?: InputMaybe<Page2ManyWhereInput>;
@@ -6191,6 +6766,12 @@ export type MutationUpdateManyTagsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<TagManyWhereInput>;
+};
+
+
+export type MutationUpdateMetadataArgs = {
+  data: MetadataUpdateInput;
+  where: MetadataWhereUniqueInput;
 };
 
 
@@ -6248,6 +6829,12 @@ export type MutationUpsertLayoutArgs = {
 };
 
 
+export type MutationUpsertMetadataArgs = {
+  upsert: MetadataUpsertInput;
+  where: MetadataWhereUniqueInput;
+};
+
+
 export type MutationUpsertPageArgs = {
   upsert: PageUpsertInput;
   where: PageWhereUniqueInput;
@@ -6271,6 +6858,429 @@ export type Node = {
   id: Scalars['ID']['output'];
   /** The Stage of an object */
   stage: Stage;
+};
+
+export type OpenGraphMeta = {
+  __typename?: 'OpenGraphMeta';
+  description?: Maybe<Scalars['String']['output']>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  image?: Maybe<Asset>;
+  /** System stage field */
+  stage: Stage;
+  title?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type OpenGraphMetaImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type OpenGraphMetaConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: OpenGraphMetaWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type OpenGraphMetaConnection = {
+  __typename?: 'OpenGraphMetaConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<OpenGraphMetaEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type OpenGraphMetaCreateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetCreateOneInlineInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OpenGraphMetaCreateManyInlineInput = {
+  /** Create and connect multiple existing OpenGraphMeta documents */
+  create?: InputMaybe<Array<OpenGraphMetaCreateInput>>;
+};
+
+export type OpenGraphMetaCreateOneInlineInput = {
+  /** Create and connect one OpenGraphMeta document */
+  create?: InputMaybe<OpenGraphMetaCreateInput>;
+};
+
+export type OpenGraphMetaCreateWithPositionInput = {
+  /** Document to create */
+  data: OpenGraphMetaCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type OpenGraphMetaEdge = {
+  __typename?: 'OpenGraphMetaEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: OpenGraphMeta;
+};
+
+/** Identifies documents */
+export type OpenGraphMetaManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  url_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  url_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  url_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  url_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  url_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  url_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  url_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum OpenGraphMetaOrderByInput {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC'
+}
+
+export type OpenGraphMetaParent = Metadata;
+
+export type OpenGraphMetaParentConnectInput = {
+  Metadata?: InputMaybe<MetadataConnectInput>;
+};
+
+export type OpenGraphMetaParentCreateInput = {
+  Metadata?: InputMaybe<MetadataCreateInput>;
+};
+
+export type OpenGraphMetaParentCreateManyInlineInput = {
+  /** Connect multiple existing OpenGraphMetaParent documents */
+  connect?: InputMaybe<Array<OpenGraphMetaParentWhereUniqueInput>>;
+  /** Create and connect multiple existing OpenGraphMetaParent documents */
+  create?: InputMaybe<Array<OpenGraphMetaParentCreateInput>>;
+};
+
+export type OpenGraphMetaParentCreateOneInlineInput = {
+  /** Connect one existing OpenGraphMetaParent document */
+  connect?: InputMaybe<OpenGraphMetaParentWhereUniqueInput>;
+  /** Create and connect one OpenGraphMetaParent document */
+  create?: InputMaybe<OpenGraphMetaParentCreateInput>;
+};
+
+export type OpenGraphMetaParentUpdateInput = {
+  Metadata?: InputMaybe<MetadataUpdateInput>;
+};
+
+export type OpenGraphMetaParentUpdateManyInlineInput = {
+  /** Connect multiple existing OpenGraphMetaParent documents */
+  connect?: InputMaybe<Array<OpenGraphMetaParentConnectInput>>;
+  /** Create and connect multiple OpenGraphMetaParent documents */
+  create?: InputMaybe<Array<OpenGraphMetaParentCreateInput>>;
+  /** Delete multiple OpenGraphMetaParent documents */
+  delete?: InputMaybe<Array<OpenGraphMetaParentWhereUniqueInput>>;
+  /** Disconnect multiple OpenGraphMetaParent documents */
+  disconnect?: InputMaybe<Array<OpenGraphMetaParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing OpenGraphMetaParent documents */
+  set?: InputMaybe<Array<OpenGraphMetaParentWhereUniqueInput>>;
+  /** Update multiple OpenGraphMetaParent documents */
+  update?: InputMaybe<Array<OpenGraphMetaParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple OpenGraphMetaParent documents */
+  upsert?: InputMaybe<Array<OpenGraphMetaParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type OpenGraphMetaParentUpdateManyWithNestedWhereInput = {
+  Metadata?: InputMaybe<MetadataUpdateManyWithNestedWhereInput>;
+};
+
+export type OpenGraphMetaParentUpdateOneInlineInput = {
+  /** Connect existing OpenGraphMetaParent document */
+  connect?: InputMaybe<OpenGraphMetaParentWhereUniqueInput>;
+  /** Create and connect one OpenGraphMetaParent document */
+  create?: InputMaybe<OpenGraphMetaParentCreateInput>;
+  /** Delete currently connected OpenGraphMetaParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected OpenGraphMetaParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single OpenGraphMetaParent document */
+  update?: InputMaybe<OpenGraphMetaParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single OpenGraphMetaParent document */
+  upsert?: InputMaybe<OpenGraphMetaParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type OpenGraphMetaParentUpdateWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpdateWithNestedWhereUniqueInput>;
+};
+
+export type OpenGraphMetaParentUpsertWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpsertWithNestedWhereUniqueInput>;
+};
+
+export type OpenGraphMetaParentWhereInput = {
+  Metadata?: InputMaybe<MetadataWhereInput>;
+};
+
+export type OpenGraphMetaParentWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataWhereUniqueInput>;
+};
+
+export type OpenGraphMetaUpdateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OpenGraphMetaUpdateManyInlineInput = {
+  /** Create and connect multiple OpenGraphMeta component instances */
+  create?: InputMaybe<Array<OpenGraphMetaCreateWithPositionInput>>;
+  /** Delete multiple OpenGraphMeta documents */
+  delete?: InputMaybe<Array<OpenGraphMetaWhereUniqueInput>>;
+  /** Update multiple OpenGraphMeta component instances */
+  update?: InputMaybe<Array<OpenGraphMetaUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple OpenGraphMeta component instances */
+  upsert?: InputMaybe<Array<OpenGraphMetaUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type OpenGraphMetaUpdateManyInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OpenGraphMetaUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: OpenGraphMetaUpdateManyInput;
+  /** Document search */
+  where: OpenGraphMetaWhereInput;
+};
+
+export type OpenGraphMetaUpdateOneInlineInput = {
+  /** Create and connect one OpenGraphMeta document */
+  create?: InputMaybe<OpenGraphMetaCreateInput>;
+  /** Delete currently connected OpenGraphMeta document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single OpenGraphMeta document */
+  update?: InputMaybe<OpenGraphMetaUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single OpenGraphMeta document */
+  upsert?: InputMaybe<OpenGraphMetaUpsertWithNestedWhereUniqueInput>;
+};
+
+export type OpenGraphMetaUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<OpenGraphMetaUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: OpenGraphMetaWhereUniqueInput;
+};
+
+export type OpenGraphMetaUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: OpenGraphMetaUpdateInput;
+  /** Unique document search */
+  where: OpenGraphMetaWhereUniqueInput;
+};
+
+export type OpenGraphMetaUpsertInput = {
+  /** Create document if it didn't exist */
+  create: OpenGraphMetaCreateInput;
+  /** Update document if it exists */
+  update: OpenGraphMetaUpdateInput;
+};
+
+export type OpenGraphMetaUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<OpenGraphMetaUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: OpenGraphMetaWhereUniqueInput;
+};
+
+export type OpenGraphMetaUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: OpenGraphMetaUpsertInput;
+  /** Unique document search */
+  where: OpenGraphMetaWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type OpenGraphMetaWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<OpenGraphMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  url_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  url_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  url_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  url_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  url_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  url_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  url_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References OpenGraphMeta record uniquely */
+export type OpenGraphMetaWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Page = Node & {
@@ -7795,6 +8805,14 @@ export type Query = {
   layouts: Array<Layout>;
   /** Retrieve multiple layouts using the Relay connection interface */
   layoutsConnection: LayoutConnection;
+  /** Retrieve a single metadata */
+  metadata?: Maybe<Metadata>;
+  /** Retrieve document version */
+  metadataVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple metadatas */
+  metadatas: Array<Metadata>;
+  /** Retrieve multiple metadatas using the Relay connection interface */
+  metadatasConnection: MetadataConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
   /** Retrieve a single page */
@@ -8029,6 +9047,44 @@ export type QueryLayoutsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: Stage;
   where?: InputMaybe<LayoutWhereInput>;
+};
+
+
+export type QueryMetadataArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: MetadataWhereUniqueInput;
+};
+
+
+export type QueryMetadataVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryMetadatasArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<MetadataOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<MetadataWhereInput>;
+};
+
+
+export type QueryMetadatasConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<MetadataOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<MetadataWhereInput>;
 };
 
 
@@ -8363,7 +9419,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Article | Article2 | Asset | Author | Layout | Page | Page2 | Tag;
+export type ScheduledOperationAffectedDocument = Article | Article2 | Asset | Author | Layout | Metadata | Page | Page2 | Tag;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -9294,6 +10350,374 @@ export type ScheduledReleaseWhereInput = {
 /** References ScheduledRelease record uniquely */
 export type ScheduledReleaseWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type SiteMeta = {
+  __typename?: 'SiteMeta';
+  description?: Maybe<Scalars['String']['output']>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  /** System stage field */
+  stage: Stage;
+  title: Scalars['String']['output'];
+};
+
+export type SiteMetaConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: SiteMetaWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type SiteMetaConnection = {
+  __typename?: 'SiteMetaConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<SiteMetaEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type SiteMetaCreateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
+};
+
+export type SiteMetaCreateManyInlineInput = {
+  /** Create and connect multiple existing SiteMeta documents */
+  create?: InputMaybe<Array<SiteMetaCreateInput>>;
+};
+
+export type SiteMetaCreateOneInlineInput = {
+  /** Create and connect one SiteMeta document */
+  create?: InputMaybe<SiteMetaCreateInput>;
+};
+
+export type SiteMetaCreateWithPositionInput = {
+  /** Document to create */
+  data: SiteMetaCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type SiteMetaEdge = {
+  __typename?: 'SiteMetaEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: SiteMeta;
+};
+
+/** Identifies documents */
+export type SiteMetaManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum SiteMetaOrderByInput {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export type SiteMetaParent = Metadata;
+
+export type SiteMetaParentConnectInput = {
+  Metadata?: InputMaybe<MetadataConnectInput>;
+};
+
+export type SiteMetaParentCreateInput = {
+  Metadata?: InputMaybe<MetadataCreateInput>;
+};
+
+export type SiteMetaParentCreateManyInlineInput = {
+  /** Connect multiple existing SiteMetaParent documents */
+  connect?: InputMaybe<Array<SiteMetaParentWhereUniqueInput>>;
+  /** Create and connect multiple existing SiteMetaParent documents */
+  create?: InputMaybe<Array<SiteMetaParentCreateInput>>;
+};
+
+export type SiteMetaParentCreateOneInlineInput = {
+  /** Connect one existing SiteMetaParent document */
+  connect?: InputMaybe<SiteMetaParentWhereUniqueInput>;
+  /** Create and connect one SiteMetaParent document */
+  create?: InputMaybe<SiteMetaParentCreateInput>;
+};
+
+export type SiteMetaParentUpdateInput = {
+  Metadata?: InputMaybe<MetadataUpdateInput>;
+};
+
+export type SiteMetaParentUpdateManyInlineInput = {
+  /** Connect multiple existing SiteMetaParent documents */
+  connect?: InputMaybe<Array<SiteMetaParentConnectInput>>;
+  /** Create and connect multiple SiteMetaParent documents */
+  create?: InputMaybe<Array<SiteMetaParentCreateInput>>;
+  /** Delete multiple SiteMetaParent documents */
+  delete?: InputMaybe<Array<SiteMetaParentWhereUniqueInput>>;
+  /** Disconnect multiple SiteMetaParent documents */
+  disconnect?: InputMaybe<Array<SiteMetaParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing SiteMetaParent documents */
+  set?: InputMaybe<Array<SiteMetaParentWhereUniqueInput>>;
+  /** Update multiple SiteMetaParent documents */
+  update?: InputMaybe<Array<SiteMetaParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple SiteMetaParent documents */
+  upsert?: InputMaybe<Array<SiteMetaParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type SiteMetaParentUpdateManyWithNestedWhereInput = {
+  Metadata?: InputMaybe<MetadataUpdateManyWithNestedWhereInput>;
+};
+
+export type SiteMetaParentUpdateOneInlineInput = {
+  /** Connect existing SiteMetaParent document */
+  connect?: InputMaybe<SiteMetaParentWhereUniqueInput>;
+  /** Create and connect one SiteMetaParent document */
+  create?: InputMaybe<SiteMetaParentCreateInput>;
+  /** Delete currently connected SiteMetaParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected SiteMetaParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single SiteMetaParent document */
+  update?: InputMaybe<SiteMetaParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single SiteMetaParent document */
+  upsert?: InputMaybe<SiteMetaParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SiteMetaParentUpdateWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpdateWithNestedWhereUniqueInput>;
+};
+
+export type SiteMetaParentUpsertWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SiteMetaParentWhereInput = {
+  Metadata?: InputMaybe<MetadataWhereInput>;
+};
+
+export type SiteMetaParentWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataWhereUniqueInput>;
+};
+
+export type SiteMetaUpdateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteMetaUpdateManyInlineInput = {
+  /** Create and connect multiple SiteMeta component instances */
+  create?: InputMaybe<Array<SiteMetaCreateWithPositionInput>>;
+  /** Delete multiple SiteMeta documents */
+  delete?: InputMaybe<Array<SiteMetaWhereUniqueInput>>;
+  /** Update multiple SiteMeta component instances */
+  update?: InputMaybe<Array<SiteMetaUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple SiteMeta component instances */
+  upsert?: InputMaybe<Array<SiteMetaUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type SiteMetaUpdateManyInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteMetaUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: SiteMetaUpdateManyInput;
+  /** Document search */
+  where: SiteMetaWhereInput;
+};
+
+export type SiteMetaUpdateOneInlineInput = {
+  /** Create and connect one SiteMeta document */
+  create?: InputMaybe<SiteMetaCreateInput>;
+  /** Delete currently connected SiteMeta document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single SiteMeta document */
+  update?: InputMaybe<SiteMetaUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single SiteMeta document */
+  upsert?: InputMaybe<SiteMetaUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SiteMetaUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<SiteMetaUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: SiteMetaWhereUniqueInput;
+};
+
+export type SiteMetaUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: SiteMetaUpdateInput;
+  /** Unique document search */
+  where: SiteMetaWhereUniqueInput;
+};
+
+export type SiteMetaUpsertInput = {
+  /** Create document if it didn't exist */
+  create: SiteMetaCreateInput;
+  /** Update document if it exists */
+  update: SiteMetaUpdateInput;
+};
+
+export type SiteMetaUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<SiteMetaUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: SiteMetaWhereUniqueInput;
+};
+
+export type SiteMetaUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: SiteMetaUpsertInput;
+  /** Unique document search */
+  where: SiteMetaWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type SiteMetaWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SiteMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References SiteMeta record uniquely */
+export type SiteMetaWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Stage system enumeration */
@@ -10602,6 +12026,413 @@ export type TagWhereUniqueInput = {
   tag?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum TwitterCard {
+  App = 'app',
+  Card = 'card',
+  Player = 'player',
+  Summary = 'summary',
+  SummaryLargeImage = 'summary_large_image'
+}
+
+export type TwitterMeta = {
+  __typename?: 'TwitterMeta';
+  card?: Maybe<TwitterCard>;
+  description?: Maybe<Scalars['String']['output']>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  image?: Maybe<Asset>;
+  /** System stage field */
+  stage: Stage;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type TwitterMetaImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type TwitterMetaConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: TwitterMetaWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type TwitterMetaConnection = {
+  __typename?: 'TwitterMetaConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<TwitterMetaEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type TwitterMetaCreateInput = {
+  card?: InputMaybe<TwitterCard>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetCreateOneInlineInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TwitterMetaCreateManyInlineInput = {
+  /** Create and connect multiple existing TwitterMeta documents */
+  create?: InputMaybe<Array<TwitterMetaCreateInput>>;
+};
+
+export type TwitterMetaCreateOneInlineInput = {
+  /** Create and connect one TwitterMeta document */
+  create?: InputMaybe<TwitterMetaCreateInput>;
+};
+
+export type TwitterMetaCreateWithPositionInput = {
+  /** Document to create */
+  data: TwitterMetaCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type TwitterMetaEdge = {
+  __typename?: 'TwitterMetaEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: TwitterMeta;
+};
+
+/** Identifies documents */
+export type TwitterMetaManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  card?: InputMaybe<TwitterCard>;
+  /** All values that are contained in given list. */
+  card_in?: InputMaybe<Array<InputMaybe<TwitterCard>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  card_not?: InputMaybe<TwitterCard>;
+  /** All values that are not contained in given list. */
+  card_not_in?: InputMaybe<Array<InputMaybe<TwitterCard>>>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum TwitterMetaOrderByInput {
+  CardAsc = 'card_ASC',
+  CardDesc = 'card_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export type TwitterMetaParent = Metadata;
+
+export type TwitterMetaParentConnectInput = {
+  Metadata?: InputMaybe<MetadataConnectInput>;
+};
+
+export type TwitterMetaParentCreateInput = {
+  Metadata?: InputMaybe<MetadataCreateInput>;
+};
+
+export type TwitterMetaParentCreateManyInlineInput = {
+  /** Connect multiple existing TwitterMetaParent documents */
+  connect?: InputMaybe<Array<TwitterMetaParentWhereUniqueInput>>;
+  /** Create and connect multiple existing TwitterMetaParent documents */
+  create?: InputMaybe<Array<TwitterMetaParentCreateInput>>;
+};
+
+export type TwitterMetaParentCreateOneInlineInput = {
+  /** Connect one existing TwitterMetaParent document */
+  connect?: InputMaybe<TwitterMetaParentWhereUniqueInput>;
+  /** Create and connect one TwitterMetaParent document */
+  create?: InputMaybe<TwitterMetaParentCreateInput>;
+};
+
+export type TwitterMetaParentUpdateInput = {
+  Metadata?: InputMaybe<MetadataUpdateInput>;
+};
+
+export type TwitterMetaParentUpdateManyInlineInput = {
+  /** Connect multiple existing TwitterMetaParent documents */
+  connect?: InputMaybe<Array<TwitterMetaParentConnectInput>>;
+  /** Create and connect multiple TwitterMetaParent documents */
+  create?: InputMaybe<Array<TwitterMetaParentCreateInput>>;
+  /** Delete multiple TwitterMetaParent documents */
+  delete?: InputMaybe<Array<TwitterMetaParentWhereUniqueInput>>;
+  /** Disconnect multiple TwitterMetaParent documents */
+  disconnect?: InputMaybe<Array<TwitterMetaParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing TwitterMetaParent documents */
+  set?: InputMaybe<Array<TwitterMetaParentWhereUniqueInput>>;
+  /** Update multiple TwitterMetaParent documents */
+  update?: InputMaybe<Array<TwitterMetaParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple TwitterMetaParent documents */
+  upsert?: InputMaybe<Array<TwitterMetaParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type TwitterMetaParentUpdateManyWithNestedWhereInput = {
+  Metadata?: InputMaybe<MetadataUpdateManyWithNestedWhereInput>;
+};
+
+export type TwitterMetaParentUpdateOneInlineInput = {
+  /** Connect existing TwitterMetaParent document */
+  connect?: InputMaybe<TwitterMetaParentWhereUniqueInput>;
+  /** Create and connect one TwitterMetaParent document */
+  create?: InputMaybe<TwitterMetaParentCreateInput>;
+  /** Delete currently connected TwitterMetaParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected TwitterMetaParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single TwitterMetaParent document */
+  update?: InputMaybe<TwitterMetaParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single TwitterMetaParent document */
+  upsert?: InputMaybe<TwitterMetaParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type TwitterMetaParentUpdateWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpdateWithNestedWhereUniqueInput>;
+};
+
+export type TwitterMetaParentUpsertWithNestedWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataUpsertWithNestedWhereUniqueInput>;
+};
+
+export type TwitterMetaParentWhereInput = {
+  Metadata?: InputMaybe<MetadataWhereInput>;
+};
+
+export type TwitterMetaParentWhereUniqueInput = {
+  Metadata?: InputMaybe<MetadataWhereUniqueInput>;
+};
+
+export type TwitterMetaUpdateInput = {
+  card?: InputMaybe<TwitterCard>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TwitterMetaUpdateManyInlineInput = {
+  /** Create and connect multiple TwitterMeta component instances */
+  create?: InputMaybe<Array<TwitterMetaCreateWithPositionInput>>;
+  /** Delete multiple TwitterMeta documents */
+  delete?: InputMaybe<Array<TwitterMetaWhereUniqueInput>>;
+  /** Update multiple TwitterMeta component instances */
+  update?: InputMaybe<Array<TwitterMetaUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple TwitterMeta component instances */
+  upsert?: InputMaybe<Array<TwitterMetaUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type TwitterMetaUpdateManyInput = {
+  card?: InputMaybe<TwitterCard>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TwitterMetaUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: TwitterMetaUpdateManyInput;
+  /** Document search */
+  where: TwitterMetaWhereInput;
+};
+
+export type TwitterMetaUpdateOneInlineInput = {
+  /** Create and connect one TwitterMeta document */
+  create?: InputMaybe<TwitterMetaCreateInput>;
+  /** Delete currently connected TwitterMeta document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single TwitterMeta document */
+  update?: InputMaybe<TwitterMetaUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single TwitterMeta document */
+  upsert?: InputMaybe<TwitterMetaUpsertWithNestedWhereUniqueInput>;
+};
+
+export type TwitterMetaUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<TwitterMetaUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: TwitterMetaWhereUniqueInput;
+};
+
+export type TwitterMetaUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: TwitterMetaUpdateInput;
+  /** Unique document search */
+  where: TwitterMetaWhereUniqueInput;
+};
+
+export type TwitterMetaUpsertInput = {
+  /** Create document if it didn't exist */
+  create: TwitterMetaCreateInput;
+  /** Update document if it exists */
+  update: TwitterMetaUpdateInput;
+};
+
+export type TwitterMetaUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<TwitterMetaUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: TwitterMetaWhereUniqueInput;
+};
+
+export type TwitterMetaUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: TwitterMetaUpsertInput;
+  /** Unique document search */
+  where: TwitterMetaWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type TwitterMetaWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<TwitterMetaWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  card?: InputMaybe<TwitterCard>;
+  /** All values that are contained in given list. */
+  card_in?: InputMaybe<Array<InputMaybe<TwitterCard>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  card_not?: InputMaybe<TwitterCard>;
+  /** All values that are not contained in given list. */
+  card_not_in?: InputMaybe<Array<InputMaybe<TwitterCard>>>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References TwitterMeta record uniquely */
+export type TwitterMetaWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type UnpublishLocaleInput = {
   /** Locales to unpublish */
   locale: Locale;
@@ -11110,27 +12941,12 @@ export type ArticleQueryQuery = (
   & { ' $fragmentRefs'?: { 'ArticleContentQueryFragmentFragment': ArticleContentQueryFragmentFragment } }
 );
 
-export type PageQueryQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars['String']['input']>;
+export type ArticleMetadataQueryQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
 }>;
 
 
-export type PageQueryQuery = (
-  { __typename?: 'Query' }
-  & { ' $fragmentRefs'?: { 'PageContentQueryFragmentFragment': PageContentQueryFragmentFragment } }
-);
-
-export type ArticleMetadataFragment = { __typename?: 'Article', createdAt: any, excerpt: string, title: string, author?: { __typename?: 'Author', name: string } | null, tags: Array<{ __typename?: 'Tag', tag: string }> } & { ' $fragmentName'?: 'ArticleMetadataFragment' };
-
-export type ArticleMetadataBySlugQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type ArticleMetadataBySlugQuery = { __typename?: 'Query', article?: (
-    { __typename?: 'Article' }
-    & { ' $fragmentRefs'?: { 'ArticleMetadataFragment': ArticleMetadataFragment } }
-  ) | null };
+export type ArticleMetadataQueryQuery = { __typename?: 'Query', article?: { __typename?: 'Article', createdAt: any, author?: { __typename?: 'Author', name: string } | null, hero?: { __typename?: 'HeroSection', caption?: string | null, title: string } | null, tags: Array<{ __typename?: 'Tag', tag: string }> } | null, metadata?: { __typename?: 'Metadata', id: string, open?: { __typename?: 'OpenGraphMeta', description?: string | null, title?: string | null, url?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null, site?: { __typename?: 'SiteMeta', description?: string | null, title: string } | null, twitter?: { __typename?: 'TwitterMeta', card?: TwitterCard | null, description?: string | null, title?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null } | null };
 
 export type ArticleAuthorFragmentFragment = { __typename?: 'Article', author?: { __typename?: 'Author', name: string, biography?: string | null, avatar?: { __typename?: 'Asset', url: string } | null } | null } & { ' $fragmentName'?: 'ArticleAuthorFragmentFragment' };
 
@@ -11169,7 +12985,23 @@ export type PageSectionExplorerFragmentFragment = { __typename?: 'Page', section
     & { ' $fragmentRefs'?: { 'ArticleExplorerSectionFragmentFragment': ArticleExplorerSectionFragmentFragment } }
   ) | { __typename: 'ArticlePreviewList' } | { __typename: 'HeroSection' } | { __typename: 'HomePageHero' } | { __typename: 'TagExplorer' }> } & { ' $fragmentName'?: 'PageSectionExplorerFragmentFragment' };
 
-export const ArticleMetadataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMetadata"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleMetadataFragment, unknown>;
+export type PageQueryQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type PageQueryQuery = (
+  { __typename?: 'Query' }
+  & { ' $fragmentRefs'?: { 'PageContentQueryFragmentFragment': PageContentQueryFragmentFragment } }
+);
+
+export type PageMetadataQueryQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type PageMetadataQueryQuery = { __typename?: 'Query', metadata?: { __typename?: 'Metadata', id: string, open?: { __typename?: 'OpenGraphMeta', description?: string | null, title?: string | null, url?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null, site?: { __typename?: 'SiteMeta', description?: string | null, title: string } | null, twitter?: { __typename?: 'TwitterMeta', card?: TwitterCard | null, description?: string | null, title?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null } | null, page?: { __typename?: 'Page', createdAt: any, hero?: { __typename?: 'HeroSection', caption?: string | null, title: string } | null } | null };
+
 export const ArticleHeroFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<ArticleHeroFragmentFragment, unknown>;
 export const ArticleMarkdownFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]} as unknown as DocumentNode<ArticleMarkdownFragmentFragment, unknown>;
 export const ArticleAuthorFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}}]}}]}}]} as unknown as DocumentNode<ArticleAuthorFragmentFragment, unknown>;
@@ -11180,6 +13012,7 @@ export const ArticleExplorerSectionFragmentFragmentDoc = {"kind":"Document","def
 export const PageSectionExplorerFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<PageSectionExplorerFragmentFragment, unknown>;
 export const PageContentQueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSectionExplorerFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}}]} as unknown as DocumentNode<PageContentQueryFragmentFragment, unknown>;
 export const ArticleQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMarkdownFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleAuthorFragment"}}]}}]}}]} as unknown as DocumentNode<ArticleQueryQuery, ArticleQueryQueryVariables>;
-export const PageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSectionExplorerFragment"}}]}}]}}]} as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
-export const ArticleMetadataBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleMetadataBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMetadata"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMetadata"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleMetadataBySlugQuery, ArticleMetadataBySlugQueryVariables>;
+export const ArticleMetadataQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleMetadataQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"metadata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"clm9qf5ek1hnk0amzfuxh62yf","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"open"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"twitter"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"card"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleMetadataQueryQuery, ArticleMetadataQueryQueryVariables>;
 export const ArticleExplorerQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleExplorerQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articlesConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"createdAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticlePreviewFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreviewFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<ArticleExplorerQueryQuery, ArticleExplorerQueryQueryVariables>;
+export const PageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSectionExplorerFragment"}}]}}]}}]} as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
+export const PageMetadataQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageMetadataQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"metadata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"clm9qf5ek1hnk0amzfuxh62yf","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"open"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"twitter"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"card"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<PageMetadataQueryQuery, PageMetadataQueryQueryVariables>;

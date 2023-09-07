@@ -23,6 +23,8 @@ const documents = {
     "\n  fragment PageContentQueryFragment on Query {\n    page(where: { slug: $slug }) {\n      ...PageHeroFragment\n      ...PageSectionExplorerFragment\n    }\n  }\n": types.PageContentQueryFragmentFragmentDoc,
     "\n  fragment PageHeroFragment on Page {\n    hero {\n      caption\n      image {\n        url\n      }\n      subtitle\n      title\n    }\n  }\n": types.PageHeroFragmentFragmentDoc,
     "\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n": types.PageSectionExplorerFragmentFragmentDoc,
+    "\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n": types.PageQueryDocument,
+    "\n  query PageMetadataQuery($slug: String) {\n    metadata(where: { id: \"clm9qf5ek1hnk0amzfuxh62yf\" }) {\n      id\n      open {\n        description\n        image {\n          url\n        }\n        title\n        url\n      }\n      site {\n        description\n        title\n      }\n      twitter {\n        card\n        description\n        image {\n          url\n        }\n        title\n      }\n    }\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n": types.PageMetadataQueryDocument,
 };
 
 /**
@@ -79,6 +81,14 @@ export function graphql(source: "\n  fragment PageHeroFragment on Page {\n    he
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n"): (typeof documents)["\n  fragment PageSectionExplorerFragment on Page {\n    sections {\n      __typename\n      ...ArticleExplorerSectionFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n"): (typeof documents)["\n  query PageQuery($slug: String) {\n    ...PageContentQueryFragment\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query PageMetadataQuery($slug: String) {\n    metadata(where: { id: \"clm9qf5ek1hnk0amzfuxh62yf\" }) {\n      id\n      open {\n        description\n        image {\n          url\n        }\n        title\n        url\n      }\n      site {\n        description\n        title\n      }\n      twitter {\n        card\n        description\n        image {\n          url\n        }\n        title\n      }\n    }\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageMetadataQuery($slug: String) {\n    metadata(where: { id: \"clm9qf5ek1hnk0amzfuxh62yf\" }) {\n      id\n      open {\n        description\n        image {\n          url\n        }\n        title\n        url\n      }\n      site {\n        description\n        title\n      }\n      twitter {\n        card\n        description\n        image {\n          url\n        }\n        title\n      }\n    }\n    page(where: { slug: $slug }) {\n      createdAt\n      hero {\n        caption\n        title\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

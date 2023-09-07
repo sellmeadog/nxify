@@ -1,7 +1,7 @@
 import { Markdown, SectionLayout } from '@nxify/kjd-ui-layout';
 import { FragmentType, fragmentData, graphql } from '../../generated';
 
-const ArticleMarkdownFragment = graphql(`
+export const ArticleMarkdownFragment = graphql(`
   fragment ArticleMarkdownFragment on Article {
     markdown
   }
@@ -16,7 +16,9 @@ export function ArticleMarkdown({ data }: ArticleMarkdownProps) {
 
   return (
     <SectionLayout>
-      <Markdown>{markdown}</Markdown>
+      <Markdown className="prose-headings:font-light prose-headings:text-orange-300 prose-headings:uppercase">
+        {markdown}
+      </Markdown>
     </SectionLayout>
   );
 }

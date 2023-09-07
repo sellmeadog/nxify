@@ -14,5 +14,8 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  moduleNameMapper: {
+    'react-markdown': 'react-markdown/react-markdown.min.js',
+  },
   coverageDirectory: '../../../coverage/libs/kjd/ui-page-fragments',
 };

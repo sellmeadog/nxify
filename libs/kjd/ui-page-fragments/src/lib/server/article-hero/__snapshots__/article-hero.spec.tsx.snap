@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleHero should render successfully 1`] = `
+<body>
+  <div>
+    <header
+      class="bg-neutral-700 max-w-none"
+    >
+      <div
+        class="flex flex-col items-center gap-y-8 max-w-prose mx-auto p-8 md:px-0 lg:py-16 prose-headings:m-0 prose-img:m-0 prose-p:m-0"
+      >
+        <section
+          class="flex flex-col gap-y-px grow"
+        >
+          <span
+            class="font-medium text-neutral-400 uppercase"
+          >
+            August 20th, 2023
+          </span>
+          <h1
+            class="empty:hidden font-light"
+          >
+            Quick Tip: Configure ESLint to Allow the Expo StatusBar "style" Prop
+          </h1>
+          <span
+            class="empty:hidden text-neutral-400"
+          />
+        </section>
+        <section>
+          <div
+            class="prose-blockquote:border-orange-400 prose-blockquote:font-serif prose-blockquote:text-neutral-400 prose-blockquote:text-xl prose-code:before:hidden prose-code:after:hidden first-of-type:prose-p:mt-0 last-of-type:prose-p:mb-0 empty:hidden"
+          >
+            <p>
+              ESLint flags the Expo StatusBar 
+              <code
+                class="text-orange-300"
+              >
+                style
+              </code>
+               prop by default; the 
+              <code
+                class="text-orange-300"
+              >
+                react/style-prop-object
+              </code>
+               lint rule offers an easy configuration option to clear this warning.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+  </div>
+</body>
+`;
