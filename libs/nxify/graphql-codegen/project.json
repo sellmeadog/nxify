@@ -1,0 +1,69 @@
+{
+  "name": "nxify-graphql-codegen",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nxify/graphql-codegen/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nxify/graphql-codegen",
+        "main": "libs/nxify/graphql-codegen/src/index.ts",
+        "tsConfig": "libs/nxify/graphql-codegen/tsconfig.lib.json",
+        "assets": [
+          "libs/nxify/graphql-codegen/*.md",
+          {
+            "input": "./libs/nxify/graphql-codegen/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nxify/graphql-codegen/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nxify/graphql-codegen",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/nxify/graphql-codegen",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs nxify-graphql-codegen {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/nxify/graphql-codegen/**/*.ts",
+          "libs/nxify/graphql-codegen/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/nxify/graphql-codegen/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
