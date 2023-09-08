@@ -46,7 +46,8 @@
       "options": {
         "lintFilePatterns": [
           "libs/nxify/graphql-codegen/**/*.ts",
-          "libs/nxify/graphql-codegen/package.json"
+          "libs/nxify/graphql-codegen/package.json",
+          "libs/nxify/graphql-codegen/generators.json"
         ]
       }
     },
