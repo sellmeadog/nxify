@@ -1,7 +1,4 @@
-import {
-  Page,
-  pageMetadataGeneratorFactory,
-} from '@nxify/kjd-ui-page-fragments';
+import { Page, pageMetadataGeneratorFactory } from '@nxify/kjd-ui-fragments';
 
 export const homePageMetadataGenerator = pageMetadataGeneratorFactory('home');
 
