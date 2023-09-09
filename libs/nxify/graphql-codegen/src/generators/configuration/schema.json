@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Configuration",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-dropdown": "project",
+      "x-prompt": "What is the name of the project to set up a esbuild for?",
+      "x-priority": "important"
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The location where code is generated. Defaults to `<projectRoot>/src/lib/generated`."
+    },
+    "schema": {
+      "type": "string",
+      "description": "The schema location to generate against. Defaults to `process.env.SCHEMA_ENDPOINT`.",
+      "default": "process.env.SCHEMA_ENDPOINT"
+    },
+    "skipClientPreset": {
+      "type": "boolean",
+      "description": "Do not configure the client preset. Defaults to `false`.",
+      "default": false
+    }
+  },
+  "required": ["project"]
+}

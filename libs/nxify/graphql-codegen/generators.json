@@ -4,6 +4,11 @@
       "factory": "./src/generators/init/generator",
       "schema": "./src/generators/init/schema.json",
       "description": "Initialize the GraphQL Code Generator plugin"
+    },
+    "configuration": {
+      "factory": "./src/generators/configuration/generator",
+      "schema": "./src/generators/configuration/schema.json",
+      "description": "Add GraphQL Code Generator configuration to a project."
     }
   }
 }
