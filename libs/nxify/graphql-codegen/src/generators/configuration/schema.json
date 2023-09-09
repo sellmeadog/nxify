@@ -12,23 +12,35 @@
         "index": 0
       },
       "x-dropdown": "project",
-      "x-prompt": "What is the name of the project to set up a esbuild for?",
+      "x-prompt": "Which project are you adding GraphQL Code Generation to?",
       "x-priority": "important"
     },
     "outputPath": {
       "type": "string",
-      "description": "The location where code is generated. Defaults to `<projectRoot>/src/lib/generated`."
+      "description": "The location where code is generated relative to the project root. Defaults to `src/lib/generated`.",
+      "default": "src/lib/generated"
     },
     "schema": {
       "type": "string",
-      "description": "The schema location to generate against. Defaults to `process.env.SCHEMA_ENDPOINT`.",
-      "default": "process.env.SCHEMA_ENDPOINT"
+      "description": "The schema location as an environment variable or URL. Defaults to `SCHEMA_ENDPOINT`.",
+      "default": "SCHEMA_ENDPOINT"
+    },
+    "schemaIsEnvironmentVariable": {
+      "type": "boolean",
+      "description": "The schema location is an environment variable. Defaults to `true`.",
+      "default": true,
+      "x-priority": "internal"
     },
     "skipClientPreset": {
       "type": "boolean",
       "description": "Do not configure the client preset. Defaults to `false`.",
       "default": false
+    },
+    "skipValidation": {
+      "type": "boolean",
+      "description": "Do not perform any validation on existing project. Defaults to `false`.",
+      "default": false
     }
   },
-  "required": ["project"]
+  "required": ["project", "schema"]
 }

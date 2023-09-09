@@ -1,18 +1,30 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 import { createGlobPatternsForDependencies } from '@nx/js/src/utils/generate-globs';
 
+<% if (schemaIsEnvironmentVariable) { %>
+const { <%= schema %> } = process.env;
+<% } %>
+
 const config: CodegenConfig = {
+  <% if (schemaIsEnvironmentVariable) { %>
   schema: <%= schema %>,
-  documents: [
-    ...createGlobPatternsForDependencies(__dirname, 'lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}'),
+  <% } else { %>
+  schema: '<%= schema %>',
+  <% } %>documents: [
+    ...createGlobPatternsForDependencies(
+      __dirname,
+      'lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}'
+    ),
     '<%= root %>/src/lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}',
   ],
   generates: {
-    '<%= root %>/src/lib/generated/': {
+    '<%= outputPath %>': {
+      <% if (!skipClientPreset) { %>
       preset: 'client',
       presetConfig: {
         fragmentMasking: { unmaskFunctionName: 'fragmentData' },
       },
+      <% } %>
     },
   },
   ignoreNoDocuments: true,
