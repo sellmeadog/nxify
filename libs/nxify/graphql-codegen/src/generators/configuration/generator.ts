@@ -11,7 +11,7 @@ import { join } from 'path';
 export function normalizeOptions(
   tree: Tree,
   {
-    outputPath = 'src/lib/generated',
+    outputPath = 'src/lib/generated/',
     schema = 'SCHEMA_ENDPOINT',
     skipClientPreset = false,
     ...rest
@@ -20,12 +20,16 @@ export function normalizeOptions(
   const project = readProjectConfiguration(tree, rest.project);
 
   return {
-    outputPath: join(project.root, outputPath),
+    outputPath: ensureTrailingSlash(join(project.root, outputPath)),
     schema,
     schemaIsEnvironmentVariable: !schema.startsWith('http'),
     skipClientPreset,
     ...rest,
   };
+}
+
+function ensureTrailingSlash(path: string) {
+  return path.endsWith('/') ? path : `${path}/`;
 }
 
 function validateCodegenTarget(

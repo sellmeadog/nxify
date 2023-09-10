@@ -17,7 +17,7 @@
     },
     "outputPath": {
       "type": "string",
-      "description": "The location where code is generated relative to the project root. Defaults to `src/lib/generated`.",
+      "description": "The location where code is generated relative to the project root. Defaults to `src/lib/generated/`.",
       "default": "src/lib/generated"
     },
     "schema": {
