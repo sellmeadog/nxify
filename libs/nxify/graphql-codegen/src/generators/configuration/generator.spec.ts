@@ -40,7 +40,7 @@ describe('configuration generator', () => {
           'mylib/src/lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}',
         ],
         generates: {
-          'mylib/src/lib/generated': {
+          'mylib/src/lib/generated/': {
             preset: 'client',
             presetConfig: {
               fragmentMasking: { unmaskFunctionName: 'fragmentData' },
@@ -85,7 +85,7 @@ describe('configuration generator', () => {
           'mylib/src/lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}',
         ],
         generates: {
-          'mylib/src/generated': {},
+          'mylib/src/generated/': {},
         },
         ignoreNoDocuments: true,
       };
