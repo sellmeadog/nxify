@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import { join, dirname } from 'path';
 import { mkdirSync, rmSync } from 'fs';
 
-describe('nxify-graphql-codegen', () => {
+describe('nxify-io-graphql-codegen', () => {
   let projectDirectory: string;
 
   beforeAll(() => {
