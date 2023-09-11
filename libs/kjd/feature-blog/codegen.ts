@@ -8,16 +8,19 @@ const config: CodegenConfig = {
   documents: [
     ...createGlobPatternsForDependencies(
       __dirname,
-      'lib/**/*!(*.stories|*.spec).{graphql,ts,tsx}'
+      'lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}'
     ),
-    'libs/kjd/feature-blog/src/lib/{client,server}/**/*!(*.stories|*.spec).{graphql,ts,tsx}',
+    'libs/kjd/feature-blog/src/lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}',
   ],
   generates: {
     'libs/kjd/feature-blog/src/lib/generated/': {
       preset: 'client',
+      presetConfig: {
+        fragmentMasking: { unmaskFunctionName: 'fragmentData' },
+      },
     },
   },
-  ignoreNoDocuments: false,
+  ignoreNoDocuments: true,
 };
 
 export default config;

@@ -33,9 +33,9 @@
       }
     },
     "codegen": {
-      "executor": "nx:run-commands",
+      "executor": "@nxify/graphql-codegen:codegen",
       "options": {
-        "command": "graphql-codegen -c {projectRoot}/codegen.ts"
+        "config": "{projectRoot}/codegen.ts"
       },
       "dependsOn": ["^codegen"]
     }
