@@ -1,5 +1,5 @@
 {
-  "name": "@nxify/graphql-codegen",
+  "name": "@nxify-io/graphql-codegen",
   "version": "0.0.1",
   "dependencies": {
     "@graphql-codegen/cli": "5.0.0",

@@ -10,7 +10,7 @@ describe('nxify-graphql-codegen', () => {
 
     // The plugin has been built and published to a local registry in the jest globalSetup
     // Install the plugin built with the latest source code into the test repo
-    execSync(`npm install @nxify/graphql-codegen@e2e`, {
+    execSync(`npm install @nxify-io/graphql-codegen@e2e`, {
       cwd: projectDirectory,
       stdio: 'inherit',
       env: process.env,
@@ -27,7 +27,7 @@ describe('nxify-graphql-codegen', () => {
 
   it('should be installed', () => {
     // npm ls will fail if the package is not installed properly
-    execSync('npm ls @nxify/graphql-codegen', {
+    execSync('npm ls @nxify-io/graphql-codegen', {
       cwd: projectDirectory,
       stdio: 'inherit',
     });

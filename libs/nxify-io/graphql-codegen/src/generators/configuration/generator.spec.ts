@@ -106,7 +106,7 @@ describe('configuration generator', () => {
     const project = readProjectConfiguration(tree, 'mylib');
 
     expect(project.targets.codegen).toEqual({
-      executor: '@nxify/graphql-codegen:codegen',
+      executor: '@nxify-io/graphql-codegen:codegen',
       options: {
         config: '{projectRoot}/codegen.ts',
       },
@@ -145,7 +145,7 @@ describe('configuration generator', () => {
     const project = readProjectConfiguration(tree, 'mylib');
 
     expect(project.targets.codegen).toEqual({
-      executor: '@nxify/graphql-codegen:codegen',
+      executor: '@nxify-io/graphql-codegen:codegen',
       options: {
         config: '{projectRoot}/codegen.ts',
       },

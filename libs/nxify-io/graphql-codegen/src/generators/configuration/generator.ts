@@ -59,7 +59,7 @@ function addCodegenTarget(tree: Tree, options: ConfigurationGeneratorSchema) {
     targets: {
       ...project.targets,
       codegen: {
-        executor: '@nxify/graphql-codegen:codegen',
+        executor: '@nxify-io/graphql-codegen:codegen',
         options: {
           config: '{projectRoot}/codegen.ts',
         },

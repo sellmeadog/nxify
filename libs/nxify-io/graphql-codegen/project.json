@@ -1,35 +1,35 @@
 {
-  "name": "nxify-graphql-codegen",
+  "name": "nxify-io-graphql-codegen",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/nxify/graphql-codegen/src",
+  "sourceRoot": "libs/nxify-io/graphql-codegen/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/nxify/graphql-codegen",
-        "main": "libs/nxify/graphql-codegen/src/index.ts",
-        "tsConfig": "libs/nxify/graphql-codegen/tsconfig.lib.json",
+        "outputPath": "dist/libs/nxify-io/graphql-codegen",
+        "main": "libs/nxify-io/graphql-codegen/src/index.ts",
+        "tsConfig": "libs/nxify-io/graphql-codegen/tsconfig.lib.json",
         "assets": [
-          "libs/nxify/graphql-codegen/*.md",
+          "libs/nxify-io/graphql-codegen/*.md",
           {
-            "input": "./libs/nxify/graphql-codegen/src",
+            "input": "./libs/nxify-io/graphql-codegen/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./libs/nxify/graphql-codegen/src",
+            "input": "./libs/nxify-io/graphql-codegen/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./libs/nxify/graphql-codegen",
+            "input": "./libs/nxify-io/graphql-codegen",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./libs/nxify/graphql-codegen",
+            "input": "./libs/nxify-io/graphql-codegen",
             "glob": "executors.json",
             "output": "."
           }
@@ -37,7 +37,7 @@
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs nxify-graphql-codegen {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs nxify-io-graphql-codegen {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
@@ -45,10 +45,10 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/nxify/graphql-codegen/**/*.ts",
-          "libs/nxify/graphql-codegen/package.json",
-          "libs/nxify/graphql-codegen/generators.json",
-          "libs/nxify/graphql-codegen/executors.json"
+          "libs/nxify-io/graphql-codegen/**/*.ts",
+          "libs/nxify-io/graphql-codegen/package.json",
+          "libs/nxify-io/graphql-codegen/generators.json",
+          "libs/nxify-io/graphql-codegen/executors.json"
         ]
       }
     },
@@ -56,7 +56,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/nxify/graphql-codegen/jest.config.ts",
+        "jestConfig": "libs/nxify-io/graphql-codegen/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

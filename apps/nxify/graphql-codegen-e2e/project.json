@@ -28,5 +28,5 @@
       }
     }
   },
-  "implicitDependencies": ["nxify-graphql-codegen"]
+  "implicitDependencies": ["nxify-io-graphql-codegen"]
 }

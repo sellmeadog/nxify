@@ -33,7 +33,7 @@
       }
     },
     "codegen": {
-      "executor": "@nxify/graphql-codegen:codegen",
+      "executor": "@nxify-io/graphql-codegen:codegen",
       "options": {
         "config": "{projectRoot}/codegen.ts"
       },
