@@ -1,6 +1,6 @@
 import { graphql } from '../../generated';
 import { hygraph } from '@nxify/kjd-data-access-hygraph';
-import { ArticleContent } from '@nxify/kjd-ui-page-fragments';
+import { ArticleContent } from '@nxify/kjd-ui-fragments';
 import { Metadata } from 'next';
 
 const ArticleQuery = graphql(`

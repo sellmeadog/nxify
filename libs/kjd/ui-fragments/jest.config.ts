@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'kjd-ui-page-fragments',
+  displayName: 'kjd-ui-fragments',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': [
@@ -17,5 +17,5 @@ export default {
   moduleNameMapper: {
     'react-markdown': 'react-markdown/react-markdown.min.js',
   },
-  coverageDirectory: '../../../coverage/libs/kjd/ui-page-fragments',
+  coverageDirectory: '../../../coverage/libs/kjd/ui-fragments',
 };

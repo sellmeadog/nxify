@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nxify-io/graphql-codegen": [
+        "libs/nxify-io/graphql-codegen/src/index.ts"
+      ],
       "@nxify/ghostbot-data-model": ["libs/ghostbot/data-model/src/index.ts"],
       "@nxify/ghostbot-data-provider": [
         "libs/ghostbot/data-provider/src/index.ts"
@@ -39,11 +42,9 @@
         "libs/kjd/shared/ui-components/src/server.ts"
       ],
       "@nxify/kjd-ui-cms-page/server": ["libs/kjd/ui-cms-page/src/server.ts"],
+      "@nxify/kjd-ui-fragments": ["libs/kjd/ui-fragments/src/index.ts"],
       "@nxify/kjd-ui-layout": ["libs/kjd/ui-layout/src/index.ts"],
       "@nxify/kjd-ui-layout/server": ["libs/kjd/ui-layout/src/server.ts"],
-      "@nxify/kjd-ui-page-fragments": [
-        "libs/kjd/ui-page-fragments/src/index.ts"
-      ],
       "@nxify/kjd-ui-page-fragments/server": [
         "libs/kjd/ui-page-fragments/src/server.ts"
       ]

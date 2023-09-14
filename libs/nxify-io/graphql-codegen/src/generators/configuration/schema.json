@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Configuration",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-dropdown": "project",
+      "x-prompt": "Which project are you adding GraphQL Code Generation to?",
+      "x-priority": "important"
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The location where code is generated relative to the project root. Defaults to `src/lib/generated/`.",
+      "default": "src/lib/generated"
+    },
+    "schema": {
+      "type": "string",
+      "description": "The schema location as an environment variable or URL. Defaults to `SCHEMA_ENDPOINT`.",
+      "default": "SCHEMA_ENDPOINT"
+    },
+    "schemaIsEnvironmentVariable": {
+      "type": "boolean",
+      "description": "The schema location is an environment variable. Defaults to `true`.",
+      "default": true,
+      "x-priority": "internal"
+    },
+    "skipClientPreset": {
+      "type": "boolean",
+      "description": "Do not configure the client preset. Defaults to `false`.",
+      "default": false
+    },
+    "skipValidation": {
+      "type": "boolean",
+      "description": "Do not perform any validation on existing project. Defaults to `false`.",
+      "default": false
+    }
+  },
+  "required": ["project", "schema"]
+}

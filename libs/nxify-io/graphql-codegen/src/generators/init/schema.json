@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Init",
+  "cli": "nx",
+  "title": "Initialize GraphQL Code Generator Plugin",
+  "description": "Initializes the GraphQL Code Generator plugin.",
+  "type": "object",
+  "properties": {
+    "skipFormat": {
+      "description": "Skip formatting files.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": []
+}

@@ -46,12 +46,13 @@ const PageMetadataQuery = graphql(`
 
 export interface PageProps {
   slug: string;
+  variant?: 'home' | 'page';
 }
 
-export async function Page({ slug }: PageProps) {
+export async function Page({ slug, variant = 'page' }: PageProps) {
   const query = await hygraph.request(PageQuery, { slug });
 
-  return <PageContent data={query} variant="home" />;
+  return <PageContent data={query} variant={variant} />;
 }
 
 export function pageMetadataGeneratorFactory(

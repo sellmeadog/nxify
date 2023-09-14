@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Codegen Target",
+  "description": "Run the GraphQL Code Generator.",
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "string",
+      "description": "The path to the `codegen.ts` file in this project."
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Execute the GraphQL Code Generator CLI in watch mode.",
+      "default": false
+    }
+  },
+  "required": ["config"]
+}
