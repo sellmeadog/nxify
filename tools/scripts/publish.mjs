@@ -11,6 +11,7 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 
 import devkit from '@nx/devkit';
+import { join } from 'path';
 const { readCachedProjectGraph } = devkit;
 
 function invariant(condition, message) {
@@ -42,22 +43,27 @@ invariant(
 const outputPath = project.data?.targets?.build?.options?.outputPath;
 invariant(
   outputPath,
-  `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`
+  `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`
 );
-
-process.chdir(outputPath);
 
 // Updating the version in "package.json" before publishing
 try {
-  const json = JSON.parse(readFileSync(`package.json`).toString());
+  const json = JSON.parse(
+    readFileSync(join(outputPath, `package.json`)).toString()
+  );
   json.version = version;
-  writeFileSync(`package.json`, JSON.stringify(json, null, 2));
+  writeFileSync(
+    join(outputPath, `package.json`),
+    JSON.stringify(json, null, 2)
+  );
 } catch (e) {
   console.error(`Error reading package.json file from library build output.`);
 }
 
 // Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`, {
-  stdio: 'inherit',
-  env: { ...process.env },
-});
+execSync(
+  `export NPM_TOKEN=${process.env.NPM_TOKEN} npm publish ${outputPath} --access public --tag ${tag}`,
+  {
+    stdio: 'inherit',
+  }
+);
