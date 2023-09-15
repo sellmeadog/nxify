@@ -6,11 +6,8 @@ const { <%= schema %> } = process.env;
 <% } %>
 
 const config: CodegenConfig = {
-  <% if (schemaIsEnvironmentVariable) { %>
-  schema: <%= schema %>,
-  <% } else { %>
-  schema: '<%= schema %>',
-  <% } %>documents: [
+  schema: <%- schemaIsEnvironmentVariable ? schema : `"${schema}"` %>,
+  documents: [
     ...createGlobPatternsForDependencies(
       __dirname,
       'lib/{client,server}/**/*!(*.stories|*.spec).{ts,tsx}'
