@@ -1,6 +1,10 @@
 import { addDependenciesToPackageJson, formatFiles, Tree } from '@nx/devkit';
 import { InitGeneratorSchema } from './schema';
-import { clinetPresetVersion, cliVersion } from '../../lib/versions';
+import {
+  clinetPresetVersion,
+  cliVersion,
+  graphqlVersion,
+} from '../../lib/versions';
 
 export async function initGenerator(
   tree: Tree,
@@ -8,7 +12,7 @@ export async function initGenerator(
 ) {
   const task = addDependenciesToPackageJson(
     tree,
-    {},
+    { graphql: graphqlVersion },
     {
       '@graphql-codegen/cli': cliVersion,
       '@graphql-codegen/client-preset': clinetPresetVersion,
