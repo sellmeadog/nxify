@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { format, parseISO } from 'date-fns';
 import { Markdown } from '@nxify/kjd-ui-layout';
 
@@ -24,7 +24,10 @@ export interface ArticlePreviewProps {
 }
 
 export function ArticlePreview({ data }: ArticlePreviewProps) {
-  const { createdAt, hero, slug } = fragmentData(ArticlePreviewFragment, data);
+  const { createdAt, hero, slug } = unmaskFragment(
+    ArticlePreviewFragment,
+    data
+  );
 
   return (
     <article className="prose-headings:font-light prose-headings:mt-0 prose-p:mb-0 border-neutral-700 last-of-type:border-transparent border-b py-8 first-of-type:pt-0 last-of-type:pb-0 lg:py-16">

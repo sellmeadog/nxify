@@ -16,7 +16,7 @@ const config: CodegenConfig = {
     'libs/kjd/feature-home/src/lib/generated/': {
       preset: 'client',
       presetConfig: {
-        fragmentMasking: { unmaskFunctionName: 'fragmentData' },
+        fragmentMasking: { unmaskFunctionName: 'unmaskFragment' },
       },
     },
   },

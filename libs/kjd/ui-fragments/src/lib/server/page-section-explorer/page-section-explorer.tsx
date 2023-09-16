@@ -1,5 +1,5 @@
 import { ElementType } from 'react';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { ArticleExplorerSection } from '../article-explorer-section/article-explorer-section';
 
 const PageSectionExplorerFragment = graphql(`
@@ -20,7 +20,7 @@ export interface PageSectionExplorerProps {
 }
 
 export function PageSectionExplorer({ data }: PageSectionExplorerProps) {
-  const { sections } = fragmentData(PageSectionExplorerFragment, data);
+  const { sections } = unmaskFragment(PageSectionExplorerFragment, data);
 
   return sections.map((fragment, index) => {
     const Component = SECTIONS[fragment.__typename];

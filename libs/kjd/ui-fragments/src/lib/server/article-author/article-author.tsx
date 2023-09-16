@@ -1,5 +1,5 @@
 import { SectionLayout } from '@nxify/kjd-ui-layout';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 
 export const ArticleAuthorFragment = graphql(`
   fragment ArticleAuthorFragment on Article {
@@ -18,7 +18,7 @@ export interface ArticleAuthorProps {
 }
 
 export function ArticleAuthor({ data }: ArticleAuthorProps) {
-  const { author } = fragmentData(ArticleAuthorFragment, data);
+  const { author } = unmaskFragment(ArticleAuthorFragment, data);
 
   return (
     <SectionLayout className="flex flex-col md:flex-row gap-8 items-center md:items-start prose-headings:mt-0 prose-img:m-0">

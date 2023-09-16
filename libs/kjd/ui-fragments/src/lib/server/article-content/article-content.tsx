@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { ArticleHero } from '../article-hero/article-hero';
 import { ArticleMarkdown } from '../article-markdown/article-markdown';
 import { ArticleAuthor } from '../article-author/article-author';
@@ -19,7 +19,7 @@ export interface ArticleContentProps {
 }
 
 export function ArticleContent({ data }: ArticleContentProps) {
-  const { article } = fragmentData(ArticleContentQueryFragment, data);
+  const { article } = unmaskFragment(ArticleContentQueryFragment, data);
 
   if (!article) {
     return notFound();
