@@ -37,7 +37,7 @@ export function ArticleAuthor({ data }: ArticleAuthorProps) {
       <section>
         <h3>Hi, I'm {author?.name}</h3>
         <p>{author?.biography}</p>
-        <p className="flex flex-row justify-evenly md:justify-start md:gap-x-2">
+        <div className="flex flex-row justify-evenly md:justify-start md:gap-x-2">
           {author?.socialIcons?.map(({ href, network }) => (
             <SocialIcon
               bgColor="rgb(10 10 10)"
@@ -47,7 +47,7 @@ export function ArticleAuthor({ data }: ArticleAuthorProps) {
               style={SOCIAL_ICON_STYLE}
             />
           ))}
-        </p>
+        </div>
       </section>
     </SectionLayout>
   );
