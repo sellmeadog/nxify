@@ -2785,6 +2785,7 @@ export type Author = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
+  socialIcons: Array<SocialIcon>;
   /** System stage field */
   stage: Stage;
   /** The time the document was updated */
@@ -2864,6 +2865,19 @@ export type AuthorScheduledInArgs = {
 };
 
 
+export type AuthorSocialIconsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<SocialIconOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SocialIconWhereInput>;
+};
+
+
 export type AuthorUpdatedByArgs = {
   forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
   locales?: InputMaybe<Array<Locale>>;
@@ -2895,6 +2909,7 @@ export type AuthorCreateInput = {
   emailAddress: Scalars['String']['input'];
   name: Scalars['String']['input'];
   picture: Scalars['String']['input'];
+  socialIcons?: InputMaybe<SocialIconCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -3071,6 +3086,9 @@ export type AuthorManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  socialIcons_every?: InputMaybe<SocialIconWhereInput>;
+  socialIcons_none?: InputMaybe<SocialIconWhereInput>;
+  socialIcons_some?: InputMaybe<SocialIconWhereInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3116,6 +3134,7 @@ export type AuthorUpdateInput = {
   emailAddress?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
+  socialIcons?: InputMaybe<SocialIconUpdateManyInlineInput>;
 };
 
 export type AuthorUpdateManyInlineInput = {
@@ -3339,6 +3358,9 @@ export type AuthorWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  socialIcons_every?: InputMaybe<SocialIconWhereInput>;
+  socialIcons_none?: InputMaybe<SocialIconWhereInput>;
+  socialIcons_some?: InputMaybe<SocialIconWhereInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10720,6 +10742,374 @@ export type SiteMetaWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SocialIcon = {
+  __typename?: 'SocialIcon';
+  href: Scalars['String']['output'];
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  network: Scalars['String']['output'];
+  /** System stage field */
+  stage: Stage;
+};
+
+export type SocialIconConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: SocialIconWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type SocialIconConnection = {
+  __typename?: 'SocialIconConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<SocialIconEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type SocialIconCreateInput = {
+  href: Scalars['String']['input'];
+  network: Scalars['String']['input'];
+};
+
+export type SocialIconCreateManyInlineInput = {
+  /** Create and connect multiple existing SocialIcon documents */
+  create?: InputMaybe<Array<SocialIconCreateInput>>;
+};
+
+export type SocialIconCreateOneInlineInput = {
+  /** Create and connect one SocialIcon document */
+  create?: InputMaybe<SocialIconCreateInput>;
+};
+
+export type SocialIconCreateWithPositionInput = {
+  /** Document to create */
+  data: SocialIconCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type SocialIconEdge = {
+  __typename?: 'SocialIconEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: SocialIcon;
+};
+
+/** Identifies documents */
+export type SocialIconManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  href_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  href_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  href_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  href_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  href_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  href_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  href_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  href_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  href_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  network?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  network_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  network_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  network_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  network_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  network_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  network_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  network_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  network_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  network_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum SocialIconOrderByInput {
+  HrefAsc = 'href_ASC',
+  HrefDesc = 'href_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NetworkAsc = 'network_ASC',
+  NetworkDesc = 'network_DESC'
+}
+
+export type SocialIconParent = Author;
+
+export type SocialIconParentConnectInput = {
+  Author?: InputMaybe<AuthorConnectInput>;
+};
+
+export type SocialIconParentCreateInput = {
+  Author?: InputMaybe<AuthorCreateInput>;
+};
+
+export type SocialIconParentCreateManyInlineInput = {
+  /** Connect multiple existing SocialIconParent documents */
+  connect?: InputMaybe<Array<SocialIconParentWhereUniqueInput>>;
+  /** Create and connect multiple existing SocialIconParent documents */
+  create?: InputMaybe<Array<SocialIconParentCreateInput>>;
+};
+
+export type SocialIconParentCreateOneInlineInput = {
+  /** Connect one existing SocialIconParent document */
+  connect?: InputMaybe<SocialIconParentWhereUniqueInput>;
+  /** Create and connect one SocialIconParent document */
+  create?: InputMaybe<SocialIconParentCreateInput>;
+};
+
+export type SocialIconParentUpdateInput = {
+  Author?: InputMaybe<AuthorUpdateInput>;
+};
+
+export type SocialIconParentUpdateManyInlineInput = {
+  /** Connect multiple existing SocialIconParent documents */
+  connect?: InputMaybe<Array<SocialIconParentConnectInput>>;
+  /** Create and connect multiple SocialIconParent documents */
+  create?: InputMaybe<Array<SocialIconParentCreateInput>>;
+  /** Delete multiple SocialIconParent documents */
+  delete?: InputMaybe<Array<SocialIconParentWhereUniqueInput>>;
+  /** Disconnect multiple SocialIconParent documents */
+  disconnect?: InputMaybe<Array<SocialIconParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing SocialIconParent documents */
+  set?: InputMaybe<Array<SocialIconParentWhereUniqueInput>>;
+  /** Update multiple SocialIconParent documents */
+  update?: InputMaybe<Array<SocialIconParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple SocialIconParent documents */
+  upsert?: InputMaybe<Array<SocialIconParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type SocialIconParentUpdateManyWithNestedWhereInput = {
+  Author?: InputMaybe<AuthorUpdateManyWithNestedWhereInput>;
+};
+
+export type SocialIconParentUpdateOneInlineInput = {
+  /** Connect existing SocialIconParent document */
+  connect?: InputMaybe<SocialIconParentWhereUniqueInput>;
+  /** Create and connect one SocialIconParent document */
+  create?: InputMaybe<SocialIconParentCreateInput>;
+  /** Delete currently connected SocialIconParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected SocialIconParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single SocialIconParent document */
+  update?: InputMaybe<SocialIconParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single SocialIconParent document */
+  upsert?: InputMaybe<SocialIconParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SocialIconParentUpdateWithNestedWhereUniqueInput = {
+  Author?: InputMaybe<AuthorUpdateWithNestedWhereUniqueInput>;
+};
+
+export type SocialIconParentUpsertWithNestedWhereUniqueInput = {
+  Author?: InputMaybe<AuthorUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SocialIconParentWhereInput = {
+  Author?: InputMaybe<AuthorWhereInput>;
+};
+
+export type SocialIconParentWhereUniqueInput = {
+  Author?: InputMaybe<AuthorWhereUniqueInput>;
+};
+
+export type SocialIconUpdateInput = {
+  href?: InputMaybe<Scalars['String']['input']>;
+  network?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SocialIconUpdateManyInlineInput = {
+  /** Create and connect multiple SocialIcon component instances */
+  create?: InputMaybe<Array<SocialIconCreateWithPositionInput>>;
+  /** Delete multiple SocialIcon documents */
+  delete?: InputMaybe<Array<SocialIconWhereUniqueInput>>;
+  /** Update multiple SocialIcon component instances */
+  update?: InputMaybe<Array<SocialIconUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple SocialIcon component instances */
+  upsert?: InputMaybe<Array<SocialIconUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type SocialIconUpdateManyInput = {
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SocialIconUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: SocialIconUpdateManyInput;
+  /** Document search */
+  where: SocialIconWhereInput;
+};
+
+export type SocialIconUpdateOneInlineInput = {
+  /** Create and connect one SocialIcon document */
+  create?: InputMaybe<SocialIconCreateInput>;
+  /** Delete currently connected SocialIcon document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single SocialIcon document */
+  update?: InputMaybe<SocialIconUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single SocialIcon document */
+  upsert?: InputMaybe<SocialIconUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SocialIconUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<SocialIconUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: SocialIconWhereUniqueInput;
+};
+
+export type SocialIconUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: SocialIconUpdateInput;
+  /** Unique document search */
+  where: SocialIconWhereUniqueInput;
+};
+
+export type SocialIconUpsertInput = {
+  /** Create document if it didn't exist */
+  create: SocialIconCreateInput;
+  /** Update document if it exists */
+  update: SocialIconUpdateInput;
+};
+
+export type SocialIconUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<SocialIconUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: SocialIconWhereUniqueInput;
+};
+
+export type SocialIconUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: SocialIconUpsertInput;
+  /** Unique document search */
+  where: SocialIconWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type SocialIconWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SocialIconWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  href_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  href_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  href_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  href_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  href_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  href_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  href_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  href_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  href_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  network?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  network_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  network_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  network_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  network_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  network_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  network_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  network_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  network_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  network_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References SocialIcon record uniquely */
+export type SocialIconWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  network?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Stage system enumeration */
 export enum Stage {
   /** The Draft is the default stage for all your content. */
@@ -12948,7 +13338,7 @@ export type ArticleMetadataQueryQueryVariables = Exact<{
 
 export type ArticleMetadataQueryQuery = { __typename?: 'Query', article?: { __typename?: 'Article', createdAt: any, author?: { __typename?: 'Author', name: string } | null, hero?: { __typename?: 'HeroSection', caption?: string | null, title: string } | null, tags: Array<{ __typename?: 'Tag', tag: string }> } | null, metadata?: { __typename?: 'Metadata', id: string, open?: { __typename?: 'OpenGraphMeta', description?: string | null, title?: string | null, url?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null, site?: { __typename?: 'SiteMeta', description?: string | null, title: string } | null, twitter?: { __typename?: 'TwitterMeta', card?: TwitterCard | null, description?: string | null, title?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null } | null };
 
-export type ArticleAuthorFragmentFragment = { __typename?: 'Article', author?: { __typename?: 'Author', name: string, biography?: string | null, avatar?: { __typename?: 'Asset', url: string } | null } | null } & { ' $fragmentName'?: 'ArticleAuthorFragmentFragment' };
+export type ArticleAuthorFragmentFragment = { __typename?: 'Article', author?: { __typename?: 'Author', biography?: string | null, name: string, avatar?: { __typename?: 'Asset', url: string } | null, socialIcons: Array<{ __typename?: 'SocialIcon', href: string, network: string }> } | null } & { ' $fragmentName'?: 'ArticleAuthorFragmentFragment' };
 
 export type ArticleContentQueryFragmentFragment = { __typename?: 'Query', article?: (
     { __typename?: 'Article' }
@@ -13004,14 +13394,14 @@ export type PageMetadataQueryQuery = { __typename?: 'Query', metadata?: { __type
 
 export const ArticleHeroFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<ArticleHeroFragmentFragment, unknown>;
 export const ArticleMarkdownFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]} as unknown as DocumentNode<ArticleMarkdownFragmentFragment, unknown>;
-export const ArticleAuthorFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}}]}}]}}]} as unknown as DocumentNode<ArticleAuthorFragmentFragment, unknown>;
-export const ArticleContentQueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMarkdownFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleAuthorFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}}]}}]}}]} as unknown as DocumentNode<ArticleContentQueryFragmentFragment, unknown>;
+export const ArticleAuthorFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"socialIcons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"network"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleAuthorFragmentFragment, unknown>;
+export const ArticleContentQueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMarkdownFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleAuthorFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"socialIcons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"network"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleContentQueryFragmentFragment, unknown>;
 export const ArticlePreviewFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreviewFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<ArticlePreviewFragmentFragment, unknown>;
 export const PageHeroFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<PageHeroFragmentFragment, unknown>;
 export const ArticleExplorerSectionFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ArticleExplorerSectionFragmentFragment, unknown>;
 export const PageSectionExplorerFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<PageSectionExplorerFragmentFragment, unknown>;
 export const PageContentQueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSectionExplorerFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}}]} as unknown as DocumentNode<PageContentQueryFragmentFragment, unknown>;
-export const ArticleQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMarkdownFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleAuthorFragment"}}]}}]}}]} as unknown as DocumentNode<ArticleQueryQuery, ArticleQueryQueryVariables>;
+export const ArticleQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleMarkdownFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleAuthorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"biography"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"socialIcons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"network"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleMarkdownFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleAuthorFragment"}}]}}]}}]} as unknown as DocumentNode<ArticleQueryQuery, ArticleQueryQueryVariables>;
 export const ArticleMetadataQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleMetadataQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"metadata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"clm9qf5ek1hnk0amzfuxh62yf","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"open"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"twitter"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"card"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleMetadataQueryQuery, ArticleMetadataQueryQueryVariables>;
 export const ArticleExplorerQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ArticleExplorerQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articlesConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"createdAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticlePreviewFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticlePreviewFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<ArticleExplorerQueryQuery, ArticleExplorerQueryQueryVariables>;
 export const PageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageContentQueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageHeroFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleExplorer"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSectionExplorerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleExplorerSectionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageContentQueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageHeroFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSectionExplorerFragment"}}]}}]}}]} as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;

@@ -1,14 +1,21 @@
 import { SectionLayout } from '@nxify/kjd-ui-layout';
 import { FragmentType, unmaskFragment, graphql } from '../../generated';
+import { SocialIcon } from 'react-social-icons';
+
+const SOCIAL_ICON_STYLE = { height: '30px', width: '30px' };
 
 export const ArticleAuthorFragment = graphql(`
   fragment ArticleAuthorFragment on Article {
     author {
-      name
       avatar {
         url
       }
       biography
+      name
+      socialIcons {
+        href
+        network
+      }
     }
   }
 `);
@@ -30,6 +37,17 @@ export function ArticleAuthor({ data }: ArticleAuthorProps) {
       <section>
         <h3>Hi, I'm {author?.name}</h3>
         <p>{author?.biography}</p>
+        <p className="flex flex-row justify-evenly md:justify-start md:gap-x-2">
+          {author?.socialIcons?.map(({ href, network }) => (
+            <SocialIcon
+              bgColor="rgb(10 10 10)"
+              href={href}
+              key={network}
+              network={network}
+              style={SOCIAL_ICON_STYLE}
+            />
+          ))}
+        </p>
       </section>
     </SectionLayout>
   );
