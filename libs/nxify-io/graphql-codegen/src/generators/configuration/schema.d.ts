@@ -2,7 +2,8 @@ export interface ConfigurationGeneratorSchema {
   outputPath?: string;
   project: string;
   schema?: string;
-  schemaIsEnvironmentVariable?: boolean;
+  schemaIsPathOrURL?: boolean;
   skipClientPreset?: boolean;
   skipValidation?: boolean;
+  unmaskFunctionName?: string;
 }

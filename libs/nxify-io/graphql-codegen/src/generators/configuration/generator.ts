@@ -15,17 +15,19 @@ export function normalizeOptions(
     outputPath = 'src/lib/generated/',
     schema = 'SCHEMA_ENDPOINT',
     skipClientPreset = false,
+    unmaskFunctionName = 'unmaskFragment',
     ...rest
   }: ConfigurationGeneratorSchema
 ): ConfigurationGeneratorSchema {
   const project = readProjectConfiguration(tree, rest.project);
-  const schemaIsEnvironmentVariable = !isPathOrUrlLike(schema);
+  const schemaIsPathOrURL = isPathOrUrlLike(schema);
 
   return {
     outputPath: ensureTrailingSlash(project.root, outputPath),
     schema,
-    schemaIsEnvironmentVariable,
+    schemaIsPathOrURL,
     skipClientPreset,
+    unmaskFunctionName,
     ...rest,
   };
 }
@@ -41,7 +43,7 @@ function ensureTrailingSlash(...paths: string[]) {
 }
 
 function isPathOrUrlLike(value: string) {
-  if (value.includes('/')) {
+  if (value.startsWith('http') || value.includes(sep)) {
     return true;
   }
 
