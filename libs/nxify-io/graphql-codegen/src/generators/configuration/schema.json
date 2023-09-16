@@ -20,6 +20,11 @@
       "description": "The location where code is generated relative to the project root. Defaults to `src/lib/generated/`.",
       "default": "src/lib/generated"
     },
+    "unmaskFunctionName": {
+      "type": "string",
+      "description": "Name of the generated unmask function. Defaults to `unmaskFragment`.",
+      "default": "unmaskFragment"
+    },
     "schema": {
       "type": "string",
       "description": "The schema location as an environment variable or URL. Defaults to `SCHEMA_ENDPOINT`.",

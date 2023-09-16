@@ -1,5 +1,5 @@
 import { SectionLayout } from '@nxify/kjd-ui-layout';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { ArticleExplorer } from '../article-explorer/article-explorer';
 
 const ArticleExplorerSectionFragment = graphql(`
@@ -20,7 +20,7 @@ export function ArticleExplorerSection({ data }: ArticleExplorerSectionProps) {
     return null;
   }
 
-  const fragment = fragmentData(ArticleExplorerSectionFragment, data);
+  const fragment = unmaskFragment(ArticleExplorerSectionFragment, data);
 
   return (
     <SectionLayout>
