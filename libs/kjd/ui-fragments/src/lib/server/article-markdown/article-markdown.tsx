@@ -1,5 +1,5 @@
 import { Markdown, SectionLayout } from '@nxify/kjd-ui-layout';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 
 export const ArticleMarkdownFragment = graphql(`
   fragment ArticleMarkdownFragment on Article {
@@ -12,7 +12,7 @@ export interface ArticleMarkdownProps {
 }
 
 export function ArticleMarkdown({ data }: ArticleMarkdownProps) {
-  const { markdown } = fragmentData(ArticleMarkdownFragment, data);
+  const { markdown } = unmaskFragment(ArticleMarkdownFragment, data);
 
   return (
     <SectionLayout>

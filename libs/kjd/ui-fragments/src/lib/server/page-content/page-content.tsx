@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { PageHero } from '../page-hero/page-hero';
 import { PageSectionExplorer } from '../page-section-explorer/page-section-explorer';
 
@@ -18,7 +18,7 @@ export interface PageContentProps {
 }
 
 export function PageContent({ data, variant }: PageContentProps) {
-  const { page } = fragmentData(PageContentQueryFragment, data);
+  const { page } = unmaskFragment(PageContentQueryFragment, data);
 
   if (!page) {
     return notFound();

@@ -1,4 +1,4 @@
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { Markdown } from '@nxify/kjd-ui-layout';
 
 const PageHeroFragment = graphql(`
@@ -35,7 +35,7 @@ export interface PageHeroProps {
 }
 
 export function PageHero({ data, variant = 'page' }: PageHeroProps) {
-  const { hero } = fragmentData(PageHeroFragment, data);
+  const { hero } = unmaskFragment(PageHeroFragment, data);
 
   return (
     <header className="bg-neutral-700 max-w-none">

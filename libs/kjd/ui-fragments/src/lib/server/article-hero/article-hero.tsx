@@ -1,4 +1,4 @@
-import { FragmentType, fragmentData, graphql } from '../../generated';
+import { FragmentType, unmaskFragment, graphql } from '../../generated';
 import { format, parseISO } from 'date-fns';
 import { Markdown } from '@nxify/kjd-ui-layout';
 
@@ -21,7 +21,7 @@ export interface ArticleHeroProps {
 }
 
 export function ArticleHero({ data }: ArticleHeroProps) {
-  const { createdAt, hero } = fragmentData(ArticleHeroFragment, data);
+  const { createdAt, hero } = unmaskFragment(ArticleHeroFragment, data);
 
   return (
     <header className="bg-neutral-700 max-w-none">

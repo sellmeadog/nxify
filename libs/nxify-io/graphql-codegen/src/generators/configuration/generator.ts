@@ -6,7 +6,8 @@ import {
   updateProjectConfiguration,
 } from '@nx/devkit';
 import { ConfigurationGeneratorSchema } from './schema';
-import { join } from 'path';
+import { join, sep } from 'path';
+import initGenerator from '../init/generator';
 
 export function normalizeOptions(
   tree: Tree,
@@ -14,22 +15,39 @@ export function normalizeOptions(
     outputPath = 'src/lib/generated/',
     schema = 'SCHEMA_ENDPOINT',
     skipClientPreset = false,
+    unmaskFunctionName = 'unmaskFragment',
     ...rest
   }: ConfigurationGeneratorSchema
 ): ConfigurationGeneratorSchema {
   const project = readProjectConfiguration(tree, rest.project);
+  const schemaIsPathOrURL = isPathOrUrlLike(schema);
 
   return {
-    outputPath: ensureTrailingSlash(join(project.root, outputPath)),
+    outputPath: ensureTrailingSlash(project.root, outputPath),
     schema,
-    schemaIsEnvironmentVariable: !schema.startsWith('http'),
+    schemaIsPathOrURL,
     skipClientPreset,
+    unmaskFunctionName,
     ...rest,
   };
 }
 
-function ensureTrailingSlash(path: string) {
-  return path.endsWith('/') ? path : `${path}/`;
+function ensureTrailingSlash(...paths: string[]) {
+  const path = join(...paths);
+
+  if (path.endsWith(sep)) {
+    return path;
+  }
+
+  return path + sep;
+}
+
+function isPathOrUrlLike(value: string) {
+  if (value.startsWith('http') || value.includes(sep)) {
+    return true;
+  }
+
+  return false;
 }
 
 function validateCodegenTarget(
@@ -73,6 +91,7 @@ export async function configurationGenerator(
   tree: Tree,
   schema: ConfigurationGeneratorSchema
 ) {
+  const init = initGenerator(tree, { skipFormat: true });
   const options = normalizeOptions(tree, schema);
   const project = readProjectConfiguration(tree, options.project);
 
@@ -84,6 +103,8 @@ export async function configurationGenerator(
   });
 
   await formatFiles(tree);
+
+  return init;
 }
 
 export default configurationGenerator;

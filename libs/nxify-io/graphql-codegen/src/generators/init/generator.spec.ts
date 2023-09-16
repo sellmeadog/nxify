@@ -2,7 +2,11 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Tree, readJson, writeJson } from '@nx/devkit';
 
 import { initGenerator } from './generator';
-import { cliVersion, clinetPresetVersion } from '../../lib/versions';
+import {
+  cliVersion,
+  clinetPresetVersion,
+  graphqlVersion,
+} from '../../lib/versions';
 
 describe('init generator', () => {
   let tree: Tree;
@@ -16,6 +20,10 @@ describe('init generator', () => {
     await initGenerator(tree, {});
 
     const packageJson = readJson(tree, 'package.json');
+
+    expect(packageJson.dependencies).toEqual({
+      graphql: graphqlVersion,
+    });
 
     expect(packageJson.devDependencies).toEqual({
       '@graphql-codegen/cli': cliVersion,
