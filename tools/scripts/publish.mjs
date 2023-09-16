@@ -62,7 +62,7 @@ try {
 
 // Execute "npm publish" to publish
 execSync(
-  `export NPM_TOKEN=${process.env.NPM_TOKEN} npm publish ${outputPath} --access=public --tag=${tag}`,
+  `npm publish ${outputPath} --access=public --registry=https://registry.npmjs.org --tag=${tag}`,
   {
     stdio: 'inherit',
   }
