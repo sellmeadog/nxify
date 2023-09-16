@@ -15,7 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  query ArticleQuery($slug: String!) {\n    ...ArticleContentQueryFragment\n  }\n": types.ArticleQueryDocument,
     "\n  query ArticleMetadataQuery($slug: String!) {\n    article(where: { slug: $slug }) {\n      author {\n        name\n      }\n      createdAt\n      hero {\n        caption\n        title\n      }\n      tags {\n        tag\n      }\n    }\n    metadata(where: { id: \"clm9qf5ek1hnk0amzfuxh62yf\" }) {\n      id\n      open {\n        description\n        image {\n          url\n        }\n        title\n        url\n      }\n      site {\n        description\n        title\n      }\n      twitter {\n        card\n        description\n        image {\n          url\n        }\n        title\n      }\n    }\n  }\n": types.ArticleMetadataQueryDocument,
-    "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n": types.ArticleAuthorFragmentFragmentDoc,
+    "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      avatar {\n        url\n      }\n      biography\n      name\n      socialIcons {\n        href\n        network\n      }\n    }\n  }\n": types.ArticleAuthorFragmentFragmentDoc,
     "\n  fragment ArticleContentQueryFragment on Query {\n    article(where: { slug: $slug }) {\n      ...ArticleHeroFragment\n      ...ArticleMarkdownFragment\n      ...ArticleAuthorFragment\n    }\n  }\n": types.ArticleContentQueryFragmentFragmentDoc,
     "\n  fragment ArticleExplorerSectionFragment on ArticleExplorer {\n    first\n    id\n    subtitle\n    title\n  }\n": types.ArticleExplorerSectionFragmentFragmentDoc,
     "\n  query ArticleExplorerQuery($first: Int) {\n    articlesConnection(first: $first, orderBy: createdAt_DESC) {\n      edges {\n        cursor\n        node {\n          ...ArticlePreviewFragment\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        pageSize\n        startCursor\n      }\n    }\n  }\n": types.ArticleExplorerQueryDocument,
@@ -54,7 +54,7 @@ export function graphql(source: "\n  query ArticleMetadataQuery($slug: String!) 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleAuthorFragment on Article {\n    author {\n      name\n      avatar {\n        url\n      }\n      biography\n    }\n  }\n"];
+export function graphql(source: "\n  fragment ArticleAuthorFragment on Article {\n    author {\n      avatar {\n        url\n      }\n      biography\n      name\n      socialIcons {\n        href\n        network\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleAuthorFragment on Article {\n    author {\n      avatar {\n        url\n      }\n      biography\n      name\n      socialIcons {\n        href\n        network\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

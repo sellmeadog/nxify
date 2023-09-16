@@ -15,6 +15,20 @@ describe('ArticleAuthor', () => {
           },
           biography:
             "An Arizona native, father of three, and software engineer passionate about Nx, React, GraphQL and improving both the developer and user experience. I write about what I'm working on and learning along the way.",
+          socialIcons: [
+            {
+              network: 'github',
+              href: 'https://github.com/sellmeadog/nxify',
+            },
+            {
+              network: 'linkedin',
+              href: 'https://linkedin.com/in/kenniejaydavis',
+            },
+            {
+              network: 'x',
+              href: 'https://twitter.com/kenniejaydavis',
+            },
+          ],
         },
       },
       ArticleAuthorFragment
