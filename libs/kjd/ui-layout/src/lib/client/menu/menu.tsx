@@ -59,10 +59,10 @@ function MenuItem({
   } else if (icon) {
     return (
       <SocialIcon
-        network={icon}
-        href="https://github.com/sellmeadog/nxify"
-        style={SOCIAL_ICON_STYLE}
         bgColor="rgb(64,64,64)"
+        href={href}
+        network={icon}
+        style={SOCIAL_ICON_STYLE}
       />
     );
   } else {
