@@ -16,7 +16,7 @@ export function ArticleMarkdown({ data }: ArticleMarkdownProps) {
 
   return (
     <SectionLayout>
-      <Markdown className="prose-headings:font-light prose-headings:text-orange-300 prose-headings:uppercase">
+      <Markdown className="prose-headings:font-light prose-headings:text-violet-300 prose-h3:font-bold prose-h3:text-neutral-300 prose-h3:text-lg prose-h3:uppercase">
         {markdown}
       </Markdown>
     </SectionLayout>
